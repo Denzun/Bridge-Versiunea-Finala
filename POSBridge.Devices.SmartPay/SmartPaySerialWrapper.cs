@@ -5,7 +5,7 @@ namespace POSBridge.Devices.SmartPay;
 
 /// <summary>
 /// Serial communication wrapper for SmartPay/Ingenico terminals.
-/// Implements the handshake and packet communication protocol.
+/// Implements the ENQ-ACK handshake and packet communication protocol.
 /// </summary>
 public class SmartPaySerialWrapper : IDisposable
 {
@@ -38,12 +38,10 @@ public class SmartPaySerialWrapper : IDisposable
 
                 _serialPort.Open();
 
-                // Perform initial handshake
-                if (!PerformHandshake())
-                {
-                    _serialPort.Close();
-                    throw new FiscalDeviceException("SmartPay handshake failed. Terminal not responding.");
-                }
+                // Wait a moment for port to stabilize
+                Thread.Sleep(100);
+
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Connected to {portName} @ {baudRate}");
             }
             catch (TimeoutException)
             {
@@ -57,39 +55,7 @@ public class SmartPaySerialWrapper : IDisposable
     }
 
     /// <summary>
-    /// Performs initial handshake: ENQ-ACK protocol
-    /// </summary>
-    private bool PerformHandshake()
-    {
-        if (_serialPort == null || !_serialPort.IsOpen)
-            return false;
-
-        try
-        {
-            // Clear any pending data
-            _serialPort.DiscardInBuffer();
-            _serialPort.DiscardOutBuffer();
-
-            // Send ENQ (0x05)
-            _serialPort.Write(new byte[] { SmartPayProtocol.ENQ }, 0, 1);
-            _serialPort.BaseStream.Flush();
-
-            // Wait for ACK (0x06)
-            int response = _serialPort.ReadByte();
-            return response == SmartPayProtocol.ACK;
-        }
-        catch (TimeoutException)
-        {
-            return false;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Sends a packet and waits for response
+    /// Sends a packet with full ENQ-ACK handshake and waits for response
     /// </summary>
     public byte[] SendAndReceive(byte[] packet)
     {
@@ -100,60 +66,123 @@ public class SmartPaySerialWrapper : IDisposable
 
             try
             {
-                // Clear buffers
+                // Step 1: Clear buffers
                 _serialPort.DiscardInBuffer();
                 _serialPort.DiscardOutBuffer();
+                Thread.Sleep(50); // Small delay after clearing
 
-                // Send packet
+                // Step 2: Send ENQ to initiate communication
+                System.Diagnostics.Debug.WriteLine("[SmartPay] Sending ENQ...");
+                _serialPort.Write(new byte[] { SmartPayProtocol.ENQ }, 0, 1);
+                _serialPort.BaseStream.Flush();
+
+                // Step 3: Wait for ACK
+                int response = _serialPort.ReadByte();
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] After ENQ got: 0x{response:X2}");
+                
+                if (response != SmartPayProtocol.ACK)
+                {
+                    if (response == SmartPayProtocol.NAK)
+                        throw new FiscalDeviceException("SmartPay returned NAK to ENQ - device busy or error");
+                    throw new FiscalDeviceException($"Expected ACK after ENQ, got 0x{response:X2}");
+                }
+
+                // Step 4: Send the actual packet
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Sending packet ({packet.Length} bytes)...");
                 _serialPort.Write(packet, 0, packet.Length);
                 _serialPort.BaseStream.Flush();
 
-                // Wait for ACK
-                int ack = _serialPort.ReadByte();
-                if (ack != SmartPayProtocol.ACK)
+                // Step 5: Wait for ACK confirming packet received
+                int packetAck = _serialPort.ReadByte();
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] After packet got: 0x{packetAck:X2}");
+                
+                if (packetAck != SmartPayProtocol.ACK)
                 {
-                    if (ack == SmartPayProtocol.NAK)
+                    if (packetAck == SmartPayProtocol.NAK)
                         throw new FiscalDeviceException("SmartPay returned NAK - packet rejected");
-                    throw new FiscalDeviceException($"Unexpected response from SmartPay: 0x{ack:X2}");
+                    throw new FiscalDeviceException($"Expected ACK after packet, got 0x{packetAck:X2}");
                 }
 
-                // Now wait for response packet
-                // Response starts with STX
+                // Step 6: Wait for response packet with timeout handling
+                // The device might take some time to process and respond
+                Thread.Sleep(100); // Give device time to prepare response
+                
                 var responseData = new List<byte>();
                 
-                // Read STX
-                int stx = _serialPort.ReadByte();
+                // Read STX (with retry for timing issues)
+                int stx = -1;
+                int retryCount = 0;
+                while (stx != SmartPayProtocol.STX && retryCount < 3)
+                {
+                    try
+                    {
+                        stx = _serialPort.ReadByte();
+                        System.Diagnostics.Debug.WriteLine($"[SmartPay] Read byte: 0x{stx:X2}");
+                        
+                        if (stx == SmartPayProtocol.STX)
+                            break;
+                            
+                        // If we got something else (like another ACK), wait and retry
+                        if (stx == SmartPayProtocol.ACK)
+                        {
+                            System.Diagnostics.Debug.WriteLine("[SmartPay] Got extra ACK, waiting for STX...");
+                            Thread.Sleep(100);
+                        }
+                        retryCount++;
+                    }
+                    catch (TimeoutException)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[SmartPay] Timeout waiting for STX, retry {retryCount + 1}/3");
+                        retryCount++;
+                        if (retryCount >= 3)
+                            throw;
+                    }
+                }
+                
                 if (stx != SmartPayProtocol.STX)
                     throw new FiscalDeviceException($"Expected STX, got 0x{stx:X2}");
                 
                 responseData.Add((byte)stx);
 
-                // Read length (2 bytes)
+                // Step 7: Read length (2 bytes)
                 byte[] lengthBytes = new byte[2];
                 _serialPort.Read(lengthBytes, 0, 2);
                 responseData.AddRange(lengthBytes);
                 
                 ushort dataLength = (ushort)((lengthBytes[0] << 8) | lengthBytes[1]);
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Response length: {dataLength}");
 
-                // Read data + ETX + CRC
-                byte[] remaining = new byte[dataLength + 3]; // data + ETX(1) + CRC(2)
+                // Step 8: Read data + ETX + CRC
+                int totalToRead = dataLength + 3; // data + ETX(1) + CRC(2)
+                byte[] remaining = new byte[totalToRead];
                 int read = 0;
-                while (read < remaining.Length)
+                
+                while (read < totalToRead)
                 {
-                    int r = _serialPort.Read(remaining, read, remaining.Length - read);
-                    if (r == 0) throw new TimeoutException();
+                    int r = _serialPort.Read(remaining, read, totalToRead - read);
+                    if (r == 0) 
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[SmartPay] Read 0 bytes, waiting... ({read}/{totalToRead})");
+                        Thread.Sleep(50);
+                        continue;
+                    }
                     read += r;
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] Read {r} bytes, total {read}/{totalToRead}");
                 }
+                
                 responseData.AddRange(remaining);
 
-                // Send ACK
+                // Step 9: Send final ACK
                 _serialPort.Write(new byte[] { SmartPayProtocol.ACK }, 0, 1);
+                _serialPort.BaseStream.Flush();
+                
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Response received: {responseData.Count} bytes");
 
                 return responseData.ToArray();
             }
             catch (TimeoutException)
             {
-                throw new FiscalDeviceException("Timeout waiting for SmartPay response");
+                throw new FiscalDeviceException("Timeout waiting for SmartPay response. Check:\n1. Device is powered on\n2. Correct COM port selected\n3. Baud rate is correct (usually 115200)");
             }
             catch (Exception ex) when (ex is not FiscalDeviceException)
             {

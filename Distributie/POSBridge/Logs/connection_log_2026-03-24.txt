@@ -715,3 +715,31 @@ WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782
 [2026-03-24 15:56:04.891]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
 [2026-03-24 15:56:04.891] ═══════════════════════════════════════
 [2026-03-24 15:56:05.594] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Ingenico device not detected. Please connect the device via USB and power it on.
+[2026-03-24 16:01:48.244] ═══════════════════════════════════════
+[2026-03-24 16:01:48.245]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:01:48.245] ═══════════════════════════════════════
+[2026-03-24 16:01:49.120] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Unexpected response from SmartPay: 0x04)
+[2026-03-24 16:02:02.282] ═══════════════════════════════════════
+[2026-03-24 16:02:02.282]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:02:02.283] ═══════════════════════════════════════
+[2026-03-24 16:02:02.991] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[2026-03-24 16:04:14.265] ═══════════════════════════════════════
+[2026-03-24 16:04:14.266]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:04:14.266] ═══════════════════════════════════════
+[2026-03-24 16:04:15.064] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Expected STX, got 0x04)
+[2026-03-24 16:04:30.566] ═══════════════════════════════════════
+[2026-03-24 16:04:30.566]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM3 @ 115200)
+[2026-03-24 16:04:30.566] ═══════════════════════════════════════
+[2026-03-24 16:04:46.317] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Conexiunea a expirat (15s). Verificați că dispozitivul este conectat și pornit.
+[2026-03-24 16:05:11.053] ═══════════════════════════════════════
+[2026-03-24 16:05:11.053]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:05:11.053] ═══════════════════════════════════════
+[2026-03-24 16:05:11.745] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Expected STX, got 0x06)
