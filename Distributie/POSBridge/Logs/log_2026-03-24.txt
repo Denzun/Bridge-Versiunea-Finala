@@ -1553,3 +1553,136 @@ https://www.ingenico.com/support/download-center
 [16:05:11] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Expected STX, got 0x06)
 [16:05:11] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
 [16:05:11] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:09:33] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[16:09:33] ✓ Pornire automată la startup activată.
+[16:09:34] Porturi COM detectate: COM10, COM3
+[16:09:34] Port COM selectat din setări: COM10
+[16:09:34] ✨ Multi-Vendor: 3 device type(s) supported
+[16:09:35] [ACTIVARE] Initial IsDeviceActivated=True
+[16:09:35] [ACTIVARE] UI set to ACTIVAT (green)
+[16:09:35] Aplicație pornită.
+[16:09:35] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[16:09:35] ✓ Pornire automată la startup activată.
+[16:09:35] Conectare automată la imprimanta fiscală...
+[16:09:35] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:09:36] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:09:36] Available COM ports:
+[16:09:36]   • COM3: Intel(R) Active Management Technology - SOL
+[16:09:36]   • COM10: USB Serial Device ← selected
+[16:09:36] ⚠ Will try to connect to selected port COM10 anyway...
+[16:09:36] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[16:09:37] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Expected STX, got 0x06)
+[16:09:37] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:09:37] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:09:49] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:09:50] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:09:50] Available COM ports:
+[16:09:50]   • COM3: Intel(R) Active Management Technology - SOL
+[16:09:50]   • COM10: USB Serial Device ← selected
+[16:09:50] ⚠ Will try to connect to selected port COM10 anyway...
+[16:09:50] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:09:50] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:09:50] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:10:04] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 9600...
+[16:10:05] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:10:05] Available COM ports:
+[16:10:05]   • COM3: Intel(R) Active Management Technology - SOL
+[16:10:05]   • COM10: USB Serial Device ← selected
+[16:10:05] ⚠ Will try to connect to selected port COM10 anyway...
+[16:10:05] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:10:05] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:10:05] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:10:10] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 19200...
+[16:10:11] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:10:11] Available COM ports:
+[16:10:11]   • COM3: Intel(R) Active Management Technology - SOL
+[16:10:11]   • COM10: USB Serial Device ← selected
+[16:10:11] ⚠ Will try to connect to selected port COM10 anyway...
+[16:10:11] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:10:11] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:10:11] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:10:18] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 38400...
+[16:10:19] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:10:19] Available COM ports:
+[16:10:19]   • COM3: Intel(R) Active Management Technology - SOL
+[16:10:19]   • COM10: USB Serial Device ← selected
+[16:10:19] ⚠ Will try to connect to selected port COM10 anyway...
+[16:10:19] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:10:19] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:10:19] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:10:22] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 57600...
+[16:10:22] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:10:23] Available COM ports:
+[16:10:23]   • COM3: Intel(R) Active Management Technology - SOL
+[16:10:23]   • COM10: USB Serial Device ← selected
+[16:10:23] ⚠ Will try to connect to selected port COM10 anyway...
+[16:10:23] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:10:23] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:10:23] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:10:26] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:10:27] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:10:27] Available COM ports:
+[16:10:27]   • COM3: Intel(R) Active Management Technology - SOL
+[16:10:27]   • COM10: USB Serial Device ← selected
+[16:10:27] ⚠ Will try to connect to selected port COM10 anyway...
+[16:10:27] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:10:27] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:10:27] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:10:29] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[16:10:37] ═══════════════════════════════════════
+[16:10:37] Aplicație în închidere - curățare...
+[16:10:37] Deconectare de la dispozitivul fiscal...
+[16:10:37] ✓ Dispozitiv fiscal deconectat
+[16:10:37] Eliberare forțată port COM...
+[16:10:37] ✓ Port COM eliberat
+[16:10:37] ✓ Setări salvate
+[16:10:37] Curățare aplicație finalizată cu succes
+[16:10:37] ═══════════════════════════════════════

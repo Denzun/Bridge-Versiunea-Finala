@@ -426,3 +426,12 @@
 [16:04:12] Dispozitiv activat. Continuare pornire...
 [16:04:12] DUDE nu este necesar (dispozitiv non-Datecs selectat)
 [16:04:15] Heartbeat timer started (5 minute interval)
+[16:09:31] === POS Bridge Startup ===
+[16:09:31] Verificare activare dispozitiv...
+[16:09:32] Serial number generated from hardware info
+[16:09:32] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[16:09:32] Tenant Code: demo
+[16:09:32] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[16:09:32] Dispozitiv activat. Continuare pornire...
+[16:09:32] DUDE nu este necesar (dispozitiv non-Datecs selectat)
+[16:09:36] Heartbeat timer started (5 minute interval)

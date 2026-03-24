@@ -743,3 +743,79 @@ https://www.ingenico.com/support/download-center
 [2026-03-24 16:05:11.053]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
 [2026-03-24 16:05:11.053] ═══════════════════════════════════════
 [2026-03-24 16:05:11.745] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Expected STX, got 0x06)
+[2026-03-24 16:09:35.593] ═══════════════════════════════════════
+[2026-03-24 16:09:35.594]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:09:35.594] ═══════════════════════════════════════
+[2026-03-24 16:09:37.057] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Expected STX, got 0x06)
+[2026-03-24 16:09:49.585] ═══════════════════════════════════════
+[2026-03-24 16:09:49.585]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:09:49.586] ═══════════════════════════════════════
+[2026-03-24 16:09:50.231] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[2026-03-24 16:10:04.849] ═══════════════════════════════════════
+[2026-03-24 16:10:04.849]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 9600)
+[2026-03-24 16:10:04.850] ═══════════════════════════════════════
+[2026-03-24 16:10:05.518] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[2026-03-24 16:10:10.675] ═══════════════════════════════════════
+[2026-03-24 16:10:10.676]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 19200)
+[2026-03-24 16:10:10.676] ═══════════════════════════════════════
+[2026-03-24 16:10:11.313] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[2026-03-24 16:10:18.552] ═══════════════════════════════════════
+[2026-03-24 16:10:18.553]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 38400)
+[2026-03-24 16:10:18.553] ═══════════════════════════════════════
+[2026-03-24 16:10:19.217] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[2026-03-24 16:10:22.416] ═══════════════════════════════════════
+[2026-03-24 16:10:22.416]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 57600)
+[2026-03-24 16:10:22.417] ═══════════════════════════════════════
+[2026-03-24 16:10:23.036] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[2026-03-24 16:10:26.616] ═══════════════════════════════════════
+[2026-03-24 16:10:26.616]   ÎNCEPUT CONEXIUNE - SmartPay/Ingenico (Serial) (COM10 @ 115200)
+[2026-03-24 16:10:26.616] ═══════════════════════════════════════
+[2026-03-24 16:10:27.265] CONEXIUNE EȘUATĂ: SmartPay/Ingenico (Serial) - Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
