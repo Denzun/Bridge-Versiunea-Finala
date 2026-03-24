@@ -146,8 +146,6 @@ public class SmartPaySerialWrapper : IDisposable
                     throw new FiscalDeviceException($"Missing ETX at expected position, got 0x{remaining[dataLength]:X2}");
 
                 // Step 10: Validate response CRC (LSB, MSB for responses)
-                ushort receivedCrc = (ushort)(remaining[dataLength + 1] | (remaining[dataLength + 2] << 8));
-                
                 // Build array for CRC verification: STX + LEN + DATA + ETX
                 byte[] crcInput = new byte[1 + 2 + dataLength + 1];
                 crcInput[0] = stx;
@@ -155,7 +153,10 @@ public class SmartPaySerialWrapper : IDisposable
                 Array.Copy(remaining, 0, crcInput, 3, dataLength);
                 crcInput[crcInput.Length - 1] = SmartPayProtocol.ETX;
                 
-                ushort computedCrc = Crc16Ibm(crcInput, 0, crcInput.Length);
+                // IMPORTANT: Use CRC-16/BUYPASS, not IBM!
+                ushort computedCrc = Crc16Buypass.CalculateValue(crcInput);
+                ushort receivedCrc = (ushort)(remaining[dataLength + 1] | (remaining[dataLength + 2] << 8));
+                
                 System.Diagnostics.Debug.WriteLine($"[SmartPay] CRC: received=0x{receivedCrc:X4}, computed=0x{computedCrc:X4}");
                 
                 if (receivedCrc != computedCrc)
@@ -235,28 +236,6 @@ public class SmartPaySerialWrapper : IDisposable
         }
         
         throw new FiscalDeviceException("Never received STX after 30 attempts");
-    }
-
-    /// <summary>
-    /// CRC16-IBM calculation (verified against PDF example).
-    /// </summary>
-    private static ushort Crc16Ibm(byte[] data, int offset, int length)
-    {
-        ushort crc = 0xFFFF;
-        
-        for (int i = offset; i < offset + length; i++)
-        {
-            crc ^= data[i];
-            for (int j = 0; j < 8; j++)
-            {
-                if ((crc & 0x0001) != 0)
-                    crc = (ushort)((crc >> 1) ^ 0xA001);
-                else
-                    crc >>= 1;
-            }
-        }
-        
-        return crc;
     }
 
     /// <summary>

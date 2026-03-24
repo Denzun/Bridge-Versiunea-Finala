@@ -147,11 +147,37 @@ public static class SmartPayProtocol
         ms.WriteByte(ETX);
         
         // Calculate CRC on everything from STX to ETX
+        // IMPORTANT: Use CRC-16/BUYPASS, not IBM!
         var packet = ms.ToArray();
-        var crc = Crc16Ibm.Calculate(packet);
+        var crc = Crc16Buypass.CalculateForRequest(packet);
         ms.Write(crc, 0, crc.Length);
         
-        return ms.ToArray();
+        var finalPacket = ms.ToArray();
+        
+        // Debug: Log the packet
+        System.Diagnostics.Debug.WriteLine($"[SmartPay] BuildPacket: {ToHexString(finalPacket)}");
+        
+        return finalPacket;
+    }
+    
+    /// <summary>
+    /// Test packet against known example from PDF
+    /// </summary>
+    public static void TestPacketBuilding()
+    {
+        // Build Get Info packet
+        var packet = BuildPacket(CommandCode.GetInfo);
+        var hex = ToHexString(packet);
+        
+        System.Diagnostics.Debug.WriteLine($"[SmartPay] Test GetInfo packet: {hex}");
+        
+        // Expected: 02 00 04 a0 00 01 01 03 06 35
+        // If different, CRC is wrong!
+    }
+    
+    private static string ToHexString(byte[] data)
+    {
+        return string.Join(" ", data.Select(b => $"{b:X2}"));
     }
 
     /// <summary>
@@ -198,11 +224,11 @@ public static class SmartPayProtocol
             if (dataEnd >= packet.Length || packet[dataEnd] != ETX)
                 return (false, ResponseCode.GenericError, tags);
 
-            // Verify CRC
+            // Verify CRC using CRC-16/BUYPASS
             var dataWithEtx = new byte[dataEnd + 1]; // From STX to ETX
             Array.Copy(packet, 0, dataWithEtx, 0, dataWithEtx.Length);
             
-            if (!Crc16Ibm.Verify(dataWithEtx))
+            if (!Crc16Buypass.VerifyResponse(dataWithEtx))
                 return (false, ResponseCode.GenericError, tags);
 
             // Parse TLV tags from data

@@ -1686,3 +1686,89 @@ https://www.ingenico.com/support/download-center
 [16:10:37] ✓ Setări salvate
 [16:10:37] Curățare aplicație finalizată cu succes
 [16:10:37] ═══════════════════════════════════════
+[16:16:07] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[16:16:07] ✓ Pornire automată la startup activată.
+[16:16:07] Porturi COM detectate: COM10, COM3
+[16:16:07] Port COM selectat din setări: COM10
+[16:16:07] ✨ Multi-Vendor: 3 device type(s) supported
+[16:16:08] [ACTIVARE] Initial IsDeviceActivated=True
+[16:16:08] [ACTIVARE] UI set to ACTIVAT (green)
+[16:16:08] Aplicație pornită.
+[16:16:08] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[16:16:08] ✓ Pornire automată la startup activată.
+[16:16:08] Conectare automată la imprimanta fiscală...
+[16:16:09] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:16:09] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:16:09] Available COM ports:
+[16:16:09]   • COM3: Intel(R) Active Management Technology - SOL
+[16:16:09]   • COM10: USB Serial Device ← selected
+[16:16:09] ⚠ Will try to connect to selected port COM10 anyway...
+[16:16:09] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[16:16:12] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Packet NAKed - check CRC/framing)
+[16:16:12] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:16:12] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:16:31] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:16:32] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:16:32] Available COM ports:
+[16:16:32]   • COM3: Intel(R) Active Management Technology - SOL
+[16:16:32]   • COM10: USB Serial Device ← selected
+[16:16:32] ⚠ Will try to connect to selected port COM10 anyway...
+[16:16:32] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:16:32] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:16:32] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:16:43] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:16:43] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:16:44] Available COM ports:
+[16:16:44]   • COM3: Intel(R) Active Management Technology - SOL
+[16:16:44]   • COM10: USB Serial Device ← selected
+[16:16:44] ⚠ Will try to connect to selected port COM10 anyway...
+[16:16:44] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Cannot access COM10.
+
+Please:
+1. Ensure the device is connected via USB
+2. Check Device Manager for the correct COM port
+3. Select the correct port from the dropdown
+
+Note: You may need to install the Ingenico USB driver from:
+https://www.ingenico.com/support/download-center
+[16:16:44] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:16:44] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[16:16:53] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[16:16:56] ═══════════════════════════════════════
+[16:16:56] Aplicație în închidere - curățare...
+[16:16:56] Deconectare de la dispozitivul fiscal...
+[16:16:56] ✓ Dispozitiv fiscal deconectat
+[16:16:56] Eliberare forțată port COM...
+[16:16:56] ✓ Port COM eliberat
+[16:16:56] ✓ Setări salvate
+[16:16:56] Curățare aplicație finalizată cu succes
+[16:16:56] ═══════════════════════════════════════
+[16:17:00] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[16:17:00] ✓ Pornire automată la startup activată.
+[16:17:00] Porturi COM detectate: COM10, COM3
+[16:17:00] Port COM selectat din setări: COM10
+[16:17:00] ✨ Multi-Vendor: 3 device type(s) supported
+[16:17:01] [ACTIVARE] Initial IsDeviceActivated=True
+[16:17:01] [ACTIVARE] UI set to ACTIVAT (green)
+[16:17:01] Aplicație pornită.
+[16:17:01] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[16:17:01] ✓ Pornire automată la startup activată.
+[16:17:01] Conectare automată la imprimanta fiscală...
+[16:17:02] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[16:17:02] ⚠ Ingenico device not detected via USB VID/PID scan.
+[16:17:02] Available COM ports:
+[16:17:02]   • COM3: Intel(R) Active Management Technology - SOL
+[16:17:02]   • COM10: USB Serial Device ← selected
+[16:17:02] ⚠ Will try to connect to selected port COM10 anyway...
+[16:17:02] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[16:17:04] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Failed to connect to SmartPay: One or more errors occurred. (Failed to get device info: Packet NAKed - check CRC/framing)
+[16:17:04] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[16:17:04] [TRAY DEBUG] ShowBalloonTip apelat cu succes
