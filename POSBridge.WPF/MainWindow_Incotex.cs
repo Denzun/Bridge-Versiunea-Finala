@@ -38,10 +38,50 @@ public partial class MainWindow
                 
                 if (!driverStatus.DeviceConnected)
                 {
-                    throw new Exception("Ingenico device not detected. Please connect the device via USB and power it on.");
+                    Log("⚠ Ingenico device not detected via USB VID/PID scan.");
+                    
+                    // List available COM ports to help user
+                    var comPorts = SmartPayDriverInstaller.ListAllComPorts();
+                    if (comPorts.Count > 0)
+                    {
+                        Log("Available COM ports:");
+                        foreach (var (comPort, desc) in comPorts)
+                        {
+                            string marker = (comPort == _comPort) ? " ← selected" : "";
+                            Log($"  • {comPort}: {desc}{marker}");
+                        }
+                    }
+                    
+                    // If user has selected a COM port, try it anyway
+                    if (!string.IsNullOrEmpty(_comPort) && _comPort.StartsWith("COM"))
+                    {
+                        Log($"⚠ Will try to connect to selected port {_comPort} anyway...");
+                        
+                        // Test if port is accessible
+                        if (!SmartPayDriverInstaller.TestComPort(_comPort))
+                        {
+                            throw new Exception(
+                                $"Cannot access {_comPort}.\n\n" +
+                                "Please:\n" +
+                                "1. Ensure the device is connected via USB\n" +
+                                "2. Check Device Manager for the correct COM port\n" +
+                                "3. Select the correct port from the dropdown\n\n" +
+                                "Note: You may need to install the Ingenico USB driver from:\n" +
+                                "https://www.ingenico.com/support/download-center");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception(
+                            "Ingenico device not detected.\n\n" +
+                            "Please:\n" +
+                            "1. Connect the device via USB and power it on\n" +
+                            "2. Install the Ingenico USB driver\n" +
+                            "3. Select the correct COM port from the dropdown\n\n" +
+                            "Driver download: https://www.ingenico.com/support/download-center");
+                    }
                 }
-
-                if (!driverStatus.DriverInstalled || string.IsNullOrEmpty(driverStatus.ComPort))
+                else if (!driverStatus.DriverInstalled || string.IsNullOrEmpty(driverStatus.ComPort))
                 {
                     Log("⚠ SmartPay driver not installed. Attempting automatic installation...");
                     var progress = new Progress<string>(msg => Log($"  → {msg}"));
@@ -49,17 +89,27 @@ public partial class MainWindow
                     
                     if (!installResult.Success)
                     {
-                        throw new Exception($"Driver installation failed: {installResult.Message}");
+                        // Allow manual connection attempt even if auto-install fails
+                        if (!string.IsNullOrEmpty(_comPort) && _comPort.StartsWith("COM"))
+                        {
+                            Log($"⚠ Auto-install failed. Will try to connect to {_comPort} anyway...");
+                        }
+                        else
+                        {
+                            throw new Exception($"Driver installation failed: {installResult.Message}");
+                        }
                     }
-                    
-                    Log($"✅ Driver installed! Device on {installResult.ComPort}");
-                    
-                    // Update COM port in settings
-                    if (!string.IsNullOrEmpty(installResult.ComPort))
+                    else
                     {
-                        _comPort = installResult.ComPort;
-                        PortComboBox.SelectedItem = _comPort;
-                        SaveSettings();
+                        Log($"✅ Driver installed! Device on {installResult.ComPort}");
+                        
+                        // Update COM port in settings
+                        if (!string.IsNullOrEmpty(installResult.ComPort))
+                        {
+                            _comPort = installResult.ComPort;
+                            PortComboBox.SelectedItem = _comPort;
+                            SaveSettings();
+                        }
                     }
                 }
                 else

@@ -23,6 +23,10 @@ public static class SmartPayDriverInstaller
         (0x0B00, 0x0071, "Lane/7000"),
         (0x0B00, 0x0072, "iUN series"),
         (0x0B00, 0x0073, "Self series"),
+        // Additional PIDs that may be used
+        (0x0B00, 0x0001, "Ingenico Generic"),
+        (0x0B00, 0x0100, "Ingenico Generic 2"),
+        (0x11CA, 0x0001, "Ingenico Alternative VID"), // Alternative VID
     };
 
     /// <summary>
@@ -101,7 +105,7 @@ public static class SmartPayDriverInstaller
                 string name = device["Name"]?.ToString() ?? "";
                 string deviceId = device["DeviceID"]?.ToString() ?? "";
 
-                // Check if it's an Ingenico device
+                // Check if it's an Ingenico device by VID/PID
                 foreach (var (vid, pid, _) in KnownDevices)
                 {
                     string vidPid = $"VID_{vid:X4}&PID_{pid:X4}";
@@ -120,10 +124,93 @@ public static class SmartPayDriverInstaller
                     }
                 }
             }
+
+            // Fallback: look for any COM port with "Ingenico" or "USB Serial" in the name
+            using var searcher2 = new ManagementObjectSearcher(
+                "SELECT * FROM Win32_SerialPort");
+
+            foreach (ManagementObject port in searcher2.Get())
+            {
+                string name = port["Name"]?.ToString() ?? "";
+                string description = port["Description"]?.ToString() ?? "";
+                string portName = port["DeviceID"]?.ToString() ?? "";
+
+                // Check for Ingenico or generic USB serial that might be the terminal
+                if (name.Contains("Ingenico", StringComparison.OrdinalIgnoreCase) ||
+                    description.Contains("Ingenico", StringComparison.OrdinalIgnoreCase) ||
+                    (description.Contains("USB", StringComparison.OrdinalIgnoreCase) && 
+                     description.Contains("Serial", StringComparison.OrdinalIgnoreCase)))
+                {
+                    return portName;
+                }
+            }
         }
         catch { }
 
         return null;
+    }
+
+    /// <summary>
+    /// Lists all available COM ports with their descriptions
+    /// </summary>
+    public static List<(string Port, string Description)> ListAllComPorts()
+    {
+        var ports = new List<(string, string)>();
+        
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_SerialPort");
+            
+            foreach (ManagementObject port in searcher.Get())
+            {
+                string portName = port["DeviceID"]?.ToString() ?? "";
+                string description = port["Description"]?.ToString() ?? "";
+                
+                if (!string.IsNullOrEmpty(portName))
+                {
+                    ports.Add((portName, description));
+                }
+            }
+        }
+        catch { }
+
+        // Fallback to standard System.IO.Ports.SerialPort if WMI fails
+        if (ports.Count == 0)
+        {
+            try
+            {
+                foreach (string portName in System.IO.Ports.SerialPort.GetPortNames())
+                {
+                    ports.Add((portName, "Unknown"));
+                }
+            }
+            catch { }
+        }
+
+        return ports;
+    }
+
+    /// <summary>
+    /// Tries to verify if a COM port is accessible
+    /// </summary>
+    public static bool TestComPort(string portName)
+    {
+        try
+        {
+            using var port = new System.IO.Ports.SerialPort(portName, 115200)
+            {
+                ReadTimeout = 1000,
+                WriteTimeout = 1000
+            };
+            
+            port.Open();
+            port.Close();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>

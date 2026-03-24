@@ -1427,3 +1427,43 @@ WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782
 [15:01:41] ✓ Setări salvate
 [15:01:41] Curățare aplicație finalizată cu succes
 [15:01:41] ═══════════════════════════════════════
+[15:55:12] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[15:55:12] ✓ Pornire automată la startup activată.
+[15:55:13] Porturi COM detectate: COM10, COM3
+[15:55:13] Port COM selectat din setări: COM10
+[15:55:13] ✨ Multi-Vendor: 3 device type(s) supported
+[15:55:14] [ACTIVARE] Initial IsDeviceActivated=True
+[15:55:14] [ACTIVARE] UI set to ACTIVAT (green)
+[15:55:14] Aplicație pornită.
+[15:55:14] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[15:55:14] ✓ Pornire automată la startup activată.
+[15:55:14] Conectare automată la imprimanta fiscală...
+[15:55:14] Conectare la Incotex (Serial/USB) prin COM10 @ 115200...
+[15:55:14] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[15:55:20] 🏭 Device type changed to: SmartPay/Ingenico (Serial)
+[15:55:26] ⏸️ Conectare anulată de utilizator.
+[15:55:26] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Conectarea a fost anulată.
+[15:55:26] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[15:55:26] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[15:55:32] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[15:55:33] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Ingenico device not detected. Please connect the device via USB and power it on.
+[15:55:33] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[15:55:33] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[15:55:50] Conectare la SmartPay/Ingenico (Serial) prin COM3 @ 115200...
+[15:55:51] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Ingenico device not detected. Please connect the device via USB and power it on.
+[15:55:51] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[15:55:51] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[15:56:04] Conectare la SmartPay/Ingenico (Serial) prin COM10 @ 115200...
+[15:56:05] ✗ Conexiune eșuată la SmartPay/Ingenico (Serial): Ingenico device not detected. Please connect the device via USB and power it on.
+[15:56:05] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[15:56:05] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[15:57:03] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[15:57:07] ═══════════════════════════════════════
+[15:57:07] Aplicație în închidere - curățare...
+[15:57:07] Deconectare de la dispozitivul fiscal...
+[15:57:07] ✓ Dispozitiv fiscal deconectat
+[15:57:07] Eliberare forțată port COM...
+[15:57:07] ✓ Port COM eliberat
+[15:57:07] ✓ Setări salvate
+[15:57:07] Curățare aplicație finalizată cu succes
+[15:57:07] ═══════════════════════════════════════
