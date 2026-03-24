@@ -1,0 +1,401 @@
+[09:18:26] === POS Bridge Startup ===
+[09:18:26] Verificare activare dispozitiv...
+[09:18:28] Serial number generated from hardware info
+[09:18:28] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[09:18:28] Tenant Code: demo
+[09:18:28] Dispozitiv neactivat: Server error: NotFound
+[09:18:28] Dispozitiv neactivat. Mod demo - 30 zile.
+[09:18:28] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[09:18:30] ✓ DUDE lansat cu succes (PID: 9056)
+[09:18:33] Heartbeat timer started (5 minute interval)
+[09:18:33] ✓ Așteptare inițializare DUDE completă
+[09:20:59] === POS Bridge Startup ===
+[09:20:59] Verificare activare dispozitiv...
+[09:21:00] Serial number generated from hardware info
+[09:21:00] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[09:21:00] Tenant Code: demo
+[09:21:00] Dispozitiv neactivat: Server error: NotFound
+[09:21:00] Dispozitiv neactivat. Mod demo - 30 zile.
+[09:21:00] ✓ DUDE rulează deja
+[09:21:02] Heartbeat timer started (5 minute interval)
+[09:30:59] === POS Bridge Startup ===
+[09:30:59] Verificare activare dispozitiv...
+[09:31:00] Serial number generated from hardware info
+[09:31:00] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[09:31:00] Tenant Code: demo
+[09:31:00] Dispozitiv neactivat: Server error: NotFound
+[09:31:00] Dispozitiv neactivat. Mod demo - 30 zile.
+[09:31:00] ✓ DUDE rulează deja
+[09:31:02] Heartbeat timer started (5 minute interval)
+[09:40:26] === POS Bridge Startup ===
+[09:40:26] Verificare activare dispozitiv...
+[09:40:27] Serial number generated from hardware info
+[09:40:27] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[09:40:27] Tenant Code: demo
+[09:40:27] Dispozitiv neactivat: Server error: NotFound
+[09:40:27] Dispozitiv neactivat. Mod demo - 30 zile.
+[09:40:27] ✓ DUDE rulează deja
+[09:40:29] Heartbeat timer started (5 minute interval)
+[09:42:41] === POS Bridge Startup ===
+[09:42:41] Verificare activare dispozitiv...
+[09:42:42] Serial number generated from hardware info
+[09:42:42] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[09:42:42] Tenant Code: demo
+[09:42:42] Dispozitiv neactivat: Server error: NotFound
+[09:42:42] Dispozitiv neactivat. Mod demo - 30 zile.
+[09:42:42] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[09:42:43] ✓ DUDE lansat cu succes (PID: 20976)
+[09:42:45] Heartbeat timer started (5 minute interval)
+[09:42:46] ✓ Așteptare inițializare DUDE completă
+[10:09:50] === POS Bridge Startup ===
+[10:09:50] Verificare activare dispozitiv...
+[10:09:51] Serial number generated from hardware info
+[10:09:51] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[10:09:51] Tenant Code: demo
+[10:09:51] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:09:51] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:09:51] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:09:51] ✓ DUDE lansat cu succes (PID: 17988)
+[10:09:54] ✓ Așteptare inițializare DUDE completă
+[10:09:55] Heartbeat timer started (5 minute interval)
+[10:13:44] === POS Bridge Startup ===
+[10:13:44] Verificare activare dispozitiv...
+[10:13:44] Serial number generated from hardware info
+[10:13:44] Serial Number: POS_DESKTOP-60L0JJT_C7162E48
+[10:13:44] Tenant Code: demo
+[10:13:44] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:13:44] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:13:44] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:13:44] ✓ DUDE lansat cu succes (PID: 21492)
+[10:13:47] ✓ Așteptare inițializare DUDE completă
+[10:13:50] Heartbeat timer started (5 minute interval)
+[10:13:59] === POS Bridge Startup ===
+[10:13:59] Verificare activare dispozitiv...
+[10:13:59] Serial number generated from hardware info
+[10:13:59] Serial Number: POS_DESKTOP-60L0JJT_D33DE6EC
+[10:13:59] Tenant Code: demo
+[10:13:59] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:13:59] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:13:59] ✓ DUDE rulează deja
+[10:14:33] Heartbeat timer started (5 minute interval)
+[10:20:20] === POS Bridge Startup ===
+[10:20:20] Verificare activare dispozitiv...
+[10:20:21] Serial number generated from hardware info
+[10:20:21] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[10:20:21] Tenant Code: demo
+[10:20:22] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:20:22] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:20:22] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:20:22] ✓ DUDE lansat cu succes (PID: 20404)
+[10:20:24] Heartbeat timer started (5 minute interval)
+[10:20:25] ✓ Așteptare inițializare DUDE completă
+[10:26:28] === POS Bridge Startup ===
+[10:26:28] Verificare activare dispozitiv...
+[10:26:29] Serial number generated from hardware info
+[10:26:29] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[10:26:29] Tenant Code: demo
+[10:26:29] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:26:29] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:26:29] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:26:30] ✓ DUDE lansat cu succes (PID: 23532)
+[10:26:32] Heartbeat timer started (5 minute interval)
+[10:26:33] ✓ Așteptare inițializare DUDE completă
+[10:29:28] === POS Bridge Startup ===
+[10:29:28] Verificare activare dispozitiv...
+[10:29:29] Serial number generated from hardware info
+[10:29:29] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[10:29:29] Tenant Code: demo
+[10:29:30] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:29:30] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:29:30] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:29:30] ✓ DUDE lansat cu succes (PID: 15256)
+[10:29:32] Heartbeat timer started (5 minute interval)
+[10:29:33] ✓ Așteptare inițializare DUDE completă
+[10:41:56] === POS Bridge Startup ===
+[10:41:56] Verificare activare dispozitiv...
+[10:41:57] Serial number generated from hardware info
+[10:41:57] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[10:41:57] Tenant Code: demo
+[10:41:57] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:41:57] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:41:57] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:41:57] ✓ DUDE lansat cu succes (PID: 20796)
+[10:41:59] Heartbeat timer started (5 minute interval)
+[10:42:00] ✓ Așteptare inițializare DUDE completă
+[10:49:06] === POS Bridge Startup ===
+[10:49:06] Verificare activare dispozitiv...
+[10:49:07] Serial number generated from hardware info
+[10:49:07] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[10:49:07] Tenant Code: demo
+[10:49:07] Dispozitiv neactivat: Device not registered. Contact administrator.
+[10:49:07] Dispozitiv neactivat. Mod demo - 30 zile.
+[10:49:07] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[10:49:07] ✓ DUDE lansat cu succes (PID: 14000)
+[10:49:10] Heartbeat timer started (5 minute interval)
+[10:49:10] ✓ Așteptare inițializare DUDE completă
+[11:02:45] === POS Bridge Startup ===
+[11:02:45] Verificare activare dispozitiv...
+[11:02:47] Serial number generated from hardware info
+[11:02:47] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[11:02:47] Tenant Code: demo
+[11:02:47] Dispozitiv neactivat: Device not registered. Contact administrator.
+[11:02:47] Dispozitiv neactivat. Mod demo - 30 zile.
+[11:02:47] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[11:02:47] ✓ DUDE lansat cu succes (PID: 9620)
+[11:02:49] Heartbeat timer started (5 minute interval)
+[11:02:50] ✓ Așteptare inițializare DUDE completă
+[11:04:21] === POS Bridge Startup ===
+[11:04:21] Verificare activare dispozitiv...
+[11:04:23] Serial number generated from hardware info
+[11:04:23] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[11:04:23] Tenant Code: demo
+[11:04:23] Dispozitiv neactivat: Device not registered. Contact administrator.
+[11:04:23] Dispozitiv neactivat. Mod demo - 30 zile.
+[11:04:23] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[11:04:23] ✓ DUDE lansat cu succes (PID: 11176)
+[11:04:25] Heartbeat timer started (5 minute interval)
+[11:04:26] ✓ Așteptare inițializare DUDE completă
+[12:19:01] === POS Bridge Startup ===
+[12:19:01] Verificare activare dispozitiv...
+[12:19:02] Serial number generated from hardware info
+[12:19:02] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:19:02] Tenant Code: demo
+[12:19:03] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:19:03] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:19:03] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:19:03] ✓ DUDE lansat cu succes (PID: 18764)
+[12:19:05] Heartbeat timer started (5 minute interval)
+[12:19:06] ✓ Așteptare inițializare DUDE completă
+[12:23:01] === POS Bridge Startup ===
+[12:23:01] Verificare activare dispozitiv...
+[12:23:02] Serial number generated from hardware info
+[12:23:02] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:23:02] Tenant Code: demo
+[12:23:02] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:23:02] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:23:02] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:23:02] ✓ DUDE lansat cu succes (PID: 19076)
+[12:23:05] Heartbeat timer started (5 minute interval)
+[12:23:05] ✓ Așteptare inițializare DUDE completă
+[12:27:04] === POS Bridge Startup ===
+[12:27:04] Verificare activare dispozitiv...
+[12:27:05] Serial number generated from hardware info
+[12:27:05] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:27:05] Tenant Code: demo
+[12:27:05] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:27:05] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:27:05] ✓ DUDE rulează deja
+[12:27:08] Heartbeat timer started (5 minute interval)
+[12:28:44] === POS Bridge Startup ===
+[12:28:44] Verificare activare dispozitiv...
+[12:28:46] Serial number generated from hardware info
+[12:28:46] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:28:46] Tenant Code: demo
+[12:28:46] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:28:46] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:28:46] ✓ DUDE rulează deja
+[12:28:48] Heartbeat timer started (5 minute interval)
+[12:30:07] === POS Bridge Startup ===
+[12:30:07] Verificare activare dispozitiv...
+[12:30:08] Serial number generated from hardware info
+[12:30:08] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:30:08] Tenant Code: demo
+[12:30:08] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:30:08] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:30:08] ✓ DUDE rulează deja
+[12:30:10] Heartbeat timer started (5 minute interval)
+[12:30:32] === POS Bridge Startup ===
+[12:30:32] Verificare activare dispozitiv...
+[12:30:33] Serial number generated from hardware info
+[12:30:33] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:30:33] Tenant Code: demo
+[12:30:33] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:30:33] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:30:33] ✓ DUDE rulează deja
+[12:30:35] Heartbeat timer started (5 minute interval)
+[12:30:48] === POS Bridge Startup ===
+[12:30:48] Verificare activare dispozitiv...
+[12:30:50] Serial number generated from hardware info
+[12:30:50] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:30:50] Tenant Code: demo
+[12:30:50] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:30:50] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:30:50] ✓ DUDE rulează deja
+[12:30:52] Heartbeat timer started (5 minute interval)
+[12:32:33] === POS Bridge Startup ===
+[12:32:33] Verificare activare dispozitiv...
+[12:32:34] Serial number generated from hardware info
+[12:32:34] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:32:34] Tenant Code: demo
+[12:32:35] Dispozitiv neactivat: Device not registered. Contact administrator.
+[12:32:35] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:32:35] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:32:35] ✓ DUDE lansat cu succes (PID: 10104)
+[12:32:37] Heartbeat timer started (5 minute interval)
+[12:32:38] ✓ Așteptare inițializare DUDE completă
+[12:43:37] === POS Bridge Startup ===
+[12:43:37] Verificare activare dispozitiv...
+[12:43:38] Serial number generated from hardware info
+[12:43:38] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:43:38] Tenant Code: demo
+[12:43:39] Dispozitiv neactivat: Device deactivated. Contact administrator.
+[12:43:39] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:43:39] DUDE nu este necesar (dispozitiv non-Datecs selectat)
+[12:43:40] Heartbeat timer started (5 minute interval)
+[12:45:22] === POS Bridge Startup ===
+[12:45:22] Verificare activare dispozitiv...
+[12:45:23] Serial number generated from hardware info
+[12:45:23] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:45:23] Tenant Code: demo
+[12:45:23] Dispozitiv neactivat: Device activated
+[12:45:23] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:45:23] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:45:23] ✓ DUDE lansat cu succes (PID: 19476)
+[12:45:25] Heartbeat timer started (5 minute interval)
+[12:45:26] ✓ Așteptare inițializare DUDE completă
+[12:46:46] === POS Bridge Startup ===
+[12:46:46] Verificare activare dispozitiv...
+[12:46:47] Serial number generated from hardware info
+[12:46:47] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:46:47] Tenant Code: demo
+[12:46:47] Dispozitiv neactivat: Device activated
+[12:46:47] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:46:47] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:46:47] ✓ DUDE lansat cu succes (PID: 15732)
+[12:46:49] Heartbeat timer started (5 minute interval)
+[12:46:50] ✓ Așteptare inițializare DUDE completă
+[12:50:03] === POS Bridge Startup ===
+[12:50:03] Verificare activare dispozitiv...
+[12:50:04] Serial number generated from hardware info
+[12:50:04] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:50:04] Tenant Code: demo
+[12:50:04] Dispozitiv neactivat: Device activated
+[12:50:04] Dispozitiv neactivat. Mod demo - 30 zile.
+[12:50:04] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:50:04] ✓ DUDE lansat cu succes (PID: 15416)
+[12:50:07] Heartbeat timer started (5 minute interval)
+[12:50:07] ✓ Așteptare inițializare DUDE completă
+[12:52:07] === POS Bridge Startup ===
+[12:52:07] Verificare activare dispozitiv...
+[12:52:08] Serial number generated from hardware info
+[12:52:08] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:52:08] Tenant Code: demo
+[12:52:09] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[12:52:09] Dispozitiv activat. Continuare pornire...
+[12:52:09] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:52:09] ✓ DUDE lansat cu succes (PID: 13784)
+[12:52:11] Heartbeat timer started (5 minute interval)
+[12:52:12] ✓ Așteptare inițializare DUDE completă
+[12:55:33] === POS Bridge Startup ===
+[12:55:33] Verificare activare dispozitiv...
+[12:55:35] Serial number generated from hardware info
+[12:55:35] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:55:35] Tenant Code: demo
+[12:55:35] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[12:55:35] Dispozitiv activat. Continuare pornire...
+[12:55:35] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:55:36] ✓ DUDE lansat cu succes (PID: 14392)
+[12:55:41] Heartbeat timer started (5 minute interval)
+[12:55:41] ✓ Așteptare inițializare DUDE completă
+[12:57:04] === POS Bridge Startup ===
+[12:57:04] Verificare activare dispozitiv...
+[12:57:06] Serial number generated from hardware info
+[12:57:06] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:57:06] Tenant Code: demo
+[12:57:06] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[12:57:06] Dispozitiv activat. Continuare pornire...
+[12:57:06] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[12:57:06] ✓ DUDE lansat cu succes (PID: 13628)
+[12:57:08] Heartbeat timer started (5 minute interval)
+[12:57:09] ✓ Așteptare inițializare DUDE completă
+[13:04:00] === POS Bridge Startup ===
+[13:04:00] Verificare activare dispozitiv...
+[13:04:02] Serial number generated from hardware info
+[13:04:02] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[13:04:02] Tenant Code: demo
+[13:04:02] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[13:04:02] Dispozitiv activat. Continuare pornire...
+[13:04:02] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[13:04:02] ✓ DUDE lansat cu succes (PID: 16096)
+[13:04:04] Heartbeat timer started (5 minute interval)
+[13:04:05] ✓ Așteptare inițializare DUDE completă
+[13:05:41] === POS Bridge Startup ===
+[13:05:41] Verificare activare dispozitiv...
+[13:05:43] Serial number generated from hardware info
+[13:05:43] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[13:05:43] Tenant Code: demo
+[13:05:43] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[13:05:43] Dispozitiv activat. Continuare pornire...
+[13:05:43] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[13:05:44] ✓ DUDE lansat cu succes (PID: 14220)
+[13:05:47] Heartbeat timer started (5 minute interval)
+[13:05:47] ✓ Așteptare inițializare DUDE completă
+[13:27:29] === POS Bridge Startup ===
+[13:27:29] Verificare activare dispozitiv...
+[13:27:30] Serial number generated from hardware info
+[13:27:30] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[13:27:30] Tenant Code: demo
+[13:27:31] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[13:27:31] Dispozitiv activat. Continuare pornire...
+[13:27:31] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[13:27:31] ✓ DUDE lansat cu succes (PID: 7696)
+[13:27:33] Heartbeat timer started (5 minute interval)
+[13:27:34] ✓ Așteptare inițializare DUDE completă
+[14:12:34] === POS Bridge Startup ===
+[14:12:34] Verificare activare dispozitiv...
+[14:12:36] Serial number generated from hardware info
+[14:12:36] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[14:12:36] Tenant Code: demo
+[14:12:36] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[14:12:36] Dispozitiv activat. Continuare pornire...
+[14:12:36] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[14:12:36] ✓ DUDE lansat cu succes (PID: 18172)
+[14:12:38] Heartbeat timer started (5 minute interval)
+[14:12:39] ✓ Așteptare inițializare DUDE completă
+[14:37:10] === POS Bridge Startup ===
+[14:37:10] Verificare activare dispozitiv...
+[14:37:11] Serial number generated from hardware info
+[14:37:11] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[14:37:11] Tenant Code: demo
+[14:37:11] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[14:37:11] Dispozitiv activat. Continuare pornire...
+[14:37:11] Lansare DUDE de la: C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+[14:37:11] ✓ DUDE lansat cu succes (PID: 1660)
+[14:37:13] Heartbeat timer started (5 minute interval)
+[14:37:14] ✓ Așteptare inițializare DUDE completă
+[14:48:01] === POS Bridge Startup ===
+[14:48:01] Verificare activare dispozitiv...
+[14:48:02] Serial number generated from hardware info
+[14:48:02] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[14:48:02] Tenant Code: demo
+[14:48:03] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[14:48:03] Dispozitiv activat. Continuare pornire...
+[14:48:03] DUDE nu este necesar (dispozitiv non-Datecs selectat)
+[14:48:04] Heartbeat timer started (5 minute interval)
+[14:51:43] === POS Bridge Startup ===
+[14:51:43] Verificare activare dispozitiv...
+[14:51:44] Serial number generated from hardware info
+[14:51:44] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[14:51:44] Tenant Code: demo
+[14:51:44] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[14:51:44] Dispozitiv activat. Continuare pornire...
+[14:51:44] DUDE nu este necesar (dispozitiv non-Datecs selectat)
+[14:51:46] Heartbeat timer started (5 minute interval)
+[14:53:30] === POS Bridge Startup ===
+[14:53:30] Verificare activare dispozitiv...
+[14:53:31] Serial number generated from hardware info
+[14:53:31] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[14:53:31] Tenant Code: demo
+[14:53:32] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[14:53:32] Dispozitiv activat. Continuare pornire...
+[14:53:32] DUDE nu este necesar (dispozitiv non-Datecs selectat)
+[14:53:33] Heartbeat timer started (5 minute interval)
+[14:55:48] === POS Bridge Startup ===
+[14:55:48] Verificare activare dispozitiv...
+[14:55:49] Serial number generated from hardware info
+[14:55:49] Serial Number: POS_DESKTOP-60L0JJT_BFEBFBFF
+[14:55:49] Tenant Code: demo
+[14:55:49] Dispozitiv activat: DP-25MX (Serie fiscala: DB4090041142)
+[14:55:49] Dispozitiv activat. Continuare pornire...
+[14:55:49] DUDE nu este necesar (dispozitiv non-Datecs selectat)
+[14:55:52] Heartbeat timer started (5 minute interval)

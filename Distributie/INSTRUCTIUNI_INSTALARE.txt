@@ -1,0 +1,79 @@
+================================================================================
+  POS BRIDGE - Instrucțiuni pentru instalare pe calculator nou
+  Actualizat: februarie 2026
+================================================================================
+
+  MOD DEMO: La prima pornire, dacă dispozitivul nu este activat, aplicația
+  rulează în mod demo (30 zile). Footer-ul afișează "Demo - X zile rămase".
+  Contactați administratorul pentru activare.
+
+Pași de instalare pe calculatorul unde vrei să rulezi aplicația:
+
+--------------------------------------------------------------------------------
+1. .NET 8.0 Runtime (OBLIGATORIU)
+--------------------------------------------------------------------------------
+   - Descarcă: https://dotnet.microsoft.com/download/dotnet/8.0
+   - Instalează: ".NET Desktop Runtime 8.0" - varianta x86 (32-bit)
+   - NU folosi varianta x64 - aplicația necesită x86 din cauza DUDE COM
+
+--------------------------------------------------------------------------------
+2. Driver DUDE (OBLIGATORIU)
+--------------------------------------------------------------------------------
+   - Intră în folderul: DUDE\
+   - Rulează: DRIVER USB DATECS WINDOW 11.exe (cu drepturi Administrator)
+   - Așteaptă finalizarea instalării
+
+--------------------------------------------------------------------------------
+3. Casa de marcat Datecs
+--------------------------------------------------------------------------------
+   - Conectează casa la calculator (USB)
+   - Pornește casa de marcat
+   - În Device Manager verifică portul COM atribuit (ex: COM3, COM6)
+
+--------------------------------------------------------------------------------
+4. Lansare aplicație
+--------------------------------------------------------------------------------
+   - Intră în folderul: POSBridge\
+   - Dublu-click pe: POSBridge.WPF.exe
+   - La prima pornire: selectează portul COM corect în meniu
+   - Aplicația se conectează și pornește automat monitorizarea folderului Bon\
+
+   - Apăsând X (închide): aplicația se ascunde în fundal (iconiță lângă ceas)
+   - Din iconiță: Deschide/Restore (restaurează fereastra) sau Ieșire (închide complet)
+   - Opțiune "Pornește automat la pornirea Windows" în meniu pentru autorun
+
+--------------------------------------------------------------------------------
+5. Structură foldere
+--------------------------------------------------------------------------------
+   POSBridge\
+     ├── POSBridge.WPF.exe    <- Pornește de aici
+     ├── Bon\                 <- Pune fișierele .txt aici (bonuri de printat)
+     │   ├── Istoric\         <- Bonuri tipărite cu succes
+     │   ├── Erori\           <- Bonuri cu erori (verifică .log)
+     │   └── Raspuns\         <- bon.txt cu BONOK=1 (doar când bonul e tipărit OK)
+     └── ...
+
+--------------------------------------------------------------------------------
+Format fișier bon (.txt):
+--------------------------------------------------------------------------------
+   NumeProdus|Pret|Cantitate|CotaTVA
+
+   Exemplu:
+   Cafea Espresso|5.50|2|19
+   Croissant|4.00|1|19
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Depanare: Eroare "System.IO.Ports is currently only supported on Windows"
+--------------------------------------------------------------------------------
+   Dacă apare această eroare pe calculatorul țintă:
+   1. Verifică că ai instalat ".NET Desktop Runtime 8.0" varianta x86 (32-bit)
+      NU varianta x64! În "Programe și funcții" să apară "X86" sau "x86"
+   2. Descarcă explicit: https://dotnet.microsoft.com/download/dotnet/8.0
+      → "Run desktop apps" → Windows x86 Installer
+   3. Asigură-te că rulezi pe Windows (nu WSL, emulator sau Linux)
+   4. Repornește calculatorul după instalarea .NET
+
+--------------------------------------------------------------------------------
+Suport: support@posbridge.local
+================================================================================

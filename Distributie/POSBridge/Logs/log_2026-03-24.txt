@@ -1,0 +1,1429 @@
+[09:18:31] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[09:18:31] ✓ Pornire automată la startup activată.
+[09:18:31] Porturi COM detectate: COM3
+[09:18:31] Port COM selectat din setări: COM3
+[09:18:31] ✨ Multi-Vendor: 2 device type(s) supported
+[09:18:31] 🔌 Conexiune schimbată la: USB Direct (pentru Incotex, Tremol, etc.)
+[09:18:33] Aplicație pornită.
+[09:18:33] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[09:18:33] ✓ Pornire automată la startup activată.
+[09:18:33] Conectare automată la imprimanta fiscală...
+[09:18:33] Conectare la Incotex (Serial/USB)...
+[09:18:33] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[09:18:33] ✗ Conexiune eșuată la Incotex (Serial/USB): Failed to connect to Incotex.
+
+Tried:
+• Serial/COM (explicit port or auto-detect by VID_0483&PID_5740)
+• WinUSB fallback (requires WinUSB driver)
+
+Error: Incotex device not detected in Windows device list.
+
+Verifica:
+• cablul USB / portul USB
+• Device Manager: sa apara un dispozitiv cu VID_0483&PID_5740
+• daca apare ca "USB Serial Device (COMx)", seteaza Port=COMx (sau lasa AUTO)
+• daca vrei WinUSB, trebuie driver WinUSB (Microsoft) pe dispozitiv
+[09:18:33] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[09:18:33] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:18:41] 🏭 Device type changed to: Datecs (RS232/TCP)
+[09:18:44] 🌐 Conexiune schimbată la: Ethernet (192.168.1.219:8000)
+[09:18:54] Inițializare DUDE COM Server...
+[09:18:54] Conectare prin Ethernet la 192.168.1.219...
+[09:18:54] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:18:54] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:19:24] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:19:24] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[09:19:24] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:19:50] Inițializare DUDE COM Server...
+[09:19:50] Conectare prin Ethernet la 192.168.1.219...
+[09:19:50] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:19:50] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:20:20] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:20:20] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[09:20:20] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:20:54] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[09:21:01] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[09:21:01] ✓ Pornire automată la startup activată.
+[09:21:01] Porturi COM detectate: COM3
+[09:21:01] Port COM selectat din setări: COM3
+[09:21:01] ✨ Multi-Vendor: 2 device type(s) supported
+[09:21:01] 🌐 Conexiune schimbată la: Ethernet (192.168.1.219:8000)
+[09:21:02] Aplicație pornită.
+[09:21:02] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[09:21:02] ✓ Pornire automată la startup activată.
+[09:21:02] Conectare automată la imprimanta fiscală...
+[09:21:02] Inițializare DUDE COM Server...
+[09:21:02] Conectare prin Ethernet la 192.168.1.219...
+[09:21:02] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:21:02] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:21:32] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:21:32] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[09:21:32] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:21:38] Inițializare DUDE COM Server...
+[09:21:38] Conectare prin Ethernet la 192.168.1.219...
+[09:21:38] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:21:38] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:21:41] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[09:22:08] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:22:08] [TRAY DEBUG] IsVisible=False, WindowState=Normal, _trayIcon=OK
+[09:22:08] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:25:59] ❌ Niciun port funcțional găsit din lista testată
+[09:31:01] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[09:31:01] ✓ Pornire automată la startup activată.
+[09:31:01] Porturi COM detectate: COM3
+[09:31:01] Port COM selectat din setări: COM3
+[09:31:01] ✨ Multi-Vendor: 2 device type(s) supported
+[09:31:01] 🌐 Conexiune schimbată la: Ethernet (192.168.1.219:8000)
+[09:31:02] Aplicație pornită.
+[09:31:02] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[09:31:02] ✓ Pornire automată la startup activată.
+[09:31:02] Conectare automată la imprimanta fiscală...
+[09:31:02] Inițializare DUDE COM Server...
+[09:31:02] Conectare prin Ethernet la 192.168.1.219...
+[09:31:02] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:31:02] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:31:17] ❌ Niciun port funcțional găsit din lista testată
+[09:31:22] 🔌 Conexiune schimbată la: USB Direct (pentru Incotex, Tremol, etc.)
+[09:31:23] 📡 Conexiune schimbată la: Serial (COM)
+[09:31:28] 🌐 Conexiune schimbată la: Ethernet (192.168.1.218:3999)
+[09:31:32] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:31:32] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[09:31:32] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:33:58] Inițializare DUDE COM Server...
+[09:33:58] Conectare prin Ethernet la 192.168.1.218...
+[09:33:58] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:33:58] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:34:26] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[09:34:28] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:34:28] [TRAY DEBUG] IsVisible=False, WindowState=Normal, _trayIcon=OK
+[09:34:28] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:37:59] ❌ Niciun port funcțional găsit din lista testată
+[09:40:27] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[09:40:27] ✓ Pornire automată la startup activată.
+[09:40:28] Porturi COM detectate: COM3
+[09:40:28] Port COM selectat din setări: COM3
+[09:40:28] ✨ Multi-Vendor: 2 device type(s) supported
+[09:40:28] 🌐 Conexiune schimbată la: Ethernet (192.168.1.219:8000)
+[09:40:29] Aplicație pornită.
+[09:40:29] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[09:40:29] ✓ Pornire automată la startup activată.
+[09:40:29] Conectare automată la imprimanta fiscală...
+[09:40:29] Inițializare DUDE COM Server...
+[09:40:29] Conectare prin Ethernet la 192.168.1.219...
+[09:40:29] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:40:29] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:40:30] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[09:40:35] ═══════════════════════════════════════
+[09:40:35] Aplicație în închidere - curățare...
+[09:40:35] Deconectare de la dispozitivul fiscal...
+[09:40:37] ═══════════════════════════════════════
+[09:40:37] Aplicație în închidere - curățare...
+[09:40:37] Deconectare de la dispozitivul fiscal...
+[09:40:37] ✓ Dispozitiv fiscal deconectat
+[09:40:37] Eliberare forțată port COM...
+[09:40:38] ═══════════════════════════════════════
+[09:40:38] Aplicație în închidere - curățare...
+[09:40:38] Deconectare de la dispozitivul fiscal...
+[09:40:39] ═══════════════════════════════════════
+[09:40:39] Aplicație în închidere - curățare...
+[09:40:39] Deconectare de la dispozitivul fiscal...
+[09:41:06] ✓ Port COM eliberat
+[09:41:06] ✓ Setări salvate
+[09:41:06] Curățare aplicație finalizată cu succes
+[09:41:06] ═══════════════════════════════════════
+[09:41:06] ✓ Dispozitiv fiscal deconectat
+[09:41:06] Eliberare forțată port COM...
+[09:41:06] ✓ Dispozitiv fiscal deconectat
+[09:41:06] Eliberare forțată port COM...
+[09:41:06] ✓ Port COM eliberat
+[09:41:06] ✓ Setări salvate
+[09:41:06] Curățare aplicație finalizată cu succes
+[09:41:06] ═══════════════════════════════════════
+[09:41:06] ❌ Niciun port funcțional găsit din lista testată
+[09:41:06] ✓ Port COM eliberat
+[09:41:06] ✓ Setări salvate
+[09:41:06] Curățare aplicație finalizată cu succes
+[09:41:06] ═══════════════════════════════════════
+[09:41:06] ❌ Niciun port funcțional găsit din lista testată
+[09:41:06] ❌ Niciun port funcțional găsit din lista testată
+[09:42:24] ✓ Dispozitiv fiscal deconectat
+[09:42:24] Eliberare forțată port COM...
+[09:42:24] ✓ Port COM eliberat
+[09:42:24] ✓ Setări salvate
+[09:42:24] Curățare aplicație finalizată cu succes
+[09:42:24] ═══════════════════════════════════════
+[09:42:24] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:42:24] [TRAY DEBUG] IsVisible=False, WindowState=Normal, _trayIcon=NULL
+[09:42:24] ❌ Niciun port funcțional găsit din lista testată
+[09:42:43] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[09:42:43] ✓ Pornire automată la startup activată.
+[09:42:43] Porturi COM detectate: COM3
+[09:42:43] Port COM selectat din setări: COM3
+[09:42:43] ✨ Multi-Vendor: 2 device type(s) supported
+[09:42:43] 🌐 Conexiune schimbată la: Ethernet (192.168.1.219:8000)
+[09:42:44] Aplicație pornită.
+[09:42:44] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[09:42:44] ✓ Pornire automată la startup activată.
+[09:42:44] Conectare automată la imprimanta fiscală...
+[09:42:44] Inițializare DUDE COM Server...
+[09:42:44] Conectare prin Ethernet la 192.168.1.219...
+[09:42:44] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:42:44] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:43:14] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:43:14] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[09:43:14] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[09:43:23] Inițializare DUDE COM Server...
+[09:43:23] Conectare prin Ethernet la 192.168.1.219...
+[09:43:23] 🔍 Testare automată 16 porturi: 9100, 4999, 9999, 8000, 4000, 5000, 9001, 515, etc...
+[09:43:23] ⏱️ Durată estimată: ~15 secunde (16 porturi × ~500ms + conexiuni)
+[09:43:38] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[09:43:42] ═══════════════════════════════════════
+[09:43:42] Aplicație în închidere - curățare...
+[09:43:42] Deconectare de la dispozitivul fiscal...
+[09:44:00] ✓ Dispozitiv fiscal deconectat
+[09:44:00] Eliberare forțată port COM...
+[09:44:00] ✓ Port COM eliberat
+[09:44:00] ✓ Setări salvate
+[09:44:00] Curățare aplicație finalizată cu succes
+[09:44:00] ═══════════════════════════════════════
+[09:44:00] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[09:44:00] [TRAY DEBUG] IsVisible=False, WindowState=Normal, _trayIcon=NULL
+[09:44:00] ❌ Niciun port funcțional găsit din lista testată
+[09:44:00] ❌ Niciun port funcțional găsit din lista testată
+[10:09:52] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:09:52] ✓ Pornire automată la startup activată.
+[10:09:52] Porturi COM detectate: COM3
+[10:09:52] Port COM selectat din setări: COM3
+[10:09:52] ✨ Multi-Vendor: 2 device type(s) supported
+[10:09:53] Aplicație pornită.
+[10:09:53] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[10:09:53] ✓ Pornire automată la startup activată.
+[10:09:53] Conectare automată la imprimanta fiscală...
+[10:11:45] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:11:51] ═══════════════════════════════════════
+[10:11:51] Aplicație în închidere - curățare...
+[10:11:51] Deconectare de la dispozitivul fiscal...
+[10:11:51] ✓ Dispozitiv fiscal deconectat
+[10:11:51] Eliberare forțată port COM...
+[10:11:51] ✓ Port COM eliberat
+[10:11:51] Închidere proces DUDE (PID: 17988)...
+[10:11:53] ✓ Proces DUDE închis cu succes
+[10:11:53] ✓ Setări salvate
+[10:11:53] Curățare aplicație finalizată cu succes
+[10:11:53] ═══════════════════════════════════════
+[10:13:45] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:13:45] ✓ Pornire automată la startup activată.
+[10:13:57] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:13:59] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:13:59] ✓ Pornire automată la startup activată.
+[10:14:34] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:14:41] ═══════════════════════════════════════
+[10:14:41] Aplicație în închidere - curățare...
+[10:14:41] Deconectare de la dispozitivul fiscal...
+[10:14:41] ✓ Dispozitiv fiscal deconectat
+[10:14:41] Eliberare forțată port COM...
+[10:14:41] ✓ Port COM eliberat
+[10:14:41] Închidere proces DUDE (PID: 21492)...
+[10:14:43] ✓ Proces DUDE închis cu succes
+[10:14:43] ✓ Setări salvate
+[10:14:43] Curățare aplicație finalizată cu succes
+[10:14:43] ═══════════════════════════════════════
+[10:14:45] ═══════════════════════════════════════
+[10:14:45] Aplicație în închidere - curățare...
+[10:14:45] Deconectare de la dispozitivul fiscal...
+[10:14:45] ✓ Dispozitiv fiscal deconectat
+[10:14:45] Eliberare forțată port COM...
+[10:14:45] ✓ Port COM eliberat
+[10:14:45] ✓ Setări salvate
+[10:14:45] Curățare aplicație finalizată cu succes
+[10:14:45] ═══════════════════════════════════════
+[10:20:22] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:20:22] ✓ Pornire automată la startup activată.
+[10:20:22] Porturi COM detectate: COM3
+[10:20:22] Port COM selectat din setări: COM3
+[10:20:22] ✨ Multi-Vendor: 2 device type(s) supported
+[10:20:24] Aplicație pornită.
+[10:20:24] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[10:20:24] ✓ Pornire automată la startup activată.
+[10:20:24] Conectare automată la imprimanta fiscală...
+[10:20:24] Inițializare DUDE COM Server...
+[10:20:24] Conectare prin Ethernet la 192.168.1.219:9100...
+[10:20:24] 🔌 Încercare port manual: 9100
+[10:20:36] ✗ Conexiune eșuată: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[10:20:36] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:20:36] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:20:45] Port 9100 a eșuat, scanare automată...
+[10:20:45] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:20:45] ⏱️ Durată estimată: ~15 secunde
+[10:20:53] Inițializare DUDE COM Server...
+[10:20:53] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:20:53] 🔌 Încercare port manual: 3999
+[10:21:05] ✗ Conexiune eșuată: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[10:21:05] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:21:05] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:21:53] Inițializare DUDE COM Server...
+[10:21:53] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:21:53] 🔌 Încercare port manual: 3999
+[10:22:05] ✗ Conexiune eșuată: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[10:22:05] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:22:05] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:22:21] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:25:44] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:25:45] Port 3999 a eșuat, scanare automată...
+[10:25:45] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:25:45] ⏱️ Durată estimată: ~15 secunde
+[10:25:46] Port 3999 a eșuat, scanare automată...
+[10:25:46] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:25:46] ⏱️ Durată estimată: ~15 secunde
+[10:25:58] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:25:58] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:26:30] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:26:30] ✓ Pornire automată la startup activată.
+[10:26:30] Porturi COM detectate: COM3
+[10:26:30] Port COM selectat din setări: COM3
+[10:26:30] ✨ Multi-Vendor: 2 device type(s) supported
+[10:26:31] Aplicație pornită.
+[10:26:31] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[10:26:31] ✓ Pornire automată la startup activată.
+[10:26:31] Conectare automată la imprimanta fiscală...
+[10:26:31] Inițializare DUDE COM Server...
+[10:26:31] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:26:32] 🔌 Încercare port manual: 3999
+[10:26:32] Port 3999 a eșuat, scanare automată...
+[10:26:32] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:26:32] ⏱️ Durată estimată: ~15 secunde
+[10:26:43] ✗ Conexiune eșuată: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[10:26:43] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:26:43] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:26:57] ═══════════════════════════════════════
+[10:26:57] Aplicație în închidere - curățare...
+[10:26:57] Deconectare de la dispozitivul fiscal...
+[10:27:00] ═══════════════════════════════════════
+[10:27:00] Aplicație în închidere - curățare...
+[10:27:00] Deconectare de la dispozitivul fiscal...
+[10:27:00] ✓ Dispozitiv fiscal deconectat
+[10:27:00] Eliberare forțată port COM...
+[10:27:00] ✓ Port COM eliberat
+[10:27:00] ✓ Setări salvate
+[10:27:00] Curățare aplicație finalizată cu succes
+[10:27:00] ═══════════════════════════════════════
+[10:27:35] ✓ Dispozitiv fiscal deconectat
+[10:27:35] Eliberare forțată port COM...
+[10:27:35] ✓ Port COM eliberat
+[10:27:35] ✓ Setări salvate
+[10:27:35] Curățare aplicație finalizată cu succes
+[10:27:35] ═══════════════════════════════════════
+[10:27:35] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:29:30] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:29:30] ✓ Pornire automată la startup activată.
+[10:29:31] Porturi COM detectate: COM3
+[10:29:31] Port COM selectat din setări: COM3
+[10:29:31] ✨ Multi-Vendor: 2 device type(s) supported
+[10:29:32] Aplicație pornită.
+[10:29:32] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[10:29:32] ✓ Pornire automată la startup activată.
+[10:29:32] Conectare automată la imprimanta fiscală...
+[10:29:32] Inițializare DUDE COM Server...
+[10:29:32] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:29:32] 🔌 Încercare port manual: 3999
+[10:29:32] Port 3999 a eșuat, scanare automată...
+[10:29:32] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:29:32] ⏱️ Durată estimată: ~15 secunde
+[10:29:38] ⏸️ Conectare anulată de utilizator.
+[10:29:38] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[10:29:38] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:29:38] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:29:39] Inițializare DUDE COM Server...
+[10:29:39] Conectare prin Ethernet la 192.168.1.218:9100...
+[10:29:39] 🔌 Încercare port manual: 9100
+[10:29:49] ⏸️ Conectare anulată de utilizator.
+[10:29:49] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[10:29:49] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:29:49] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:29:54] Inițializare DUDE COM Server...
+[10:29:54] Conectare prin Ethernet la 192.168.1.218:4999...
+[10:29:54] 🔌 Încercare port manual: 4999
+[10:30:03] ⏸️ Conectare anulată de utilizator.
+[10:30:03] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[10:30:03] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:30:03] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:30:18] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:30:23] ═══════════════════════════════════════
+[10:30:23] Aplicație în închidere - curățare...
+[10:30:23] Deconectare de la dispozitivul fiscal...
+[10:30:46] ✓ Dispozitiv fiscal deconectat
+[10:30:46] Eliberare forțată port COM...
+[10:30:46] ✓ Port COM eliberat
+[10:30:46] ✓ Setări salvate
+[10:30:46] Curățare aplicație finalizată cu succes
+[10:30:46] ═══════════════════════════════════════
+[10:30:46] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:30:46] Port 9100 a eșuat, scanare automată...
+[10:30:46] Port 4999 a eșuat, scanare automată...
+[10:30:46] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:30:46] ⏱️ Durată estimată: ~15 secunde
+[10:30:46] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:30:46] ⏱️ Durată estimată: ~15 secunde
+[10:41:58] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:41:58] ✓ Pornire automată la startup activată.
+[10:41:58] Porturi COM detectate: COM3
+[10:41:58] Port COM selectat din setări: COM3
+[10:41:58] ✨ Multi-Vendor: 2 device type(s) supported
+[10:41:59] Aplicație pornită.
+[10:41:59] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[10:41:59] ✓ Pornire automată la startup activată.
+[10:41:59] Conectare automată la imprimanta fiscală...
+[10:41:59] Inițializare DUDE COM Server...
+[10:41:59] Conectare prin Ethernet la 192.168.1.218:4999...
+[10:41:59] 🔌 Încercare port manual: 4999
+[10:42:04] ⏸️ Conectare anulată de utilizator.
+[10:42:04] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[10:42:04] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:42:04] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:42:10] Inițializare DUDE COM Server...
+[10:42:10] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:42:10] 🔌 Încercare port manual: 3999
+[10:42:21] Port 4999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:4999. Error: open_Connection failed: -33022 - Device not connected
+[10:42:21] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:42:21] ⏱️ Durată estimată: ~15 secunde
+[10:42:21] Port 3999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:3999. Error: open_Connection failed: -33025 - Unknown device model
+[10:42:21] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:42:21] ⏱️ Durată estimată: ~15 secunde
+[10:42:40] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[10:42:40] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:42:40] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:42:43] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:47:00] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:49:08] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[10:49:08] ✓ Pornire automată la startup activată.
+[10:49:08] Porturi COM detectate: COM3
+[10:49:08] Port COM selectat din setări: COM3
+[10:49:08] ✨ Multi-Vendor: 2 device type(s) supported
+[10:49:10] Aplicație pornită.
+[10:49:10] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[10:49:10] ✓ Pornire automată la startup activată.
+[10:49:10] Conectare automată la imprimanta fiscală...
+[10:49:10] Inițializare DUDE COM Server...
+[10:49:10] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:49:10] 🔌 Încercare port manual: 3999
+[10:49:10] Port 3999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:3999. Error: open_Connection failed: -33025 - Unknown device model
+[10:49:10] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:49:10] ⏱️ Durată estimată: ~15 secunde
+[10:49:30] ⏸️ Conectare anulată de utilizator.
+[10:49:30] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[10:49:30] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:49:30] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:49:37] Inițializare DUDE COM Server...
+[10:49:37] Conectare prin Ethernet la 192.168.1.218:3999...
+[10:49:37] 🔌 Încercare port manual: 3999
+[10:50:07] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[10:50:07] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[10:50:08] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[10:50:47] ⏸️ Conectare anulată de utilizator.
+[10:51:45] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[10:52:14] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[10:52:14] Port 3999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:3999. Error: open_Connection failed: -33025 - Unknown device model
+[10:52:14] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[10:52:14] ⏱️ Durată estimată: ~15 secunde
+[10:52:59] ═══════════════════════════════════════
+[10:52:59] Aplicație în închidere - curățare...
+[10:52:59] Deconectare de la dispozitivul fiscal...
+[10:53:41] ✓ Dispozitiv fiscal deconectat
+[10:53:41] Eliberare forțată port COM...
+[10:53:41] ✓ Port COM eliberat
+[10:53:41] ✓ Setări salvate
+[10:53:41] Curățare aplicație finalizată cu succes
+[10:53:41] ═══════════════════════════════════════
+[10:53:41] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[11:02:47] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[11:02:47] ✓ Pornire automată la startup activată.
+[11:02:48] Porturi COM detectate: COM3
+[11:02:48] Port COM selectat din setări: COM3
+[11:02:48] ✨ Multi-Vendor: 2 device type(s) supported
+[11:02:49] Aplicație pornită.
+[11:02:49] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[11:02:49] ✓ Pornire automată la startup activată.
+[11:02:49] Conectare automată la imprimanta fiscală...
+[11:02:49] Inițializare DUDE COM Server...
+[11:02:49] Conectare prin Ethernet la 192.168.1.218:3999...
+[11:02:49] 🔌 Încercare port manual: 3999
+[11:02:50] Port 3999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:3999. Error: open_Connection failed: -33025 - Unknown device model
+[11:02:50] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[11:02:50] ⏱️ Durată estimată: ~15 secunde
+[11:02:58] ⏸️ Conectare anulată de utilizator.
+[11:02:58] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[11:02:58] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[11:02:58] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[11:03:01] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[11:03:07] ═══════════════════════════════════════
+[11:03:07] Aplicație în închidere - curățare...
+[11:03:07] Deconectare de la dispozitivul fiscal...
+[11:03:18] ✓ Dispozitiv fiscal deconectat
+[11:03:18] Eliberare forțată port COM...
+[11:03:18] ✓ Port COM eliberat
+[11:03:18] ✓ Setări salvate
+[11:03:18] Curățare aplicație finalizată cu succes
+[11:03:18] ═══════════════════════════════════════
+[11:03:18] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[11:04:23] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[11:04:23] ✓ Pornire automată la startup activată.
+[11:04:24] Porturi COM detectate: COM3
+[11:04:24] Port COM selectat din setări: COM3
+[11:04:24] ✨ Multi-Vendor: 2 device type(s) supported
+[11:04:25] Aplicație pornită.
+[11:04:25] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[11:04:25] ✓ Pornire automată la startup activată.
+[11:04:25] Conectare automată la imprimanta fiscală...
+[11:04:25] Inițializare DUDE COM Server...
+[11:04:25] Conectare prin Ethernet la 192.168.1.218:3999...
+[11:04:25] 🔌 Încercare port manual: 3999
+[11:04:26] Port 3999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:3999. Error: open_Connection failed: -33025 - Unknown device model
+[11:04:26] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[11:04:26] ⏱️ Durată estimată: ~15 secunde
+[11:04:55] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[11:04:55] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[11:04:55] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[11:05:07] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[11:05:12] ═══════════════════════════════════════
+[11:05:12] Aplicație în închidere - curățare...
+[11:05:12] Deconectare de la dispozitivul fiscal...
+[11:06:52] ✓ Dispozitiv fiscal deconectat
+[11:06:52] Eliberare forțată port COM...
+[11:06:52] ✓ Port COM eliberat
+[11:06:52] ✓ Setări salvate
+[11:06:52] Curățare aplicație finalizată cu succes
+[11:06:52] ═══════════════════════════════════════
+[11:06:52] ❌ Niciun port funcțional (încercați 9100 sau 3999 manual în câmpul Port)
+[12:19:04] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:19:04] ✓ Pornire automată la startup activată.
+[12:19:04] Porturi COM detectate: COM3
+[12:19:04] Port COM selectat din setări: COM3
+[12:19:04] ✨ Multi-Vendor: 2 device type(s) supported
+[12:19:05] Aplicație pornită.
+[12:19:05] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:19:05] ✓ Pornire automată la startup activată.
+[12:19:05] Conectare automată la imprimanta fiscală...
+[12:19:05] Inițializare DUDE COM Server...
+[12:19:05] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:19:05] 🔌 Încercare port manual: 3999
+[12:19:07] ✅ Conectat pe port 3999
+[12:19:07] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:19:07] ═══════════════════════════════════════
+[12:19:07] Pornire serviciu monitorizare folder...
+[12:19:07] [12:19:07] Starting folder watcher...
+[12:19:07] [12:19:07] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:19:07] ✓ Monitorizarea folderului este activă
+[12:19:07] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:19:07] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:19:07] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:19:07] ═══════════════════════════════════════
+[12:19:08] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:20:29] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:20:40] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:20:43] ═══════════════════════════════════════
+[12:20:43] Aplicație în închidere - curățare...
+[12:20:43] Oprire monitorizare folder...
+[12:20:43] [12:20:43] Folder watcher stopped.
+[12:20:43] ✓ Monitorizarea folderului s-a oprit
+[12:20:43] Deconectare de la dispozitivul fiscal...
+[12:20:43] ✓ Dispozitiv fiscal deconectat
+[12:20:43] Eliberare forțată port COM...
+[12:20:43] ✓ Port COM eliberat
+[12:20:43] Închidere proces DUDE (PID: 18764)...
+[12:20:48] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[12:20:48] ✓ Proces DUDE închis cu succes
+[12:20:48] ✓ Setări salvate
+[12:20:48] Curățare aplicație finalizată cu succes
+[12:20:48] ═══════════════════════════════════════
+[12:23:03] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:23:03] ✓ Pornire automată la startup activată.
+[12:23:04] Porturi COM detectate: COM3
+[12:23:04] Port COM selectat din setări: COM3
+[12:23:04] ✨ Multi-Vendor: 2 device type(s) supported
+[12:23:05] Aplicație pornită.
+[12:23:05] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:23:05] ✓ Pornire automată la startup activată.
+[12:23:05] Conectare automată la imprimanta fiscală...
+[12:23:05] Inițializare DUDE COM Server...
+[12:23:05] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:23:05] 🔌 Încercare port manual: 3999
+[12:23:07] ✅ Conectat pe port 3999
+[12:23:07] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:23:07] ═══════════════════════════════════════
+[12:23:07] Pornire serviciu monitorizare folder...
+[12:23:07] [12:23:07] Starting folder watcher...
+[12:23:07] [12:23:07] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:23:07] ✓ Monitorizarea folderului este activă
+[12:23:07] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:23:07] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:23:07] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:23:07] ═══════════════════════════════════════
+[12:23:08] ⚠ Eroare transmitere server: Server error 404: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot POST /api/licentiere/posdevice/checkin</pre>
+</body>
+</html>
+
+[12:27:06] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:27:06] ✓ Pornire automată la startup activată.
+[12:27:07] Porturi COM detectate: COM3
+[12:27:07] Port COM selectat din setări: COM3
+[12:27:07] ✨ Multi-Vendor: 2 device type(s) supported
+[12:27:08] Aplicație pornită.
+[12:27:08] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:27:08] ✓ Pornire automată la startup activată.
+[12:27:08] Conectare automată la imprimanta fiscală...
+[12:27:08] Inițializare DUDE COM Server...
+[12:27:08] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:27:08] 🔌 Încercare port manual: 3999
+[12:27:30] ⏸️ Conectare anulată de utilizator.
+[12:27:30] ✗ Conexiune eșuată: Conectarea a fost anulată.
+[12:27:30] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[12:27:30] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[12:27:33] Inițializare DUDE COM Server...
+[12:27:33] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:27:33] 🔌 Încercare port manual: 3999
+[12:27:38] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:27:42] ═══════════════════════════════════════
+[12:27:42] Aplicație în închidere - curățare...
+[12:27:42] Deconectare de la dispozitivul fiscal...
+[12:28:39] ✓ Dispozitiv fiscal deconectat
+[12:28:39] Eliberare forțată port COM...
+[12:28:40] ✓ Port COM eliberat
+[12:28:40] ✓ Setări salvate
+[12:28:40] Curățare aplicație finalizată cu succes
+[12:28:40] ═══════════════════════════════════════
+[12:28:40] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[12:28:40] [TRAY DEBUG] IsVisible=False, WindowState=Normal, _trayIcon=NULL
+[12:28:40] Port 3999 a eșuat: Failed to connect to device via TCP/IP at 192.168.1.218:3999. Error: The remote procedure call failed. (0x800706BE)
+[12:28:40] 🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...
+[12:28:40] ⏱️ Durată estimată: ~15 secunde
+[12:28:46] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:28:46] ✓ Pornire automată la startup activată.
+[12:28:46] Porturi COM detectate: COM3
+[12:28:46] Port COM selectat din setări: COM3
+[12:28:46] ✨ Multi-Vendor: 2 device type(s) supported
+[12:28:48] Aplicație pornită.
+[12:28:48] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:28:48] ✓ Pornire automată la startup activată.
+[12:28:48] Conectare automată la imprimanta fiscală...
+[12:28:48] Inițializare DUDE COM Server...
+[12:28:48] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:28:48] 🔌 Încercare port manual: 3999
+[12:29:18] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[12:29:18] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[12:29:18] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[12:29:25] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:30:09] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:30:09] ✓ Pornire automată la startup activată.
+[12:30:09] Porturi COM detectate: COM3
+[12:30:09] Port COM selectat din setări: COM3
+[12:30:09] ✨ Multi-Vendor: 2 device type(s) supported
+[12:30:10] Aplicație pornită.
+[12:30:10] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:30:10] ✓ Pornire automată la startup activată.
+[12:30:10] Conectare automată la imprimanta fiscală...
+[12:30:10] Inițializare DUDE COM Server...
+[12:30:10] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:30:10] 🔌 Încercare port manual: 3999
+[12:30:34] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:30:34] ✓ Pornire automată la startup activată.
+[12:30:34] Porturi COM detectate: COM3
+[12:30:34] Port COM selectat din setări: COM3
+[12:30:34] ✨ Multi-Vendor: 2 device type(s) supported
+[12:30:35] Aplicație pornită.
+[12:30:35] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:30:35] ✓ Pornire automată la startup activată.
+[12:30:35] Conectare automată la imprimanta fiscală...
+[12:30:35] Inițializare DUDE COM Server...
+[12:30:35] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:30:35] 🔌 Încercare port manual: 3999
+[12:30:39] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:30:40] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:30:40] ✗ Conexiune eșuată: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[12:30:40] [TRAY DEBUG] IsVisible=False, WindowState=Normal, _trayIcon=OK
+[12:30:40] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[12:30:50] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:30:50] ✓ Pornire automată la startup activată.
+[12:30:51] Porturi COM detectate: COM3
+[12:30:51] Port COM selectat din setări: COM3
+[12:30:51] ✨ Multi-Vendor: 2 device type(s) supported
+[12:30:52] Aplicație pornită.
+[12:30:52] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:30:52] ✓ Pornire automată la startup activată.
+[12:30:52] Conectare automată la imprimanta fiscală...
+[12:30:52] Inițializare DUDE COM Server...
+[12:30:52] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:30:52] 🔌 Încercare port manual: 3999
+[12:30:55] ✅ Conectat pe port 3999
+[12:30:55] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:30:55] ═══════════════════════════════════════
+[12:30:55] Pornire serviciu monitorizare folder...
+[12:30:55] [12:30:55] Starting folder watcher...
+[12:30:55] [12:30:55] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:30:55] ✓ Monitorizarea folderului este activă
+[12:30:55] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:30:55] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:30:55] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:30:55] ═══════════════════════════════════════
+[12:30:57] ⚠ Eroare transmitere server: Server error 400: {"error":"Tenant code required"}
+[12:31:21] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:31:37] ═══════════════════════════════════════
+[12:31:37] Aplicație în închidere - curățare...
+[12:31:37] Oprire monitorizare folder...
+[12:31:37] [12:31:37] Folder watcher stopped.
+[12:31:37] ✓ Monitorizarea folderului s-a oprit
+[12:31:37] Deconectare de la dispozitivul fiscal...
+[12:31:37] ✓ Dispozitiv fiscal deconectat
+[12:31:37] Eliberare forțată port COM...
+[12:31:37] ✓ Port COM eliberat
+[12:31:37] ✓ Setări salvate
+[12:31:37] Curățare aplicație finalizată cu succes
+[12:31:37] ═══════════════════════════════════════
+[12:32:35] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:32:35] ✓ Pornire automată la startup activată.
+[12:32:36] Porturi COM detectate: COM3
+[12:32:36] Port COM selectat din setări: COM3
+[12:32:36] ✨ Multi-Vendor: 2 device type(s) supported
+[12:32:37] Aplicație pornită.
+[12:32:37] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:32:37] ✓ Pornire automată la startup activată.
+[12:32:37] Conectare automată la imprimanta fiscală...
+[12:32:37] Inițializare DUDE COM Server...
+[12:32:37] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:32:37] 🔌 Încercare port manual: 3999
+[12:32:39] ✅ Conectat pe port 3999
+[12:32:39] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:32:39] ═══════════════════════════════════════
+[12:32:39] Pornire serviciu monitorizare folder...
+[12:32:39] [12:32:39] Starting folder watcher...
+[12:32:39] [12:32:39] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:32:39] ✓ Monitorizarea folderului este activă
+[12:32:39] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:32:39] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:32:39] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:32:39] ═══════════════════════════════════════
+[12:32:40] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:33:25] 🏭 Device type changed to: Incotex (Serial/USB)
+[12:33:40] ⚠️ Verificare activare: Device activated | Status: Activated
+[12:33:53] ⚠️ Verificare activare: Device activated | Status: Activated
+[12:35:43] ⚠️ Verificare activare: Device deactivated. Contact administrator. | Status: Deactivated
+[12:35:51] ⚠️ Verificare activare: Device deactivated. Contact administrator. | Status: Deactivated
+[12:41:47] ═══════════════════════════════════════
+[12:41:47] Aplicație în închidere - curățare...
+[12:41:47] Oprire monitorizare folder...
+[12:41:47] [12:41:47] Folder watcher stopped.
+[12:41:47] ✓ Monitorizarea folderului s-a oprit
+[12:41:47] Deconectare de la dispozitivul fiscal...
+[12:41:47] ✓ Dispozitiv fiscal deconectat
+[12:41:47] Eliberare forțată port COM...
+[12:41:47] ✓ Port COM eliberat
+[12:41:47] Închidere proces DUDE (PID: 10104)...
+[12:41:52] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[12:41:52] ✓ Proces DUDE închis cu succes
+[12:41:52] ✓ Setări salvate
+[12:41:52] Curățare aplicație finalizată cu succes
+[12:41:52] ═══════════════════════════════════════
+[12:43:39] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:43:39] ✓ Pornire automată la startup activată.
+[12:43:39] Porturi COM detectate: COM3
+[12:43:39] Port COM selectat din setări: COM3
+[12:43:39] ✨ Multi-Vendor: 2 device type(s) supported
+[12:43:40] Aplicație pornită.
+[12:43:40] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:43:40] ✓ Pornire automată la startup activată.
+[12:43:40] Conectare automată la imprimanta fiscală...
+[12:43:40] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[12:43:41] ✗ Conexiune eșuată la Incotex (Serial/USB): Incotex device not found in SetupAPI enumeration.
+
+Check:
+1. Incotex is connected via USB
+2. Device VID:PID = 0483:5740
+
+Note:
+• WinUSB transport works ONLY if the device is bound to WinUSB (Microsoft)
+• If the device shows up as a COM port, use the Serial/COM connection instead
+[12:43:41] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[12:43:41] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[12:43:55] 🏭 Device type changed to: Datecs (RS232/TCP)
+[12:43:58] 🌐 Conexiune schimbată la: Ethernet (192.168.1.218:3999)
+[12:44:00] Inițializare DUDE COM Server...
+[12:44:00] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:44:00] 🔌 Încercare port manual: 3999
+[12:44:02] ✅ Conectat pe port 3999
+[12:44:02] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:44:03] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:44:17] ⚠️ Verificare activare: Device activated | Status: Activated
+[12:44:50] ═══════════════════════════════════════
+[12:44:50] Aplicație în închidere - curățare...
+[12:44:50] Deconectare de la dispozitivul fiscal...
+[12:44:50] ✓ Dispozitiv fiscal deconectat
+[12:44:50] Eliberare forțată port COM...
+[12:44:50] ✓ Port COM eliberat
+[12:44:50] ✓ Setări salvate
+[12:44:50] Curățare aplicație finalizată cu succes
+[12:44:50] ═══════════════════════════════════════
+[12:45:23] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:45:23] ✓ Pornire automată la startup activată.
+[12:45:24] Porturi COM detectate: COM3
+[12:45:24] Port COM selectat din setări: COM3
+[12:45:24] ✨ Multi-Vendor: 2 device type(s) supported
+[12:45:25] Aplicație pornită.
+[12:45:25] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:45:25] ✓ Pornire automată la startup activată.
+[12:45:25] Conectare automată la imprimanta fiscală...
+[12:45:25] Inițializare DUDE COM Server...
+[12:45:25] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:45:25] 🔌 Încercare port manual: 3999
+[12:45:27] ✅ Conectat pe port 3999
+[12:45:27] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:45:27] ═══════════════════════════════════════
+[12:45:27] Pornire serviciu monitorizare folder...
+[12:45:27] [12:45:27] Starting folder watcher...
+[12:45:27] [12:45:27] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:45:27] ✓ Monitorizarea folderului este activă
+[12:45:27] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:45:27] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:45:27] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:45:27] ═══════════════════════════════════════
+[12:45:28] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:45:33] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:45:41] ═══════════════════════════════════════
+[12:45:41] Aplicație în închidere - curățare...
+[12:45:41] Oprire monitorizare folder...
+[12:45:41] [12:45:41] Folder watcher stopped.
+[12:45:41] ✓ Monitorizarea folderului s-a oprit
+[12:45:41] Deconectare de la dispozitivul fiscal...
+[12:45:41] ✓ Dispozitiv fiscal deconectat
+[12:45:41] Eliberare forțată port COM...
+[12:45:41] ✓ Port COM eliberat
+[12:45:41] ✓ Setări salvate
+[12:45:41] Curățare aplicație finalizată cu succes
+[12:45:41] ═══════════════════════════════════════
+[12:46:47] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:46:47] ✓ Pornire automată la startup activată.
+[12:46:48] Porturi COM detectate: COM3
+[12:46:48] Port COM selectat din setări: COM3
+[12:46:48] ✨ Multi-Vendor: 2 device type(s) supported
+[12:46:49] Aplicație pornită.
+[12:46:49] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:46:49] ✓ Pornire automată la startup activată.
+[12:46:49] Conectare automată la imprimanta fiscală...
+[12:46:49] Inițializare DUDE COM Server...
+[12:46:49] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:46:49] 🔌 Încercare port manual: 3999
+[12:46:51] ✅ Conectat pe port 3999
+[12:46:51] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:46:51] ═══════════════════════════════════════
+[12:46:51] Pornire serviciu monitorizare folder...
+[12:46:51] [12:46:51] Starting folder watcher...
+[12:46:51] [12:46:51] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:46:51] ✓ Monitorizarea folderului este activă
+[12:46:51] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:46:51] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:46:51] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:46:51] ═══════════════════════════════════════
+[12:46:52] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:46:57] ⚠️ Verificare activare: Device activated | Status: Activated
+[12:47:02] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:47:06] ═══════════════════════════════════════
+[12:47:07] Aplicație în închidere - curățare...
+[12:47:07] Oprire monitorizare folder...
+[12:47:07] [12:47:07] Folder watcher stopped.
+[12:47:07] ✓ Monitorizarea folderului s-a oprit
+[12:47:07] Deconectare de la dispozitivul fiscal...
+[12:47:07] ✓ Dispozitiv fiscal deconectat
+[12:47:07] Eliberare forțată port COM...
+[12:47:07] ✓ Port COM eliberat
+[12:47:07] Închidere proces DUDE (PID: 15732)...
+[12:47:12] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[12:47:12] ✓ Proces DUDE închis cu succes
+[12:47:12] ✓ Setări salvate
+[12:47:12] Curățare aplicație finalizată cu succes
+[12:47:12] ═══════════════════════════════════════
+[12:50:05] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:50:05] ✓ Pornire automată la startup activată.
+[12:50:05] Porturi COM detectate: COM3
+[12:50:05] Port COM selectat din setări: COM3
+[12:50:05] ✨ Multi-Vendor: 2 device type(s) supported
+[12:50:06] [ACTIVARE] Initial IsDeviceActivated=False
+[12:50:06] [ACTIVARE] UI set to NEACTIVAT (red)
+[12:50:06] Aplicație pornită.
+[12:50:06] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:50:06] ✓ Pornire automată la startup activată.
+[12:50:06] Conectare automată la imprimanta fiscală...
+[12:50:06] Inițializare DUDE COM Server...
+[12:50:06] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:50:07] 🔌 Încercare port manual: 3999
+[12:50:07] [ACTIVARE] Server returned IsActivated=FALSE, UI kept red. Reason: Device activated
+[12:50:08] ✅ Conectat pe port 3999
+[12:50:08] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:50:08] ═══════════════════════════════════════
+[12:50:08] Pornire serviciu monitorizare folder...
+[12:50:08] [12:50:08] Starting folder watcher...
+[12:50:08] [12:50:08] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:50:08] ✓ Monitorizarea folderului este activă
+[12:50:08] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:50:08] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:50:08] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:50:08] ═══════════════════════════════════════
+[12:50:10] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:50:26] ⚠️ Verificare activare: Device activated | Status: Activated
+[12:51:17] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:51:21] ═══════════════════════════════════════
+[12:51:21] Aplicație în închidere - curățare...
+[12:51:21] Oprire monitorizare folder...
+[12:51:21] [12:51:21] Folder watcher stopped.
+[12:51:21] ✓ Monitorizarea folderului s-a oprit
+[12:51:21] Deconectare de la dispozitivul fiscal...
+[12:51:21] ✓ Dispozitiv fiscal deconectat
+[12:51:21] Eliberare forțată port COM...
+[12:51:21] ✓ Port COM eliberat
+[12:51:21] Închidere proces DUDE (PID: 15416)...
+[12:51:26] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[12:51:26] ✓ Proces DUDE închis cu succes
+[12:51:26] ✓ Setări salvate
+[12:51:26] Curățare aplicație finalizată cu succes
+[12:51:26] ═══════════════════════════════════════
+[12:52:09] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:52:09] ✓ Pornire automată la startup activată.
+[12:52:10] Porturi COM detectate: COM3
+[12:52:10] Port COM selectat din setări: COM3
+[12:52:10] ✨ Multi-Vendor: 2 device type(s) supported
+[12:52:11] [ACTIVARE] Initial IsDeviceActivated=True
+[12:52:11] [ACTIVARE] UI set to ACTIVAT (green)
+[12:52:11] Aplicație pornită.
+[12:52:11] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:52:11] ✓ Pornire automată la startup activată.
+[12:52:11] Conectare automată la imprimanta fiscală...
+[12:52:11] Inițializare DUDE COM Server...
+[12:52:11] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:52:11] 🔌 Încercare port manual: 3999
+[12:52:11] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[12:52:12] ✅ Conectat pe port 3999
+[12:52:12] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:52:12] ═══════════════════════════════════════
+[12:52:12] Pornire serviciu monitorizare folder...
+[12:52:12] [12:52:12] Starting folder watcher...
+[12:52:12] [12:52:12] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:52:12] ✓ Monitorizarea folderului este activă
+[12:52:12] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:52:12] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:52:12] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:52:12] ═══════════════════════════════════════
+[12:52:14] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:52:43] ═══════════════════════════════════════
+[12:52:43] 🌐 TEST CONEXIUNE SERVER ACTIVARE (API v13.0.0)
+[12:52:43]    URL bază:          https://0dmin.app.store.ro/conexa/api/licentiere/posdevice
+[12:52:43]    Endpoint check:    https://0dmin.app.store.ro/conexa/api/licentiere/posdevice/check?serialNumber=POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:52:43]    Endpoint register: https://0dmin.app.store.ro/conexa/api/licentiere/posdevice/register
+[12:52:43]    Serial Number:     POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:52:43]    Tenant Code:       demo
+[12:52:43] ───────────────────────────────────────
+[12:52:43]    [1/3] Rezolvare DNS...
+[12:52:43]    ✓ DNS rezolvat: 0dmin.app.store.ro → 89.33.25.94
+[12:52:43]    [2/3] HTTP GET /check ...
+[12:52:43]    ✓ HTTP Status:  200 OK
+[12:52:43]    ✓ Timp răspuns:  94 ms
+[12:52:43]    ✓ Content-Type:  application/json; charset=utf-8
+[12:52:43]    ✓ Răspuns body:  {"isActivated":true,"status":"Activated","serialNumber":"POS_DESKTOP-60L0JJT_BFEBFBFF","fiscalPrinterSeries":"DB4090041142","model":"DP-25MX","tenantCode":"demo","firstAuthenticationDate":"2026-03-24T10:32:19.240Z","lastCheckIn":"2026-03-24T10:50:49.905Z","message":"Device activated"}
+[12:52:43]    ✓ JSON valid. Câmpuri:
+[12:52:43]      • isActivated: True
+[12:52:43]      • status: Activated
+[12:52:43]      • serialNumber: POS_DESKTOP-60L0JJT_BFEBFBFF
+[12:52:43]      • fiscalPrinterSeries: DB4090041142
+[12:52:43]      • model: DP-25MX
+[12:52:43]      • tenantCode: demo
+[12:52:43]      • firstAuthenticationDate: 2026-03-24T10:32:19.240Z
+[12:52:43]      • lastCheckIn: 2026-03-24T10:50:49.905Z
+[12:52:43]      • message: Device activated
+[12:52:43]    [3/3] HTTP HEAD / (test server reachability)...
+[12:52:43]    ✓ Server accesibil: 401 Unauthorized (15 ms)
+[12:52:43] ───────────────────────────────────────
+[12:52:43] 🌐 TEST FINALIZAT
+[12:52:43] ═══════════════════════════════════════
+[12:53:45] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:53:54] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:55:38] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:55:38] ✓ Pornire automată la startup activată.
+[12:55:39] Porturi COM detectate: COM3
+[12:55:39] Port COM selectat din setări: COM3
+[12:55:39] ✨ Multi-Vendor: 2 device type(s) supported
+[12:55:40] [ACTIVARE] Initial IsDeviceActivated=True
+[12:55:40] [ACTIVARE] UI set to ACTIVAT (green)
+[12:55:40] Aplicație pornită.
+[12:55:40] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:55:40] ✓ Pornire automată la startup activată.
+[12:55:40] Conectare automată la imprimanta fiscală...
+[12:55:40] Inițializare DUDE COM Server...
+[12:55:41] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:55:41] 🔌 Încercare port manual: 3999
+[12:55:41] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[12:55:42] ✅ Conectat pe port 3999
+[12:55:42] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:55:42] ═══════════════════════════════════════
+[12:55:42] Pornire serviciu monitorizare folder...
+[12:55:42] [12:55:42] Starting folder watcher...
+[12:55:42] [12:55:42] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:55:42] ✓ Monitorizarea folderului este activă
+[12:55:42] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:55:42] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:55:42] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:55:42] ═══════════════════════════════════════
+[12:55:43] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:55:53] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:55:55] ═══════════════════════════════════════
+[12:55:55] Aplicație în închidere - curățare...
+[12:55:55] Oprire monitorizare folder...
+[12:55:55] [12:55:55] Folder watcher stopped.
+[12:55:55] ✓ Monitorizarea folderului s-a oprit
+[12:55:55] Deconectare de la dispozitivul fiscal...
+[12:56:14] ✓ Dispozitiv fiscal deconectat
+[12:56:14] Eliberare forțată port COM...
+[12:56:14] ✓ Port COM eliberat
+[12:56:14] ✓ Setări salvate
+[12:56:14] Curățare aplicație finalizată cu succes
+[12:56:14] ═══════════════════════════════════════
+[12:57:07] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[12:57:07] ✓ Pornire automată la startup activată.
+[12:57:07] Porturi COM detectate: COM3
+[12:57:07] Port COM selectat din setări: COM3
+[12:57:07] ✨ Multi-Vendor: 2 device type(s) supported
+[12:57:08] [ACTIVARE] Initial IsDeviceActivated=True
+[12:57:08] [ACTIVARE] UI set to ACTIVAT (green)
+[12:57:08] Aplicație pornită.
+[12:57:08] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:57:08] ✓ Pornire automată la startup activată.
+[12:57:08] Conectare automată la imprimanta fiscală...
+[12:57:08] Inițializare DUDE COM Server...
+[12:57:08] Conectare prin Ethernet la 192.168.1.218:3999...
+[12:57:08] 🔌 Încercare port manual: 3999
+[12:57:08] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[12:57:10] ✅ Conectat pe port 3999
+[12:57:10] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[12:57:10] ═══════════════════════════════════════
+[12:57:10] Pornire serviciu monitorizare folder...
+[12:57:10] [12:57:10] Starting folder watcher...
+[12:57:10] [12:57:10] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:57:10] ✓ Monitorizarea folderului este activă
+[12:57:10] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[12:57:10] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[12:57:10] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[12:57:10] ═══════════════════════════════════════
+[12:57:11] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[12:57:18] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[12:57:30] ═══════════════════════════════════════
+[12:57:30] Aplicație în închidere - curățare...
+[12:57:30] Oprire monitorizare folder...
+[12:57:30] [12:57:30] Folder watcher stopped.
+[12:57:30] ✓ Monitorizarea folderului s-a oprit
+[12:57:30] Deconectare de la dispozitivul fiscal...
+[12:57:30] ✓ Dispozitiv fiscal deconectat
+[12:57:30] Eliberare forțată port COM...
+[12:57:30] ✓ Port COM eliberat
+[12:57:30] Închidere proces DUDE (PID: 13628)...
+[12:57:35] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[12:57:35] ✓ Proces DUDE închis cu succes
+[12:57:35] ✓ Setări salvate
+[12:57:35] Curățare aplicație finalizată cu succes
+[12:57:35] ═══════════════════════════════════════
+[13:04:02] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[13:04:02] ✓ Pornire automată la startup activată.
+[13:04:03] Porturi COM detectate: COM3
+[13:04:03] Port COM selectat din setări: COM3
+[13:04:03] ✨ Multi-Vendor: 2 device type(s) supported
+[13:04:04] [ACTIVARE] Initial IsDeviceActivated=True
+[13:04:04] [ACTIVARE] UI set to ACTIVAT (green)
+[13:04:04] Aplicație pornită.
+[13:04:04] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:04:04] ✓ Pornire automată la startup activată.
+[13:04:04] Conectare automată la imprimanta fiscală...
+[13:04:04] Inițializare DUDE COM Server...
+[13:04:04] Conectare prin Ethernet la 192.168.1.218:3999...
+[13:04:04] 🔌 Încercare port manual: 3999
+[13:04:04] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[13:04:06] ✅ Conectat pe port 3999
+[13:04:06] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[13:04:06] ═══════════════════════════════════════
+[13:04:06] Pornire serviciu monitorizare folder...
+[13:04:06] [13:04:06] Starting folder watcher...
+[13:04:06] [13:04:06] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:04:06] ✓ Monitorizarea folderului este activă
+[13:04:06] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:04:06] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[13:04:06] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[13:04:06] ═══════════════════════════════════════
+[13:04:07] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[13:04:19] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[13:04:29] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[13:05:45] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[13:05:45] ✓ Pornire automată la startup activată.
+[13:05:46] Porturi COM detectate: COM3
+[13:05:46] Port COM selectat din setări: COM3
+[13:05:46] ✨ Multi-Vendor: 2 device type(s) supported
+[13:05:47] [ACTIVARE] Initial IsDeviceActivated=True
+[13:05:47] [ACTIVARE] UI set to ACTIVAT (green)
+[13:05:47] Aplicație pornită automat. Dashboard ascuns (click pe tray icon pentru a deschide).
+[13:05:47] Aplicație pornită.
+[13:05:47] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:05:47] ✓ Pornire automată la startup activată.
+[13:05:47] Conectare automată la imprimanta fiscală...
+[13:05:47] Inițializare DUDE COM Server...
+[13:05:47] Conectare prin Ethernet la 192.168.1.218:3999...
+[13:05:47] 🔌 Încercare port manual: 3999
+[13:05:47] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[13:05:49] ✅ Conectat pe port 3999
+[13:05:49] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[13:05:49] ═══════════════════════════════════════
+[13:05:49] Pornire serviciu monitorizare folder...
+[13:05:49] [13:05:49] Starting folder watcher...
+[13:05:49] [13:05:49] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:05:49] ✓ Monitorizarea folderului este activă
+[13:05:49] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:05:49] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[13:05:49] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[13:05:49] ═══════════════════════════════════════
+[13:05:50] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[13:06:04] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[13:06:16] ═══════════════════════════════════════
+[13:06:16] Aplicație în închidere - curățare...
+[13:06:16] Oprire monitorizare folder...
+[13:06:16] [13:06:16] Folder watcher stopped.
+[13:06:16] ✓ Monitorizarea folderului s-a oprit
+[13:06:16] Deconectare de la dispozitivul fiscal...
+[13:06:16] ✓ Dispozitiv fiscal deconectat
+[13:06:16] Eliberare forțată port COM...
+[13:06:16] ✓ Port COM eliberat
+[13:06:16] Închidere proces DUDE (PID: 14220)...
+[13:06:21] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[13:06:21] ✓ Proces DUDE închis cu succes
+[13:06:21] ✓ Setări salvate
+[13:06:21] Curățare aplicație finalizată cu succes
+[13:06:21] ═══════════════════════════════════════
+[13:27:32] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[13:27:32] ✓ Pornire automată la startup activată.
+[13:27:32] Porturi COM detectate: COM3
+[13:27:32] Port COM selectat din setări: COM3
+[13:27:32] ✨ Multi-Vendor: 2 device type(s) supported
+[13:27:33] [ACTIVARE] Initial IsDeviceActivated=True
+[13:27:33] [ACTIVARE] UI set to ACTIVAT (green)
+[13:27:33] Aplicație pornită.
+[13:27:33] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:27:33] ✓ Pornire automată la startup activată.
+[13:27:33] Conectare automată la imprimanta fiscală...
+[13:27:33] Inițializare DUDE COM Server...
+[13:27:33] Conectare prin Ethernet la 192.168.1.218:3999...
+[13:27:33] 🔌 Încercare port manual: 3999
+[13:27:33] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[13:27:35] ✅ Conectat pe port 3999
+[13:27:35] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[13:27:35] ═══════════════════════════════════════
+[13:27:35] Pornire serviciu monitorizare folder...
+[13:27:35] [13:27:35] Starting folder watcher...
+[13:27:35] [13:27:35] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:27:35] ✓ Monitorizarea folderului este activă
+[13:27:35] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[13:27:35] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[13:27:35] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[13:27:35] ═══════════════════════════════════════
+[13:27:36] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[13:27:49] ⏳ Se tipareste Raport Departamente...
+[13:27:49] ✗ Eroare Raport Departamente: DUDE COM Error -10504: Check for availability in the enumerated list of values. [INPUT]
+[13:27:59] ⏳ Se tipareste Raport MF Z scurt (Z - Z)...
+[13:27:59] ✗ Eroare Raport MF Z scurt (Z - Z): DUDE COM Error -110104: Device error: Device is not fiscalized
+[13:28:13] ⏳ Se citesc Z-uri ramase in MF...
+[13:28:13] ✓ Z-uri ramase in MF: 0	2474	
+[13:28:41] 💰 Introducere 50.00 lei în casă...
+[13:28:42] ✓ Introducere numerar reușită: 50.00 lei
+[13:29:25] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[13:29:27] ═══════════════════════════════════════
+[13:29:27] Aplicație în închidere - curățare...
+[13:29:27] Oprire monitorizare folder...
+[13:29:27] [13:29:27] Folder watcher stopped.
+[13:29:27] ✓ Monitorizarea folderului s-a oprit
+[13:29:27] Deconectare de la dispozitivul fiscal...
+[13:29:27] ✓ Dispozitiv fiscal deconectat
+[13:29:27] Eliberare forțată port COM...
+[13:29:27] ✓ Port COM eliberat
+[13:29:27] Închidere proces DUDE (PID: 7696)...
+[13:29:32] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[13:29:32] ✓ Proces DUDE închis cu succes
+[13:29:32] ✓ Setări salvate
+[13:29:32] Curățare aplicație finalizată cu succes
+[13:29:32] ═══════════════════════════════════════
+[14:12:36] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[14:12:36] ✓ Pornire automată la startup activată.
+[14:12:37] Porturi COM detectate: COM3
+[14:12:37] Port COM selectat din setări: COM3
+[14:12:37] ✨ Multi-Vendor: 2 device type(s) supported
+[14:12:38] [ACTIVARE] Initial IsDeviceActivated=True
+[14:12:38] [ACTIVARE] UI set to ACTIVAT (green)
+[14:12:38] Aplicație pornită.
+[14:12:38] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:12:38] ✓ Pornire automată la startup activată.
+[14:12:38] Conectare automată la imprimanta fiscală...
+[14:12:38] Inițializare DUDE COM Server...
+[14:12:38] Conectare prin Ethernet la 192.168.1.218:3999...
+[14:12:38] 🔌 Încercare port manual: 3999
+[14:12:38] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[14:12:40] ✅ Conectat pe port 3999
+[14:12:40] ✓ Conectat la imprimanta fiscală Datecs pe 192.168.1.218:3999
+[14:12:40] ═══════════════════════════════════════
+[14:12:40] Pornire serviciu monitorizare folder...
+[14:12:40] [14:12:40] Starting folder watcher...
+[14:12:40] [14:12:40] Watching folder: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:12:40] ✓ Monitorizarea folderului este activă
+[14:12:40] Adaugă fișiere .txt în: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:12:40] Format: S^DENUMIRE^PRET^CANTITATE^UM^GRTVA^GRDEP (plus comenzi DP/DV/MP/MV/ST/TL/P etc.)
+[14:12:40] Comenzi speciale: X^ (raport X), Z^ (raport Z), I^VALOARE^ (introducere numerar), O^VALOARE^ (scoatere numerar)
+[14:12:40] ═══════════════════════════════════════
+[14:12:41] ✓ Model și serie transmise la server: DP-25MX / DB4090041142
+[14:12:47] 🏭 Device type changed to: Incotex (Serial/USB)
+[14:15:50] 🏭 Device type changed to: Datecs (RS232/TCP)
+[14:15:51] 🏭 Device type changed to: Incotex (Serial/USB)
+[14:15:56] 🏭 Device type changed to: Datecs (RS232/TCP)
+[14:15:57] Stopping folder watcher...
+[14:15:57] [14:15:57] Folder watcher stopped.
+[14:15:57] ✓ Monitorizarea folderului s-a oprit
+[14:15:57] ═══════════════════════════════════════
+[14:15:57] Deconectat de la imprimanta fiscală.
+[14:17:01] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[14:17:04] ═══════════════════════════════════════
+[14:17:04] Aplicație în închidere - curățare...
+[14:17:04] Deconectare de la dispozitivul fiscal...
+[14:17:04] ✓ Dispozitiv fiscal deconectat
+[14:17:04] Eliberare forțată port COM...
+[14:17:04] ✓ Port COM eliberat
+[14:17:04] Închidere proces DUDE (PID: 18172)...
+[14:17:09] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[14:17:09] ✓ Proces DUDE închis cu succes
+[14:17:09] ✓ Setări salvate
+[14:17:09] Curățare aplicație finalizată cu succes
+[14:17:09] ═══════════════════════════════════════
+[14:37:12] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[14:37:12] ✓ Pornire automată la startup activată.
+[14:37:12] Porturi COM detectate: COM3, COM9
+[14:37:12] Port COM selectat din setări: COM3
+[14:37:12] ✨ Multi-Vendor: 2 device type(s) supported
+[14:37:13] [ACTIVARE] Initial IsDeviceActivated=True
+[14:37:13] [ACTIVARE] UI set to ACTIVAT (green)
+[14:37:13] Aplicație pornită.
+[14:37:13] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:37:13] ✓ Pornire automată la startup activată.
+[14:37:13] Conectare automată la imprimanta fiscală...
+[14:37:13] Inițializare DUDE COM Server...
+[14:37:13] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[14:37:19] 🏭 Device type changed to: Incotex (Serial/USB)
+[14:37:20] ✗ Eroare în conectare Serial: Failed to connect to device on COM3 at 115200 baud. Error: open_Connection failed: -6 - Timeout expired.
+[14:37:20] ✗ Conexiune eșuată: Failed to connect to device on COM3 at 115200 baud. Error: open_Connection failed: -6 - Timeout expired.
+[14:37:20] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:37:20] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:37:32] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[14:37:32] ✗ Conexiune eșuată la Incotex (Serial/USB): Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[14:37:32] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:37:32] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:42:48] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[14:42:51] ═══════════════════════════════════════
+[14:42:51] Aplicație în închidere - curățare...
+[14:42:51] Deconectare de la dispozitivul fiscal...
+[14:42:51] ✓ Dispozitiv fiscal deconectat
+[14:42:51] Eliberare forțată port COM...
+[14:42:51] ✓ Port COM eliberat
+[14:42:51] Închidere proces DUDE (PID: 1660)...
+[14:42:56] ⚠ DUDE nu s-a închis grațios, forțare închidere...
+[14:42:56] ✓ Proces DUDE închis cu succes
+[14:42:56] ✓ Setări salvate
+[14:42:56] Curățare aplicație finalizată cu succes
+[14:42:56] ═══════════════════════════════════════
+[14:48:03] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[14:48:03] ✓ Pornire automată la startup activată.
+[14:48:03] Porturi COM detectate: COM3, COM9
+[14:48:03] Port COM selectat din setări: COM3
+[14:48:03] ✨ Multi-Vendor: 2 device type(s) supported
+[14:48:04] [ACTIVARE] Initial IsDeviceActivated=True
+[14:48:04] [ACTIVARE] UI set to ACTIVAT (green)
+[14:48:04] Aplicație pornită.
+[14:48:04] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:48:04] ✓ Pornire automată la startup activată.
+[14:48:04] Conectare automată la imprimanta fiscală...
+[14:48:04] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[14:48:04] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[14:48:04] ✗ Conexiune eșuată la Incotex (Serial/USB): Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[14:48:04] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:48:04] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:48:13] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[14:48:13] ✗ Conexiune eșuată la Incotex (Serial/USB): Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[14:48:13] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:48:13] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:50:13] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[14:50:16] ═══════════════════════════════════════
+[14:50:16] Aplicație în închidere - curățare...
+[14:50:16] Deconectare de la dispozitivul fiscal...
+[14:50:16] ✓ Dispozitiv fiscal deconectat
+[14:50:16] Eliberare forțată port COM...
+[14:50:16] ✓ Port COM eliberat
+[14:50:16] ✓ Setări salvate
+[14:50:16] Curățare aplicație finalizată cu succes
+[14:50:16] ═══════════════════════════════════════
+[14:51:45] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[14:51:45] ✓ Pornire automată la startup activată.
+[14:51:45] Porturi COM detectate: COM3, COM9
+[14:51:45] Port COM selectat din setări: COM3
+[14:51:45] ✨ Multi-Vendor: 2 device type(s) supported
+[14:51:46] [ACTIVARE] Initial IsDeviceActivated=True
+[14:51:46] [ACTIVARE] UI set to ACTIVAT (green)
+[14:51:46] Aplicație pornită.
+[14:51:46] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:51:46] ✓ Pornire automată la startup activată.
+[14:51:46] Conectare automată la imprimanta fiscală...
+[14:51:46] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[14:51:46] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[14:51:46] ✗ Conexiune eșuată la Incotex (Serial/USB): Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[14:51:46] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:51:46] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:52:30] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[14:52:33] ═══════════════════════════════════════
+[14:52:33] Aplicație în închidere - curățare...
+[14:52:33] Deconectare de la dispozitivul fiscal...
+[14:52:33] ✓ Dispozitiv fiscal deconectat
+[14:52:33] Eliberare forțată port COM...
+[14:52:33] ✓ Port COM eliberat
+[14:52:33] ✓ Setări salvate
+[14:52:33] Curățare aplicație finalizată cu succes
+[14:52:33] ═══════════════════════════════════════
+[14:53:32] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[14:53:32] ✓ Pornire automată la startup activată.
+[14:53:32] Porturi COM detectate: COM3, COM9
+[14:53:32] Port COM selectat din setări: COM3
+[14:53:32] ✨ Multi-Vendor: 2 device type(s) supported
+[14:53:33] [ACTIVARE] Initial IsDeviceActivated=True
+[14:53:33] [ACTIVARE] UI set to ACTIVAT (green)
+[14:53:33] Aplicație pornită.
+[14:53:33] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:53:33] ✓ Pornire automată la startup activată.
+[14:53:33] Conectare automată la imprimanta fiscală...
+[14:53:33] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[14:53:34] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[14:53:34] ✗ Conexiune eșuată la Incotex (Serial/USB): Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[14:53:34] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:53:34] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:53:38] 🏭 Device type changed to: Datecs (RS232/TCP)
+[14:53:42] 🏭 Device type changed to: Incotex (Serial/USB)
+[14:54:54] ═══════════════════════════════════════
+[14:54:54] Aplicație în închidere - curățare...
+[14:54:54] Deconectare de la dispozitivul fiscal...
+[14:54:54] ✓ Dispozitiv fiscal deconectat
+[14:54:54] Eliberare forțată port COM...
+[14:54:54] ✓ Port COM eliberat
+[14:54:54] ✓ Setări salvate
+[14:54:54] Curățare aplicație finalizată cu succes
+[14:54:54] ═══════════════════════════════════════
+[14:55:50] ✓ Loaded assembly: POSBridge.Devices.Incotex
+[14:55:50] ✓ Pornire automată la startup activată.
+[14:55:50] Porturi COM detectate: COM3, COM9
+[14:55:50] Port COM selectat din setări: COM3
+[14:55:50] ✨ Multi-Vendor: 2 device type(s) supported
+[14:55:52] [ACTIVARE] Initial IsDeviceActivated=True
+[14:55:52] [ACTIVARE] UI set to ACTIVAT (green)
+[14:55:52] Aplicație pornită.
+[14:55:52] Folder monitorizat: D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+[14:55:52] ✓ Pornire automată la startup activată.
+[14:55:52] Conectare automată la imprimanta fiscală...
+[14:55:52] Conectare la Incotex (Serial/USB) prin USB (auto)...
+[14:55:52] [ACTIVARE] Server returned IsActivated=TRUE, UI updated to green
+[14:55:52] ✗ Conexiune eșuată la Incotex (Serial/USB): Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[14:55:52] [TRAY DEBUG] IsVisible=True, WindowState=Normal, _trayIcon=OK
+[14:55:52] [TRAY DEBUG] ShowBalloonTip apelat cu succes
+[14:55:55] 📡 Conexiune schimbată la: Serial (COM)
+[14:56:02] Conectare la Incotex (Serial/USB) prin COM9 @ 115200...
+[14:56:02] ✓ Conectat la Incotex (Serial/USB) prin USB
+[14:56:02]   Vendor: Incotex
+[14:56:02]   Model: Incotex Succes M7 (FW: 19.32)
+[14:56:02]   Firmware: 19.32
+[14:56:02]   Serie: FW 19.32
+[14:56:02]   Serie Fiscală: —
+[14:56:02]   Cod Fiscal: —
+[14:56:03] ✓ Model și serie transmise la server: Incotex Succes M7 (FW: 19.32) / FW 19.32
+[14:57:06] 💰 Introducere 50.00 lei în casă...
+[14:57:07] ✗ Introducere numerar eșuată: 24 ore de la primul bon fiscal - emiteți raportul Z
+[15:01:38] Aplicația rulează în fundal. Click pe iconiță pentru a o deschide.
+[15:01:41] ═══════════════════════════════════════
+[15:01:41] Aplicație în închidere - curățare...
+[15:01:41] Deconectare de la dispozitivul fiscal...
+[15:01:41] ✓ Dispozitiv fiscal deconectat
+[15:01:41] Eliberare forțată port COM...
+[15:01:41] ✓ Port COM eliberat
+[15:01:41] ✓ Setări salvate
+[15:01:41] Curățare aplicație finalizată cu succes
+[15:01:41] ═══════════════════════════════════════

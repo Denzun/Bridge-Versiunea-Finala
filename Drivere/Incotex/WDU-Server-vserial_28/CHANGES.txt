@@ -1,0 +1,11 @@
+26.05.2017	- Version 2.6
+		- Run as Admin shortcuts
+
+20.09.2018	- Version 2.7
+		- Upnp discovery target by friendly name added
+		- last-device cache entry handling added in config file
+		- Virtual Com handling improved
+		- copy2com.bat - example added
+
+29.11.2018	- Version 2.8
+		- Service start/stop improved, start type set to 'Automatic (Delayed Start)'

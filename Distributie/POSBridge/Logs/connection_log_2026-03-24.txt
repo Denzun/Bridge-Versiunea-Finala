@@ -1,0 +1,701 @@
+[2026-03-24 10:20:24.121] ═══════════════════════════════════════
+[2026-03-24 10:20:24.122]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.219:9100
+[2026-03-24 10:20:24.122] ═══════════════════════════════════════
+[2026-03-24 10:20:24.380] ═══════════════════════════════════════
+[2026-03-24 10:20:24.380]   CONEXIUNE TCP/IP - 192.168.1.219:9100
+[2026-03-24 10:20:24.380] ═══════════════════════════════════════
+[2026-03-24 10:20:24.442]   close_Connection() - OK
+[2026-03-24 10:20:24.457]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 10:20:24.462]   set_TCPIP(192.168.1.219, 9100) -> 0
+[2026-03-24 10:20:36.152] CONEXIUNE EȘUATĂ: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 10:20:45.727]   open_Connection() -> -33022 (Device not connected)
+[2026-03-24 10:20:45.728]   ✗ EROARE TCP: open_Connection failed: -33022 - Device not connected
+[2026-03-24 10:20:45.766] ═══════════════════════════════════════
+[2026-03-24 10:20:45.767]   SCANARE AUTO PORT TCP - 192.168.1.219
+[2026-03-24 10:20:45.768] ═══════════════════════════════════════
+[2026-03-24 10:20:53.338] ═══════════════════════════════════════
+[2026-03-24 10:20:53.338]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.219:9100
+[2026-03-24 10:20:53.338] ═══════════════════════════════════════
+[2026-03-24 10:21:05.342] CONEXIUNE EȘUATĂ: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 10:21:07.136]   Port 3999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:21:28.506]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:21:49.877]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:21:53.750] ═══════════════════════════════════════
+[2026-03-24 10:21:53.750]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 10:21:53.750] ═══════════════════════════════════════
+[2026-03-24 10:22:05.757] CONEXIUNE EȘUATĂ: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 10:22:11.237]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:22:32.598]   Port 8000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:22:53.965]   Port 4000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:23:15.341]   Port 5000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:23:36.696]   Port 9001: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:23:58.054]   Port 515: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:24:19.411]   Port 9200: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:24:40.760]   Port 8080: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:25:02.123]   Port 1024: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:25:23.496]   Port 5001: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:25:44.879]   Port 23: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:25:44.880]   ✗ Niciun port funcțional
+[2026-03-24 10:25:44.880] ═══════════════════════════════════════
+[2026-03-24 10:25:44.881]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:25:44.881] ═══════════════════════════════════════
+[2026-03-24 10:25:44.903]   close_Connection() - OK
+[2026-03-24 10:25:44.905]   set_TransportType(1=TCP/IP) -> 0 (Device not connected)
+[2026-03-24 10:25:44.908]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:25:45.542]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:25:45.543]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:25:45.544] ═══════════════════════════════════════
+[2026-03-24 10:25:45.544]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:25:45.544] ═══════════════════════════════════════
+[2026-03-24 10:25:45.545]   close_Connection() - OK
+[2026-03-24 10:25:45.546]   set_TransportType(1=TCP/IP) -> 0 (Unknown device model)
+[2026-03-24 10:25:45.547]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:25:46.142]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:25:46.143]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:25:46.143] ═══════════════════════════════════════
+[2026-03-24 10:25:46.144]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:25:46.144] ═══════════════════════════════════════
+[2026-03-24 10:25:46.646]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:25:58.148]   Port 9100: excepție - The remote procedure call failed. (0x800706BE)
+[2026-03-24 10:25:58.150]   Port 4999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.153]   Port 9999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.155]   Port 8000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.158]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.159]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.161]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.166]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.176]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.179]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.181]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.183]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.185]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.186]   ✗ Niciun port funcțional
+[2026-03-24 10:25:58.186] ═══════════════════════════════════════
+[2026-03-24 10:25:58.187]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:25:58.187] ═══════════════════════════════════════
+[2026-03-24 10:25:58.189]   Port 3999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.195]   Port 9100: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.196]   Port 4999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.199]   Port 9999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.201]   Port 8000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.202]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.204]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.206]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.207]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.209]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.210]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.214]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.217]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.218]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:25:58.218]   ✗ Niciun port funcțional
+[2026-03-24 10:26:31.936] ═══════════════════════════════════════
+[2026-03-24 10:26:31.937]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 10:26:31.937] ═══════════════════════════════════════
+[2026-03-24 10:26:32.203] ═══════════════════════════════════════
+[2026-03-24 10:26:32.203]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:26:32.203] ═══════════════════════════════════════
+[2026-03-24 10:26:32.271]   close_Connection() - OK
+[2026-03-24 10:26:32.286]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 10:26:32.292]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:26:32.832]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:26:32.833]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:26:32.863] ═══════════════════════════════════════
+[2026-03-24 10:26:32.863]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:26:32.863] ═══════════════════════════════════════
+[2026-03-24 10:26:33.419]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:26:43.969] CONEXIUNE EȘUATĂ: Conexiunea a expirat (12s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 10:26:54.781]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:27:16.184]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:27:35.423]   Port 9999: excepție - The remote procedure call failed. (0x800706BE)
+[2026-03-24 10:27:35.424]   Port 8000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.426]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.427]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.429]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.430]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.432]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.433]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.434]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.435]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.437]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:27:35.437]   ✗ Niciun port funcțional
+[2026-03-24 10:29:32.173] ═══════════════════════════════════════
+[2026-03-24 10:29:32.174]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 10:29:32.175] ═══════════════════════════════════════
+[2026-03-24 10:29:32.466] ═══════════════════════════════════════
+[2026-03-24 10:29:32.466]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:29:32.467] ═══════════════════════════════════════
+[2026-03-24 10:29:32.553]   close_Connection() - OK
+[2026-03-24 10:29:32.568]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 10:29:32.573]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:29:32.940]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:29:32.941]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:29:32.969] ═══════════════════════════════════════
+[2026-03-24 10:29:32.969]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:29:32.969] ═══════════════════════════════════════
+[2026-03-24 10:29:33.527]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:29:38.321] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 10:29:39.915] ═══════════════════════════════════════
+[2026-03-24 10:29:39.915]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 10:29:39.916] ═══════════════════════════════════════
+[2026-03-24 10:29:49.159] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 10:29:54.244] ═══════════════════════════════════════
+[2026-03-24 10:29:54.244]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:9100
+[2026-03-24 10:29:54.244] ═══════════════════════════════════════
+[2026-03-24 10:29:54.882]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:30:03.375] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 10:30:16.247]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:30:37.623]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:30:46.192]   Port 8000: excepție - The remote procedure call failed. (0x800706BE)
+[2026-03-24 10:30:46.195]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.200]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.204]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.207]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.209]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.210]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.211]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.212]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.218]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.219]   ✗ Niciun port funcțional
+[2026-03-24 10:30:46.220] ═══════════════════════════════════════
+[2026-03-24 10:30:46.221]   CONEXIUNE TCP/IP - 192.168.1.218:9100
+[2026-03-24 10:30:46.221] ═══════════════════════════════════════
+[2026-03-24 10:30:46.223]   close_Connection() - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.223]   ✗ EROARE TCP: The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.226] ═══════════════════════════════════════
+[2026-03-24 10:30:46.226]   CONEXIUNE TCP/IP - 192.168.1.218:4999
+[2026-03-24 10:30:46.226] ═══════════════════════════════════════
+[2026-03-24 10:30:46.227]   close_Connection() - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.228]   ✗ EROARE TCP: The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.246] ═══════════════════════════════════════
+[2026-03-24 10:30:46.246]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:30:46.247] ═══════════════════════════════════════
+[2026-03-24 10:30:46.248]   Port 3999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.254]   Port 9100: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.255]   Port 4999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.257]   Port 9999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.258]   Port 8000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.259]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.260]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.262]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.265]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.271]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.274]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.284]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.287]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.290]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.291]   ✗ Niciun port funcțional
+[2026-03-24 10:30:46.292] ═══════════════════════════════════════
+[2026-03-24 10:30:46.293]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:30:46.293] ═══════════════════════════════════════
+[2026-03-24 10:30:46.295]   Port 3999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.297]   Port 9100: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.299]   Port 4999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.302]   Port 9999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:30:46.306]   Port 8000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:41:59.759] ═══════════════════════════════════════
+[2026-03-24 10:41:59.761]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:4999
+[2026-03-24 10:41:59.761] ═══════════════════════════════════════
+[2026-03-24 10:42:00.008] ═══════════════════════════════════════
+[2026-03-24 10:42:00.008]   CONEXIUNE TCP/IP - 192.168.1.218:4999
+[2026-03-24 10:42:00.009] ═══════════════════════════════════════
+[2026-03-24 10:42:00.075]   close_Connection() - OK
+[2026-03-24 10:42:00.091]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 10:42:00.097]   set_TCPIP(192.168.1.218, 4999) -> 0
+[2026-03-24 10:42:04.728] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 10:42:10.679] ═══════════════════════════════════════
+[2026-03-24 10:42:10.679]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:4999
+[2026-03-24 10:42:10.679] ═══════════════════════════════════════
+[2026-03-24 10:42:21.353]   open_Connection() -> -33022 (Device not connected)
+[2026-03-24 10:42:21.353]   ✗ EROARE TCP: open_Connection failed: -33022 - Device not connected
+[2026-03-24 10:42:21.357] ═══════════════════════════════════════
+[2026-03-24 10:42:21.357]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:42:21.357] ═══════════════════════════════════════
+[2026-03-24 10:42:21.358]   close_Connection() - OK
+[2026-03-24 10:42:21.359]   set_TransportType(1=TCP/IP) -> 0 (Device not connected)
+[2026-03-24 10:42:21.360]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:42:21.816]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:42:21.817]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:42:21.842] ═══════════════════════════════════════
+[2026-03-24 10:42:21.843]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:42:21.844] ═══════════════════════════════════════
+[2026-03-24 10:42:22.404]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:42:40.681] CONEXIUNE EȘUATĂ: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 10:42:43.770]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:43:05.137]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:43:26.485]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:43:47.832]   Port 8000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:44:09.198]   Port 4000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:44:30.530]   Port 5000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:44:51.887]   Port 9001: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:45:13.223]   Port 515: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:45:34.576]   Port 9200: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:45:55.947]   Port 8080: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:46:17.293]   Port 1024: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:46:38.649]   Port 5001: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:47:00.000]   Port 23: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:47:00.000]   ✗ Niciun port funcțional
+[2026-03-24 10:47:00.000] ═══════════════════════════════════════
+[2026-03-24 10:47:00.001]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:47:00.001] ═══════════════════════════════════════
+[2026-03-24 10:47:00.603]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:47:21.963]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:47:43.310]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:48:04.650]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:49:10.099] ═══════════════════════════════════════
+[2026-03-24 10:49:10.100]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 10:49:10.101] ═══════════════════════════════════════
+[2026-03-24 10:49:10.350] ═══════════════════════════════════════
+[2026-03-24 10:49:10.351]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:49:10.351] ═══════════════════════════════════════
+[2026-03-24 10:49:10.410]   close_Connection() - OK
+[2026-03-24 10:49:10.424]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 10:49:10.429]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:49:10.911]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:49:10.912]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:49:11.034] ═══════════════════════════════════════
+[2026-03-24 10:49:11.034]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:49:11.035] ═══════════════════════════════════════
+[2026-03-24 10:49:11.534]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:49:30.162] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 10:49:32.893]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:49:37.976] ═══════════════════════════════════════
+[2026-03-24 10:49:37.976]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 10:49:37.976] ═══════════════════════════════════════
+[2026-03-24 10:49:54.248]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:50:07.987] CONEXIUNE EȘUATĂ: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 10:50:15.590]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:50:36.941]   Port 8000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:50:58.308]   Port 4000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:51:19.670]   Port 5000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:51:41.004]   Port 9001: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:52:02.381]   Port 515: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:52:13.996]   Port 9200: excepție - The remote procedure call failed. (0x800706BE)
+[2026-03-24 10:52:13.998]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:52:13.999]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:52:14.000]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:52:14.001]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:52:14.001]   ✗ Niciun port funcțional
+[2026-03-24 10:52:14.218] ═══════════════════════════════════════
+[2026-03-24 10:52:14.218]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 10:52:14.218] ═══════════════════════════════════════
+[2026-03-24 10:52:14.223]   close_Connection() - OK
+[2026-03-24 10:52:14.225]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 10:52:14.226]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 10:52:14.663]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 10:52:14.664]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 10:52:14.965] ═══════════════════════════════════════
+[2026-03-24 10:52:14.966]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 10:52:14.966] ═══════════════════════════════════════
+[2026-03-24 10:52:15.805]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 10:52:37.166]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:52:58.577]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:53:19.928]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:53:41.294]   Port 8000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 10:53:41.629]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.630]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.631]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.632]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.634]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.635]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.636]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.637]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.637]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 10:53:41.638]   ✗ Niciun port funcțional
+[2026-03-24 11:02:49.316] ═══════════════════════════════════════
+[2026-03-24 11:02:49.317]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 11:02:49.317] ═══════════════════════════════════════
+[2026-03-24 11:02:49.574] ═══════════════════════════════════════
+[2026-03-24 11:02:49.574]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 11:02:49.574] ═══════════════════════════════════════
+[2026-03-24 11:02:49.638]   close_Connection() - OK
+[2026-03-24 11:02:49.653]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 11:02:49.659]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 11:02:50.196]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 11:02:50.197]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 11:02:50.328] ═══════════════════════════════════════
+[2026-03-24 11:02:50.328]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 11:02:50.328] ═══════════════════════════════════════
+[2026-03-24 11:02:50.823]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 11:02:58.028] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 11:03:12.195]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:03:18.889]   Port 4999: excepție - The remote procedure call failed. (0x800706BE)
+[2026-03-24 11:03:18.891]   Port 9999: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.893]   Port 8000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.896]   Port 4000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.897]   Port 5000: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.898]   Port 9001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.899]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.900]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.902]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.903]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.904]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.905]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:03:18.905]   ✗ Niciun port funcțional
+[2026-03-24 11:04:25.193] ═══════════════════════════════════════
+[2026-03-24 11:04:25.195]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 11:04:25.195] ═══════════════════════════════════════
+[2026-03-24 11:04:25.479] ═══════════════════════════════════════
+[2026-03-24 11:04:25.479]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 11:04:25.479] ═══════════════════════════════════════
+[2026-03-24 11:04:25.548]   close_Connection() - OK
+[2026-03-24 11:04:25.564]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 11:04:25.571]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 11:04:26.140]   open_Connection() -> -33025 (Unknown device model)
+[2026-03-24 11:04:26.141]   ✗ EROARE TCP: open_Connection failed: -33025 - Unknown device model
+[2026-03-24 11:04:26.282] ═══════════════════════════════════════
+[2026-03-24 11:04:26.283]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 11:04:26.283] ═══════════════════════════════════════
+[2026-03-24 11:04:26.763]   Port 3999: open_Connection eșuat (-33025 - Unknown device model)
+[2026-03-24 11:04:48.115]   Port 9100: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:04:55.224] CONEXIUNE EȘUATĂ: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 11:05:09.480]   Port 4999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:05:30.841]   Port 9999: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:05:52.245]   Port 8000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:06:13.674]   Port 4000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:06:35.051]   Port 5000: open_Connection eșuat (-33022 - Device not connected)
+[2026-03-24 11:06:52.645]   Port 9001: excepție - The remote procedure call failed. (0x800706BE)
+[2026-03-24 11:06:52.648]   Port 515: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:06:52.649]   Port 9200: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:06:52.650]   Port 8080: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:06:52.652]   Port 1024: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:06:52.653]   Port 5001: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:06:52.656]   Port 23: excepție - The RPC server is unavailable. (0x800706BA)
+[2026-03-24 11:06:52.657]   ✗ Niciun port funcțional
+[2026-03-24 12:19:05.871] ═══════════════════════════════════════
+[2026-03-24 12:19:05.872]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:19:05.873] ═══════════════════════════════════════
+[2026-03-24 12:19:06.127] ═══════════════════════════════════════
+[2026-03-24 12:19:06.127]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:19:06.127] ═══════════════════════════════════════
+[2026-03-24 12:19:06.188]   close_Connection() - OK
+[2026-03-24 12:19:06.204]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:19:06.210]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:19:06.709]   open_Connection() -> 0 (No error)
+[2026-03-24 12:19:06.741]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:19:07.277] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:23:05.331] ═══════════════════════════════════════
+[2026-03-24 12:23:05.332]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:23:05.333] ═══════════════════════════════════════
+[2026-03-24 12:23:05.608] ═══════════════════════════════════════
+[2026-03-24 12:23:05.608]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:23:05.608] ═══════════════════════════════════════
+[2026-03-24 12:23:05.684]   close_Connection() - OK
+[2026-03-24 12:23:05.702]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:23:05.709]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:23:06.436]   open_Connection() -> 0 (No error)
+[2026-03-24 12:23:06.469]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:23:07.010] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:27:08.490] ═══════════════════════════════════════
+[2026-03-24 12:27:08.491]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:27:08.491] ═══════════════════════════════════════
+[2026-03-24 12:27:08.753] ═══════════════════════════════════════
+[2026-03-24 12:27:08.754]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:27:08.754] ═══════════════════════════════════════
+[2026-03-24 12:27:08.836]   close_Connection() - OK
+[2026-03-24 12:27:08.856]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:27:08.862]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:27:30.598] CONEXIUNE EȘUATĂ: Conectarea a fost anulată.
+[2026-03-24 12:27:33.075] ═══════════════════════════════════════
+[2026-03-24 12:27:33.076]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:27:33.076] ═══════════════════════════════════════
+[2026-03-24 12:28:39.014]   ✗ EROARE TCP: The remote procedure call failed. (0x800706BE)
+[2026-03-24 12:28:39.191] ═══════════════════════════════════════
+[2026-03-24 12:28:39.192]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:28:39.192] ═══════════════════════════════════════
+[2026-03-24 12:28:39.195]   close_Connection() - OK
+[2026-03-24 12:28:39.196]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:28:39.198]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:28:40.146]   open_Connection() -> 0 (No error)
+[2026-03-24 12:28:40.182]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:28:40.198] CONEXIUNE EȘUATĂ: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 12:28:40.585] ═══════════════════════════════════════
+[2026-03-24 12:28:40.586]   SCANARE AUTO PORT TCP - 192.168.1.218
+[2026-03-24 12:28:40.586] ═══════════════════════════════════════
+[2026-03-24 12:28:48.076] ═══════════════════════════════════════
+[2026-03-24 12:28:48.077]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:28:48.078] ═══════════════════════════════════════
+[2026-03-24 12:28:48.300] ═══════════════════════════════════════
+[2026-03-24 12:28:48.301]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:28:48.301] ═══════════════════════════════════════
+[2026-03-24 12:28:48.374]   close_Connection() - OK
+[2026-03-24 12:28:48.388]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:28:48.395]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:29:18.102] CONEXIUNE EȘUATĂ: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 12:30:10.864] ═══════════════════════════════════════
+[2026-03-24 12:30:10.866]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:30:10.866] ═══════════════════════════════════════
+[2026-03-24 12:30:35.613] ═══════════════════════════════════════
+[2026-03-24 12:30:35.614]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:30:35.614] ═══════════════════════════════════════
+[2026-03-24 12:30:40.893] CONEXIUNE EȘUATĂ: Conexiunea a expirat (30s). Verificați conexiunea și alimentarea dispozitivului.
+[2026-03-24 12:30:52.666] ═══════════════════════════════════════
+[2026-03-24 12:30:52.667]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:30:52.667] ═══════════════════════════════════════
+[2026-03-24 12:30:54.409] ═══════════════════════════════════════
+[2026-03-24 12:30:54.409]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:30:54.410] ═══════════════════════════════════════
+[2026-03-24 12:30:54.493]   close_Connection() - OK
+[2026-03-24 12:30:54.512]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:30:54.520]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:30:55.211]   open_Connection() -> 0 (No error)
+[2026-03-24 12:30:55.247]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:30:55.829] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:32:37.429] ═══════════════════════════════════════
+[2026-03-24 12:32:37.431]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:32:37.431] ═══════════════════════════════════════
+[2026-03-24 12:32:37.750] ═══════════════════════════════════════
+[2026-03-24 12:32:37.751]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:32:37.751] ═══════════════════════════════════════
+[2026-03-24 12:32:37.825]   close_Connection() - OK
+[2026-03-24 12:32:37.842]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:32:37.852]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:32:38.762]   open_Connection() -> 0 (No error)
+[2026-03-24 12:32:38.798]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:32:39.353] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:43:40.920] ═══════════════════════════════════════
+[2026-03-24 12:43:40.921]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 12:43:40.922] ═══════════════════════════════════════
+[2026-03-24 12:43:41.005] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Incotex device not found in SetupAPI enumeration.
+
+Check:
+1. Incotex is connected via USB
+2. Device VID:PID = 0483:5740
+
+Note:
+• WinUSB transport works ONLY if the device is bound to WinUSB (Microsoft)
+• If the device shows up as a COM port, use the Serial/COM connection instead
+[2026-03-24 12:44:00.922] ═══════════════════════════════════════
+[2026-03-24 12:44:00.922]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:44:00.922] ═══════════════════════════════════════
+[2026-03-24 12:44:01.162] ═══════════════════════════════════════
+[2026-03-24 12:44:01.163]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:44:01.163] ═══════════════════════════════════════
+[2026-03-24 12:44:01.237]   close_Connection() - OK
+[2026-03-24 12:44:01.254]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:44:01.261]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:44:01.789]   open_Connection() -> 0 (No error)
+[2026-03-24 12:44:01.823]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:44:02.399] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:45:25.429] ═══════════════════════════════════════
+[2026-03-24 12:45:25.430]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:45:25.431] ═══════════════════════════════════════
+[2026-03-24 12:45:25.683] ═══════════════════════════════════════
+[2026-03-24 12:45:25.683]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:45:25.683] ═══════════════════════════════════════
+[2026-03-24 12:45:25.744]   close_Connection() - OK
+[2026-03-24 12:45:25.760]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:45:25.766]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:45:26.668]   open_Connection() -> 0 (No error)
+[2026-03-24 12:45:26.699]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:45:27.250] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:46:49.759] ═══════════════════════════════════════
+[2026-03-24 12:46:49.761]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:46:49.761] ═══════════════════════════════════════
+[2026-03-24 12:46:50.063] ═══════════════════════════════════════
+[2026-03-24 12:46:50.064]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:46:50.064] ═══════════════════════════════════════
+[2026-03-24 12:46:50.149]   close_Connection() - OK
+[2026-03-24 12:46:50.168]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:46:50.175]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:46:51.032]   open_Connection() -> 0 (No error)
+[2026-03-24 12:46:51.072]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:46:51.623] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:50:06.937] ═══════════════════════════════════════
+[2026-03-24 12:50:06.939]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:50:06.939] ═══════════════════════════════════════
+[2026-03-24 12:50:07.259] ═══════════════════════════════════════
+[2026-03-24 12:50:07.259]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:50:07.260] ═══════════════════════════════════════
+[2026-03-24 12:50:07.351]   close_Connection() - OK
+[2026-03-24 12:50:07.375]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:50:07.382]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:50:08.245]   open_Connection() -> 0 (No error)
+[2026-03-24 12:50:08.284]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:50:08.845] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:52:11.165] ═══════════════════════════════════════
+[2026-03-24 12:52:11.167]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:52:11.167] ═══════════════════════════════════════
+[2026-03-24 12:52:11.494] ═══════════════════════════════════════
+[2026-03-24 12:52:11.494]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:52:11.494] ═══════════════════════════════════════
+[2026-03-24 12:52:11.587]   close_Connection() - OK
+[2026-03-24 12:52:11.608]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:52:11.616]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:52:12.232]   open_Connection() -> 0 (No error)
+[2026-03-24 12:52:12.290]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:52:12.859] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:55:40.977] ═══════════════════════════════════════
+[2026-03-24 12:55:40.979]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:55:40.979] ═══════════════════════════════════════
+[2026-03-24 12:55:41.256] ═══════════════════════════════════════
+[2026-03-24 12:55:41.256]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:55:41.257] ═══════════════════════════════════════
+[2026-03-24 12:55:41.321]   close_Connection() - OK
+[2026-03-24 12:55:41.334]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:55:41.340]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:55:41.919]   open_Connection() -> 0 (No error)
+[2026-03-24 12:55:41.949]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:55:42.493] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 12:57:08.872] ═══════════════════════════════════════
+[2026-03-24 12:57:08.873]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 12:57:08.873] ═══════════════════════════════════════
+[2026-03-24 12:57:09.115] ═══════════════════════════════════════
+[2026-03-24 12:57:09.115]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 12:57:09.116] ═══════════════════════════════════════
+[2026-03-24 12:57:09.192]   close_Connection() - OK
+[2026-03-24 12:57:09.209]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 12:57:09.216]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 12:57:09.765]   open_Connection() -> 0 (No error)
+[2026-03-24 12:57:09.799]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 12:57:10.360] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 13:04:04.213] ═══════════════════════════════════════
+[2026-03-24 13:04:04.215]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 13:04:04.216] ═══════════════════════════════════════
+[2026-03-24 13:04:04.522] ═══════════════════════════════════════
+[2026-03-24 13:04:04.523]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 13:04:04.523] ═══════════════════════════════════════
+[2026-03-24 13:04:04.590]   close_Connection() - OK
+[2026-03-24 13:04:04.615]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 13:04:04.622]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 13:04:05.451]   open_Connection() -> 0 (No error)
+[2026-03-24 13:04:05.488]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 13:04:06.038] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 13:05:47.430] ═══════════════════════════════════════
+[2026-03-24 13:05:47.433]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 13:05:47.435] ═══════════════════════════════════════
+[2026-03-24 13:05:47.864] ═══════════════════════════════════════
+[2026-03-24 13:05:47.864]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 13:05:47.864] ═══════════════════════════════════════
+[2026-03-24 13:05:48.041]   close_Connection() - OK
+[2026-03-24 13:05:48.070]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 13:05:48.079]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 13:05:48.868]   open_Connection() -> 0 (No error)
+[2026-03-24 13:05:48.902]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 13:05:49.456] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 13:27:33.641] ═══════════════════════════════════════
+[2026-03-24 13:27:33.642]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 13:27:33.642] ═══════════════════════════════════════
+[2026-03-24 13:27:33.855] ═══════════════════════════════════════
+[2026-03-24 13:27:33.855]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 13:27:33.855] ═══════════════════════════════════════
+[2026-03-24 13:27:33.910]   close_Connection() - OK
+[2026-03-24 13:27:33.922]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 13:27:33.927]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 13:27:34.578]   open_Connection() -> 0 (No error)
+[2026-03-24 13:27:34.608]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 13:27:35.149] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 14:12:38.404] ═══════════════════════════════════════
+[2026-03-24 14:12:38.405]   ÎNCEPUT CONEXIUNE - Datecs Ethernet 192.168.1.218:3999
+[2026-03-24 14:12:38.405] ═══════════════════════════════════════
+[2026-03-24 14:12:38.659] ═══════════════════════════════════════
+[2026-03-24 14:12:38.660]   CONEXIUNE TCP/IP - 192.168.1.218:3999
+[2026-03-24 14:12:38.660] ═══════════════════════════════════════
+[2026-03-24 14:12:38.727]   close_Connection() - OK
+[2026-03-24 14:12:38.743]   set_TransportType(1=TCP/IP) -> 0 (No error)
+[2026-03-24 14:12:38.750]   set_TCPIP(192.168.1.218, 3999) -> 0
+[2026-03-24 14:12:39.435]   open_Connection() -> 0 (No error)
+[2026-03-24 14:12:39.468]   ✓ Conectat la 192.168.1.218:3999
+[2026-03-24 14:12:40.019] CONEXIUNE REUȘITĂ: 192.168.1.218:3999
+[2026-03-24 14:37:13.682] ═══════════════════════════════════════
+[2026-03-24 14:37:13.683]   ÎNCEPUT CONEXIUNE - Datecs Serial COM3@115200
+[2026-03-24 14:37:13.683] ═══════════════════════════════════════
+[2026-03-24 14:37:13.864] ═══════════════════════════════════════
+[2026-03-24 14:37:13.864]   CONEXIUNE SERIAL - COM3 @ 115200
+[2026-03-24 14:37:13.865] ═══════════════════════════════════════
+[2026-03-24 14:37:13.866]   Încercare port: COM3
+[2026-03-24 14:37:20.645]   ✗ EROARE Serial: open_Connection failed: -6 - Timeout expired.
+[2026-03-24 14:37:20.650] CONEXIUNE EȘUATĂ: Failed to connect to device on COM3 at 115200 baud. Error: open_Connection failed: -6 - Timeout expired.
+[2026-03-24 14:37:32.621] ═══════════════════════════════════════
+[2026-03-24 14:37:32.621]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 14:37:32.621] ═══════════════════════════════════════
+[2026-03-24 14:37:32.703] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[2026-03-24 14:48:04.869] ═══════════════════════════════════════
+[2026-03-24 14:48:04.870]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 14:48:04.871] ═══════════════════════════════════════
+[2026-03-24 14:48:04.958] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[2026-03-24 14:48:13.809] ═══════════════════════════════════════
+[2026-03-24 14:48:13.809]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 14:48:13.810] ═══════════════════════════════════════
+[2026-03-24 14:48:13.849] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[2026-03-24 14:51:46.780] ═══════════════════════════════════════
+[2026-03-24 14:51:46.781]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 14:51:46.782] ═══════════════════════════════════════
+[2026-03-24 14:51:46.874] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[2026-03-24 14:53:33.925] ═══════════════════════════════════════
+[2026-03-24 14:53:33.926]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 14:53:33.926] ═══════════════════════════════════════
+[2026-03-24 14:53:34.017] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[2026-03-24 14:55:52.073] ═══════════════════════════════════════
+[2026-03-24 14:55:52.074]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (USB (auto))
+[2026-03-24 14:55:52.074] ═══════════════════════════════════════
+[2026-03-24 14:55:52.156] CONEXIUNE EȘUATĂ: Incotex (Serial/USB) - Dispozitiv Incotex detectat dar conexiunea a esuat.
+
+Interfata WinUSB nu a putut fi deschisa.
+
+Solutii:
+• Verificati ca driverul WinUSB este instalat (Device Manager)
+• Deconectati si reconectati cablul USB
+• Rulati POS Bridge ca Administrator
+
+Incercari: 1 cale(i).
+Detalii:
+WinUsb_Initialize failed (err 87) for path: \\?\usb#vid_0483&pid_5740#aa47099782#{a5dcbf10-6530-11d2-901f-00c04fb951ed}
+[2026-03-24 14:56:02.568] ═══════════════════════════════════════
+[2026-03-24 14:56:02.568]   ÎNCEPUT CONEXIUNE - Incotex (Serial/USB) (COM9 @ 115200)
+[2026-03-24 14:56:02.568] ═══════════════════════════════════════
+[2026-03-24 14:56:02.614] CONEXIUNE REUȘITĂ: Incotex (Serial/USB) (COM9 @ 115200)

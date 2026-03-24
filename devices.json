@@ -1,0 +1,7 @@
+[
+  {
+    "Name": "datesc",
+    "ComPort": "COM7",
+    "BaudRate": 115200
+  }
+]

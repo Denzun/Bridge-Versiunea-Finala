@@ -1,0 +1,5 @@
+Cafea Jacobs|18.90|1|19
+Zahar 1kg|5.50|2|9
+Ulei floarea soarelui|12.30|1|9
+Ciocolata Milka|7.80|2|19
+Suc Coca Cola 2L|8.50|1|19

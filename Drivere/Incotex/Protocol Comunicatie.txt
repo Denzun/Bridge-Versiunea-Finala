@@ -1,0 +1,1265 @@
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 1 din 28
+
+Aparat de Marcat Electronic Fiscal (AMEF)
+Succes M7
+Protocol de comunicație – versiunea pentru Romania
+Table of Contents
+1. INTRODUCERE ........................................................................................................................... 2
+2. Descriere Protocol nivel 2 .......................................................................................................... 2
+2.1. Tip protocol.......................................................................................................................... 2
+2.2. Secvență mesaje ................................................................................................................. 2
+2.3. Mesaje neîmpachetate, Time-out ........................................................................................ 2
+2.4. Mesaje împachetate ............................................................................................................. 2
+2.5. Simboluri și sintaxă câmp date din mesaje ....................................................................... 3
+3. Descriere conținut octeți de stare AMEF .................................................................................. 3
+4. Lista comenzilor existente și scurtă descriere ......................................................................... 5
+5. DESCRIERE DETALIATĂ COMENZI .......................................................................................... 7
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 2 din 28
+1. INTRODUCERE
+În comunicația între PC și AMEF, AMEF reprezintă partea pasivă și execută comenzile primite din aplicația de pe PC.
+Aplicația de pa PC nu poate accesa direct resursele AMEF, dar poate recepționa date / informații referitor la starea casei de marcat și a parților componente (imprimantă, memorie fiscală, …).
+2. Descriere Protocol nivel 2
+2.1. Tip protocol
+AMEF executa comenzi primite din aplicația de pe PC și returnează un mesaj in funcție de rezultatul comunicației. Mesajele sunt de 2 feluri: ne-împachetate (un singur octet) sau mesaje împachetate
+2.2. Secvență mesaje
+Aplicația de pe PC transmite la AMEF un mesaj împachetat conținând o comandă. AMEF execută comanda (dacă este posibil) și transmite un mesaj împachetat ca răspuns.
+Aplicația de pe PC trebuie sa aștepte răspunsul AMEF înainte de a transmite următoarea comandă.
+Mesajele neîmpachetate (octeți) reprezintă confirmări de tip ACK sau NAK sau cereri de prelungire a timpului de așteptare (SYN) până este pregătit răspunsul AMEF.
+2.3. Mesaje neîmpachetate, Time-out
+Pentru o operare normală, AMEF returnează un mesaj de răspuns. în maximum 60 ms.
+Aplicația de pe PC trebuie să asigure un Time-Aut de 500 ms pentru primirea răspunsului de la AMEF. Dacă nu primește nici un răspuns pe durata Time-Aut, trebuie să retransmită către AMEF același mesaj folosind același număr serial (<SEQ>). După câteva încercări nereușite (numărul de încercări este stabilit de aplicația de pe PC), aplicația de pe PC trebuie să afișeze un mesaj de atenționare / eroare și să se deconecteze cu Eroare Time-Out.
+Mesajele neîmpachetate sunt:
+ NAK 15H
+Acest octet este transmis de AMEF când detectează o eroare în cifra de control (Check Sum) sau o eroare de sintaxă în mesajul primit.
+Când Aplicația de pe PC primește NAK trebuie să retransmită mesajul cu același număr
+ SYN 16H
+Acest octet este transmis de AMEF când primește o comandă care necesită o durată mai mare de execuție. SYN este transmis la fiecare perioadă de 60ms, până când este pregătit pachetul cu mesajul de răspuns.
+2.4. Mesaje împachetate
+ Mesaj împachetat de la PC către AMEF
+<01><LEN><SEQ><CMD><DATA><05><BCC><03>
+ Mesaj împachetat de la AMEF către PC
+<01><LEN><SEQ><CMD><DATA><04><STATUS><05><BCC><03>
+NOTĂ: Acest mesaj este transmis automat de AMEF după fiecare comandă primită de la PC!
+Descriere conținut mesaje:
+<01> Preambul mesaj Lungime 1 byte; valuare 01;
+<LEN> Număr octeși de la <01> (exclusiv) la <05> (inclusiv) plus o valoare fixă 20h
+Lungime: 1 octet; valuare: 20h - 7Fh;
+<SEQ> Număr succesiv mesaj Lungime: 1 octet; valuare: 20h – 7Fh
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 3 din 28
+ AMEF transmite același <SEQ> în răspunsul la o comandă
+ Dacă AMEF primește o comandă cu același <SEQ> cu cel al ultimului mesaj primit, nu va executa nimic dar va retransmite mesajul de răspuns care probabil nu a fost recepționat de PC.
+<CMD> Cod Comandă Lungime: 1 octet; valuare: 20h – 7Fh
+o AMEF trebuie să transmită același <CMD> în răspuns
+o Dacă primește un cod de comandă inexistent, AMEF va transmite ăîn răspuns un cod comandă cu Lungime 0 și octeții de stare cu valoarea corespunzătoare erorii.
+<DATA> Data Lungime: depinde de comandă; valuare octeți: 20h – 7Fh
+o Formatul datelor și numărul de octeți depinde de fiecare comandă
+o Dacă o comandă nu are date, <LEN> trebuie sa fie 00h
+o Dacă este detectată o eroare de sintaxă în câmpul de date, AMEF trebuie să transmită ca răspuns un mesaj fără date, și octeții de stare cu eroarea corespunzătoare.
+<04> Delimitator Lungime: 1 octet; valuare: 04h;
+<STATUS> Octeți de stare AMEF Lungime: 6 octeți; valuare: conform detalii comenzi
+<05> Postambul Lungime: 1 octet; valuare: 05h;
+<BCC> Check sum (0000h-FFFFh) Lungime: 4 octeți; valuare: 30h - 3Fh
+o Check sum se calculează ca sumă (valoare zecimală) a octeților de la <01> (exclusiv) până la <05> inclusiv.
+o Fiecare cifră din valoarea obținută se va transmite ca octet ASCII ca în exemplul următor: pentru valoarea 1893h se transmite 31h, 38h, 39h, 33h.
+<03> Terminator Lungime: 1 octet; valuare: 03h;
+2.5. Simboluri și sintaxă câmp date din mesaje
+Conținutul din câmpul de date depinde de fiecare comandă.
+Dacă un parametru este inclus între paranteze de tip < >, acest parametru este obligatoriu dar parantezele nu fac parte din mesaj.
+Dacă un parametru este inclus între paranteze de tip [ ], acest parametru este opțional dar parantezele nu fac parte din mesaj.
+Codurile ASCII mai mici de 20h se folosesc pentru motive speciale explicate mai jos. În plus, dacă un astfel de simbol trebuie trimis dintr-un anumit motiv, trebuie să fie precedat de 10h și trebuie să se adauge 40h ca delimitare finală.
+3. Descriere conținut octeți de stare AMEF
+Starea curentă AMEF este codificată într-un câmp de 6 octeți, care este trimis în cadrul fiecărui mesaj de răspuns. Conținutul acestor octeți este prezentat mai jos:
+Byte 0: Utilizare generală
+0.7 = 1 Rezervat – mereu valoarea 1
+0.6 = 1 Rezervat
+0.5 = 1 Eroare generală - format din operarea "SAU" a tuturor erorilor marcate cu "#".
+0.4 = 1 Rezervat
+0.3 = 1 Nefolosit
+0.2 = 1 Ora / dată nu este setată
+0.1 = 1# Cod de comandă invalid
+0.0 = 1# Eroare de sintaxă
+Byte 1: Utilizare generală
+1.7 = 1 Rezervat – mereu valoarea 1
+1.6 = 1 Afișaj extern neconectat
+1.5 = 1 Introducerea consecutivă a 3 parole greșite
+1,4 = 1# 24 de ore de la tipărirea primului bon fiscal
+1.3 = 1# Rezervat
+1.2 = 1# Resetare RAM
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 4 din 28
+1.1 = 1# Execuția comenzii nu este permisă
+1.0 = 1 Rezervat
+Byte 2: Utilizare generală
+2,7 = 1 Rezervat – mereu valoarea 1
+2.6 = 1 Nefolosit
+2.5 = 1 Bon nefiscal deschis
+2.4 = 1 Rezervat
+2.3 = 1 Bon fiscal deschis
+2.2 = 1# Rezervat
+2.1 = 1 Se așteaptă confirmarea schimbării hartiei
+2.0 = 1# Lipsă hârtie
+Byte 3: codul erorii AMEF
+3.7 = 1 Rezervat.
+3,0 la 3,6 Cod eroare AMEF
+Erorile sunt descrise mai josl:
+Cod
+Descriere
+1
+Depășire multiplicare
+2
+Depăsire raport zilnic
+3
+Operație nepermisă
+4
+Reducerea depășește valoarea înregistrării / subtotal bon
+5
+Suma totală este 0
+6
+Depășire valoare bon
+7
+Depășire cantitate
+8
+Valoarea introdusă depășește valoarea maximă pentru prețuri (9 999 999,99)
+9
+Valoarea este 0
+10
+Preț liber este dezactivat pentru acest PLU sau departament
+11
+Este necesară o cantitate intreagă (fără zecimale)
+12
+Numărul maxim de tranzacții (250) înregistrate în chitanța curentă. Bonul trebuie închis.
+13
+Valoarea procentuală este în afara intervalului 0,00 - 99,99
+14
+Operația este dezactivată; rezultatul ar fi negativ
+16
+Cantitatea din stoc nu este suficientă pentru această vânzare
+18
+Nu există nicio înregistrare care să poată fi corectată
+19
+Neutilizat
+21
+Numerarul din sertar este mai mic decât suma care trebuie extrasă din sertar
+22
+Depășire raport operatori
+23
+Operatorul curent nu are drepturi pentru execuția acestei comenzi, conform opțiuni operatori
+24
+Memoria fiscală este plină
+25
+Intervale ilegale privind un raport
+26
+Depășire raport PLU
+32
+Acest cod de bare este deja programat pentru un alt PLU
+33
+Neutilizat
+34
+Depășire rapoarte grupe
+36
+Operația STORNO nu este permisă deoarece valoarea TVA nu poate fi negativă
+37
+Cota TVA dezactivată
+38
+Au trecut mai mult de 24 ore de la primul bon fiscal și trebuie emis raportul fiscal Z
+40
+Data efectuare verificare tehnică a expirat
+42
+Suma introdusă mai mare decât suma datorată. Nu este permis pentru forma de plată aleasă.
+43
+Nu exista denumire programată in câmpul obligatoriu
+73
+Baterie descărcată.
+74
+Raportul Z nu se poate efectua (data curentă este anterioară datei ultimei înregistrări din MF)
+75
+Înregistrarea imposibilă datorită limitelor din parametrul 2 (programare PLU) – câmpul 9
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 5 din 28
+76
+Eroare ceas
+88
+Eroare de memorie fiscală
+Byte 4: Memorie fiscală
+4.7 = 1 Rezervat
+4.6 = 1 Rezervat
+4.5 = 1 Rezultatul operării SAU a tuturor erorilor în octeți 4 și 5 marcat cu '*'
+4.4 = 1* Memorie fiscală plină
+4.3 = 1 Mai puțin de 60 de înregistrări libere în MF
+4.2 = 1 Eroare în MF
+4.1 = 1 Nefolosit
+4.0 = 1* Eroare la înregistrarea în FM
+Byte 5: Memorie fiscală
+5.7 = 1 Rezervat
+5.6 = 1 Rezervat
+5.5 = 1 Seria Fiscală este înregistrată în MF
+5.4 = 1 Este programată / asociată cel puțin o cotă TVA
+5.3 = 1 ECR este fiscalizată
+5.2 = 1* Nefolosit
+5.1 = 1 Rezervat
+5.0 = 1* MF este setat în modul READONLY
+4. Lista comenzilor existente și scurtă descriere
+INITIALIZĂRI
+40 (28h) Disccount
+43 (2Bh) Antet, Mesaj final Opțiuni tipărire
+61 (3Dh) Programare dată și oră
+72 (48h) Fiscalizare
+83 (53h) Punct zecimal (numar zecimale)
+91 (5Bh) Programare serie fiscală
+96 (60h) Programare cote TVA
+101 (65h) Programare parolă operator
+102 (66h) Programare nume operator
+104 (68h) Resetarea datelor în raportul unui operator
+107 (6Bh) Programare / Citire PLU
+115 (73h) Programare logo grafic
+131 (83h) Programare / Citire departament
+149 (95h) Programare / Citire câmpuri text
+172 (ACh) Viteză comunicație
+184 (B9h) Programare si citire Grupe
+VÂNZĂRI
+38 (26h) Deschiderea unui bon nefiscal
+39 (27h) Închiderea unui bon nefiscal
+42 (2Ah) Tipărirea unui text nefiscal
+48 (30h) Deschiderea unui bon fiscal
+49 (31h) Înregistrare vânzări
+51 (33h) Subtotal
+52 (34h) Înregistrare vânzare și afișare pe afișaj extern
+53 (35h) Plata
+54 (36h) Tipărire text nefiscal
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 6 din 28
+56 (38h) Închiderea unui bon fiscal
+57 (39h) Informații client care urmează să fie tipărite în bonul fiscal
+58 (3Ah) înregistrare vânzare PLU programat în baza de date a casei de marcat
+109 (6Dh) Tipărire copie nefiscală a bonului fiscal
+130 (82h) Anulare bon fiscal nefinalizat
+138 (83h) Înregistrare BACȘIȘ
+Rapoarte zilnice
+69 (45h) Raportul fiscal zilnic.
+108 (6Ch) Raport zilnic extins (Raport zilnic și raport PLU)
+RAPOARTE
+50 (32h) Raport modificări TVA
+73 (49h) Raport detaliat MF după nr. Z
+79 (4Fh) Raport sumar MF după dată
+94 (5Еh) Raport detaliat MF după dată
+95 (5Fh) Raport sumar MF după nr. Z
+105 (69h) Raport operatori
+111 (6Fh) Raport PLU
+186 (BAh) Raport Reset RAM
+187 (BBh) Raport modificări cote TVA
+INFORMAȚII CITIRE DIN CASA DE MARCAT
+62 (3Eh) Data și ora
+64 (40h) Informații din ultimul bon fiscal tipărit
+65 (41h) Sumele nete actuale
+67 (43h) Sumele zilnice curente
+68 (44h) Numărul de înregistrări libere in MF rapoartele fiscale Z
+74 (4Ah) Stare dispozitiv fiscal
+76 (4Ch) Stare bon fiscal
+90 (5Ah) Date de diagnosticare
+97 (61h) Citire cote TVA curente
+99 (63h) Citire cod fiscal
+103 (67h) Date bon fiscal
+110 (6Eh) Sume plătite cu formele de plată 1, 2 și 3
+112 (70h) Vânzări pe operator
+113 (71h) Numărul ultimului document tipărit
+173 (ADh) Sume plătite pentru toate formele de plată
+114 (72h) Date din MF
+128 (80h) Parametrii ECR
+173 (ADh) Valoare corespunzatoare fiecarei plati
+COMENZI IMPRIMANTĂ
+44 (2Ch) Avans hârtie
+AFIȘAJE EXTERNE
+33 (21h) Șterge informașia afișată pe afișajul extern
+35 (23h) Text afișat pe a doua linie a unui afișaj extern
+47 (2Fh) Text afișat pe prima linie a unui afișaj extern
+132 (84h) Programare tabel coduri Afișaj Extern
+133 (85h) Configurare funcționare Afișah Extern
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 7 din 28
+ALELE
+70 (46h) Sume introduse / extrase în / din sertar
+84 (54h) Tipărire cod bare
+106 (6Ah) Deschide sertarul pentru bani
+COMENZI VANZARE PLU DIN BAZA DATE EXTERNA
+196 (C4h) Verificare zi deschisa
+224 (E0h) Verifica AMEF daca exista cereri de comenzi
+225 (E1h) Introducere date
+227 (E3h) Activare functionalitate
+5. DESCRIERE DETALIATĂ COMENZI
+NOTĂ: Pentru fiecare comandă se va descrie conținutul campului de date din comandă (Date) si conținutul câmpului de date din răspunsul AMEF (Răspuns). Dacă nu există date pentru Răspuns, AMEF va transmite oricum octeții de stare iar aplicația de pe PC trebuie să verifice dacă s-a executat comanda sau exista o eroare.
+33 (21h) Șterge informașia afișată pe afișajul extern
+Date: Fără date
+Răspuns: Fără date
+35 (23h) Text afișat pe prima a doua linie a afișajului extern (linia de jos)
+Date: <Text>
+Răspuns: Fără date
+38 (26h) Deschide bon nefiscal
+Date: fără date
+Răspuns: Allreceipts
+Allreceipts este contorul pentru toate documentele fiscale si nefiscale, de la ultimul raport Z
+Se execută urmatoarele acțiuni:
+ Tipărește Antet Fiscal inclusiv Cod Fiscal;
+ Tipărește număr document și operator
+ Răspunde cu Număr Documente tipărite de la ultimul raport Z.
+Comanda nu se execută dacă:
+ Există un bon fiscal deschis
+ Există un bon nefiscal deschis
+ Data și ora nu sunt programate.
+Nota: Dacă există un bon nefiscal deschis sunt permise comenzile 42 (2Ah) și 39 (27h). Comenzile pentru vânzări in bon fiscal nu sunt permise!
+39 (27h) Închide bon nefiscal
+Date: fără date
+Răspuns: Allreceipts
+Allreceipts este contorul pentru toate documentele fiscale si nefiscale, de la ultimul raport Z
+Se execută urmatoarele acțiuni:
+ Tipărește Mesaj final inclusiv BON NEFISCAL și seria fiscală, fără logotip;
+Comanda nu se execută dacă:
+ Nu există un bon nefiscal deschis
+ Există un bon fiscal deschis
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 8 din 28
+40 (28h) DISCOUNTURI
+Date: <OpType> <Data>
+<OpType> 1 octet pentru definire tip operatie R sau P
+P = programare
+<Data> <P><DNum>,<Option>,<VAT><Name>
+Răspuns: Fără date
+R = Citire
+<Data> <R>< DNum >
+Răspuns: <VAT>,<Name>
+DNum Numar Discount (0 = Reducere Speciala 1; 1 = Reducere Speciala 2)
+Name Denumire Reducere Speciala
+Option 1 = Reducere Speciala aplicata pentru toate cotele TVA
+0 = Reducere Speciala se aplica doar valorilor cu cota TVA selectata
+VAT Cota TVA asociata Reducerii Speciale (A,B,C,D,F,G,N,T sau 0)
+42 (2Ah) Tipărește linie text în bon nefiscal
+Date: <Text>
+Răspuns: Fără date
+<Text> maximum 38 caractere
+Caracterele care depășesc 38 nu se tipăresc – fără eroare
+Comanda se execută dacă există bon nefiscal deschis!
+43 (2Bh) Antet fiscal, Mesaj final, Opțiuni Tipărire
+Date: <Item><Text>
+Răspuns: Depinde de câmpurile din Date
+<Item> reprezintă un simbol cu următoarele valori:
+‘0’ la ‘9’ , ':', ';' sau '<'
+- corespunzând linilor de antet și mesaj final (primele 11 pentru antet și ultimele 2 pentru mesaj final)
+- Primele 7 linii (0 … 6) reprezintă antetul fiscal și modificarea lor se va efectua doar după emiterea raportului fiscal Z, de tehnicianul autorizat care trebuie să facă inregistrări în Cartea de Intervenții!
+‘P’ – opțiuni tipărire.
+‘L’ – tipărire logo grafisînainte de antet
+‘R’ – tipărire în rapoarte regiștri cu valoare zero
+‘Е’ – precizare avans hârtie în mm
+‘W’ – amânare tipărire bon fiscal – bonul fiscal este tipărit atunci când se închide.
+‘Т’ – precizare contrast tipărire.
+‘B’ – precizare înălțime cod bare.
+‘I’ – folosit pentru citire antet, meseaj final si opțiuni tipărire. Acest simbol trebuie sa fie urmat de încă un simbol care precizează ce se citește
+<Text> maximum 38 caractere pentru simbol = ‘0’ la ‘9’, ':', ';' sau '<'
+Nota: Executarea comenzii pentru simbol = ‘0’ la ‘6’ necesită emiterea raportului fiscal Z înainte!
+Când AMEF este fiscalizată, antetul fiscal se poate modifica de maximum 15 ori
+ Dacă <Item> este ‘P’, <Text> conține 4 simboluri cu valoarea 0 (opțiune dezactivată) sau 1 (opțiune activată) pentru următoarele opțiuni:
+o Tipărește o linie liberă după Antet
+o Tipărește o linie liberă după Cod Fiscal
+o Tipărește o linie liberă după Mesaj Final
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 9 din 28
+o Tipărește o linie punctată înainte de Total Bon
+ Dacă <Item> este ‘L’, <Text> conține un simbol cu valoarea 0 (opțiune dezactivată) sau 1 (opțiune activată) pentru tipărire logo grafic
+ Dacă <Item> este ‘R’, <Text> conține un simbol cu valoarea 0 (opțiune dezactivată) sau 1 (opțiune activată) pentru tipărire registrii cu valoare zero in rapoarte
+ Dacă <Item> este ‘E’, <Text> conține numărul de mm pentru avansul hârtiei cu o linie
+ Dacă <Item> este ‘W’, <Text> conține un simbol cu valoarea 0 (opțiune dezactivată) sau 1 (opțiune activată) pentru amânarea tipăririi bonului până la comanda de închidere
+ Dacă <Item> este ‘T’, <Text> conține o cifră cu valoarea între 0 … 8 reprezentând contrastul la tipărire (8 = maxim)
+ Dacă <Item> este ‘B’, <Text> conține numărul de puncte de la 3 la 240, specificând înălțime cod bare (8 puncte / mm)
+44 (2Ch) AVANS HÂRTIE
+Date: [Linii]
+Răspuns: Fără date
+[Linii] număr între 1 … 20 pentru avansul hârtiei. Dacă Linii lipseste, avansul se face cu o linie!
+47 (2Fh) Text afișat pe prima linie a afișajului extern (linia de sus)
+Date: <Text>
+Răspuns: Fără date
+48 (30h) Deschide Bon Fiscal
+Date: <OpNumber>,<Password>,<POSNumber>{,<Invoice>}
+Răspuns: Allreceipt, FiscReceipt
+ OpNumber Număr operator de la 1 la 10
+ Password Parolă operator (maximum 6 caractere)
+ POSNumber Număr AMEF (maximum 4 cifre).
+ Invoice Caracterul I precizează ca bonul fiscal conține Cod Fiscal Client (tip Invoice) – În acest caz este necesară și comanda 57 transmisă înainte, care conține info. client
+ Allreceipts este contorul pentru toate documentele tipărite, fiscale și nefiscale (4 octeti) , de la ultimul raport Z
+ FiscReceipt Număr bon fiscal (4 octeți) – contor resetat de raportul Z
+Se execută urmatoarele acțiuni:
+ Tipărește Antet Fiscal inclusiv Cod Fiscal utilizator
+ Tipărește nume operator și număr document
+Comanda nu se execută dacă:
+ Există un bon nefiscal sau fiscal deschis
+ MF este plină
+ Parola operator eronată
+ Trebuie emis raportul Z (24 ore)
+ Există o eroare MF
+Nota: Dacă se introduce parola eronată de 3 ori consecutiv, AMEF trebuie oprită și repornită!
+Note: Dacă AMEF nu este fiscalizată. Comenzile 48 (30h) , 49 (31h) , 52 (34h) , 58 (3Аh) , 138 (83h) , 53 (35h) , 56 (38h) nu se pot executa, dar se pot executa comenzile pentru Bon Nefiscal
+49 (31h) INREGISTRARE VÂNZARE
+Date: [Text1][<LF>Text2]<Tab><TaxGr><[Sign]Price>[*[Sign2]<QTY>][,Percent]|;Abs][@MUnitString] [&CommGr][#Denominator]
+Raspuns: Fără
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 10 din 28
+ Text1 Text adițional denumire articol vândut – se tipărește înainte de denumire vânzare.
+ LF 0Аh (separator).
+ Text2 Denumire articol vândut – maximum 38 caractere
+ Tab 09h (separator).
+ TaxGr cota TVA asociată articolului vândut – se folosește codul ASCII pentru simbol cotă TVA astfel: N 4Eh (Scutite) T 54h (alte taxe), A 41h , B 42h , C 43h , D 44h , E 45h , F 46h.
+ Sign Un octet pentru semn, ‘+’ sau ‘–‘. Pentru valoare negativă comanda este CORECTARE.
+o Comanda de CORECTARE trebuie sa fie identică cu cea de vânzare (aceleași valori pentru Text 2 (Text 1 nu este necesar) , același preț cu semn negativ, cota TVA și cantitatea)
+o Pentru executarea unei corecții, se verifică existența vânzarii identice cu corecția de la începutul bonului și până la sfârșit.
+o Când se execută corecția se tipărește un mesaj specific.
+ Price reprezinta prețul unitar din maximum 9 cifre.
+ QTY reprezintă cantitatea vândută maximum 9 cifre cu 0 … 5 zecimale incluse in cele 9 cifre
+o Cantitatea se trimite cu virgula mobila, numarul maxim de zecimale depinzand de programarea casei de marcat – valoarea imlicita este 3 zecimale.
+o Exemplu:
+Cantitatea dorita
+Valoare introdusa in comanda
+Numarul de zecimale programat in casa
+Valoare tiparita pe bon
+2
+*2
+3
+2.000 X
+2.1
+*2.1
+5
+2.10000 X
+2.12345
+*2.12345
+5
+2.12345 X
+17 / 19
+*17#19
+5
+17/19 X
+Valoarea implicită este 3 zecimale
+ Sign2 Un octet de semn.
+o Daca semnul este –, comanda este STORNO ;i are ca efect Stornarea partiala cu conditia ca Valaorea Vanzarii de pe bon (corespunzatoare cotei TVA din comanda) din care se storneaza valoarea din comanda, sa fie mai mare decat valoarea stornata, astfel incat rezultatul sa fie pozitiv (sau zero).
+ Percent acest parametru reprezintă valoarea procentului pentru reducere sau majorare, în funcție de semnul pus înaint (valori permise de la -99.99 la 99.99
+o Pentru reducere se transmite –xx.xx
+o Pentru majorare se transmite xx.xx
+o acest parametru este ignorat de comanda pentru CORECTARE
+ Abs acest parametru reprezintă reducerea sau majorarea.
+o Valoarea negativa reprezintă reducere valorică valorică și nu poate depășii valoarea din care se scade!
+o Acest parametru este ignorat de comanda de CORECTARE
+ NOTA: când se execută o CORECTARE a unei vânzări care conține si o reducere sau majorare, acestea se vor corecta automat, tipărindu-se separat pe bon.
+ MUnitString text cu maximum 5 caractere pentru Unitatea de Măsură
+ CommGr Numar Grupa (de la 1 la 100) – nu este obligatoriu. Daca va fi utilizat, trebuie activat in casa de marcat!
+ Denominator Este folosit pentru NUMITOR in cantitatea fractionara (Numaratorul este QTY). Nu este obligatoriu
+o Pentru cantitate fractionara, numaratorul si numitorul trebuie sa fie valori intregi, fara zecimale!
+AMEF tipărește următoarele:
+ Text 1 (denumire adițională – dacă există)
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 11 din 28
+ Text 2 Cantitate Unitate de măsură x Preț unitar preț total și simbol cotă TVA
+o Dacă informația din a doua linie depășește 38 caractere, Text 2 se va tipări pe o linie separată
+ Denumirea și prețul total se va afișa
+ Valoarea vânzării este adăugată la registrul de vânzări, pe cote TVA
+ Reducerea / Majorarea este tipărită pe o linie separată
+Comanda nu se execută dacă:
+o Nu există bon fiscal deschis
+o Este depășit numărul maxim de vânzări in bon (250)
+o Cota TVA este invalidă
+o S-a transmis o formă de plată
+50 (32h) CITIRE COTE TVA
+Date: [StartDate,EndDate]
+Răspuns: F – error
+P00.00,00.00,AA.AA,BB.BB,CC.CC,DD.DD,EE.EE,FF.FF,DDMMYY – daca există cote TVA programate
+P urmat de valorile cotelor TVA și data & ora programării / modificării.
+StartDate data de început a perioadei (DDMMYY) – 6 bytes.
+EndDate data de sfârșit a perioadei
+Daca EndDate nu este completat, se vor returna cotele TVA curente
+51 (33h) SUBTOTAL
+Date: <Print><Option>[,Percent |;Abs] [@VATnum]
+Răspuns: SubTotal,TaxN,TaxT,TaxA,TaxB,TaxC,TaxD,TaxE,TaxF
+ Print această opțiune trebuie să fie 0 – nu se tipărește valoarea sau 1 – se tipărește valoarea.
+ Option 0, 1 sau 2
+o 0 corespunde unei reduceri normale
+o 1 corespunde Reducere Specială 1 – valorică (se folosește și ;Abs)
+o 2 corespunde Reducere Specială 2 – valorică (se folosește și ;Abs)
+ Percent reprezintă valoare procent de reducere / majorare (depinde de semn) aplicat la subtotal
+ Abs reprezintă valoare reducere / majorare valorică (depinde de semn) aplicata la subtotal.
+ VATnum Cota TVA de la 1 la 8 corespunzand TVA A … TVA T
+ SubTotal reprezintă valoarea curentă pentru subtotal bon.
+ TaxN,TaxT,TaxA…TaxF reprezintă partea din reducere / majorare aplicată la subtotal bon care corespunde viecărei cote TVA (SCUTITE, A, B, C, D, E, F) folosită pe bonul respectiv. Atenție, ALTE TAXE nu pot fi afectate de reducere / majorare.
+AMEF calculează valoarea subtotal a tuturor înregistrărilot din bon.
+Dacă există Percent sau Abs , AMEF va calcula valorile din reducere / majorare corespunzătoare fiecărei cotă TVA folosită pe bon și va tipării aceste valori intr-o secțiune separată de linii intrerupte
+Daca exista @VATnum- discount-ul se va aplica doar pentru vanzarile cu cota TVA selectata
+Notă:
+- Nu este permisă introducerea și Percent și Abs – doar unul din câmpuri!
+- Este permisă doar o reducere / majorare pe bonul fiscal, după subtotal!
+52 (34h) INREGISTRARE VÂNZARE ȘI AFIȘARE PE AFIȘAJ EXTERN
+Date: Text]<Tab><TVA><[Sign]Price>[*[Sign2]<QTY>][,Percent]|;Abs][@MUnitString]
+Raspuns: Fără
+ Text Denumire articol vândut – maximum 38 caractere
+ Tab 09h (separator).
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 12 din 28
+ TaxGr cota TVA asociată articolului vândut – se folosește codul ASCII pentru simbol cotă TVA astfel: N 4Eh (Scutite) T 54h (alte taxe), A 41h , B 42h , C 43h , D 44h , E 45h , F 46h.
+ Sign Un octet pentru semn, ‘+’ sau ‘–‘. Pentru valoare negativă comanda este CORECTARE.
+o Comanda de CORECTARE trebuie sa fie identică cu cea de vânzare (aceleași valori pentru Text 2 (Text 1 nu este necesar) , același preț cu semn negativ, cota TVA și cantitatea)
+o Pentru executarea unei corecții, se verifică existența vânzarii identice cu corecția de la începutul bonului și până la sfârșit.
+o Când se execută corecția se tipărește un mesaj specific.
+ Price reprezinta prețul unitar din maximum 9 cifre.
+ QTY reprezintă cantitatea vândută maximum 9 cifre cu 0 … 5 zecimale incluse in cele 9 cifre
+o Cantitatea se trimite cu virgula fixă și trebuie programată casa de marcat nu numărul de zecimale corespunzător
+o Exemplu, dacă se programează cantitatea cu 5 zecimale, pentru cantitate 1 buc. se transmite 100000; dacă se programează cantitatea cu 3 zecimale, 1 buc se transmite 1000
+o Valoarea implicită este 3 zecimale
+ Sign2 Un octet de semn.
+o Daca semnul este –, comanda este STORNO ;i are ca efect Stornarea partiala cu conditia ca Valaorea Vanzarii de pe bon (corespunzatoare cotei TVA din comanda) din care se storneaza valoarea din comanda, sa fie mai mare decat valoarea stornata, astfel incat rezultatul sa fie pozitiv (sau zero).
+ Percent acest parametru reprezintă valoarea procentului pentru reducere sau majorare, în funcție de semnul pus înaint (valori permise de la -99.99 la 99.99
+o Pentru reducere se transmite –xx.xx
+o Pentru majorare se transmite xx.xx
+o acest parametru este ignorat de comanda pentru CORECTARE
+ Abs acest parametru reprezintă reducerea sau majorarea.
+o Valoarea negativa reprezintă reducere valorică valorică și nu poate depășii valoarea din care se scade!
+o Acest parametru este ignorat de comanda de CORECTARE
+ NOTA: când se execută o CORECTARE a unei vânzări care conține si o reducere sau majorare, acestea se vor corecta automat, tipărindu-se separat pe bon.
+ MUnitString text cu maximum 5 caractere pentru Unitatea de Măsură
+AMEF tipărește următoarele:
+ Text Cantitate Unitate de măsură x Preț unitar preț total și simbol cotă TVA
+o Dacă informația din a doua linie depășește 38 caractere, Text 2 se va tipări pe o linie separată
+o Denumirea și prețul total se va afișa
+o Valoarea vânzării este adăugată la registrul de vânzări, pe cote TVA
+o Reducerea / Majorarea este tipărită pe o linie separată
+ AMEF afișează numele articolului (Text) și valoarea vânzării
+ Dacă există reducere / majorare, după afișarea vânzării, se afișează reducerea / majorarea respectivă
+Comanda nu se execută dacă:
+o Nu există bon fiscal deschis
+o Este depășit numărul maxim de vânzări in bon (250)
+o Cota TVA este invalidă
+o S-a transmis o formă de plată – comanda 53 (35h)
+53 (35h) PLATA
+Date: [<Text1>][<LF><Text2>]<Tab>[[<Payment>] <[Sign]Amount>]
+Răspuns: <PCode><Amount1>
+ Text1 Text tipărit pe prima linie sub forma de plată, din maximum 38 caractere
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 13 din 28
+ LF 0Аh (separator).
+ Text2 Text tipărit pe a doua linie sub forma de plată, din maximum 38 caractere
+ Tab 09h (separator).
+ Payment Forma de plată. Acest parametru nu este obligatoriu. Daca nu există, se va aplica forma de plată NUMERAR. Forme de plată sunt:
+o ‘P’ NUMERAR;
+o ‘N’ CARD;
+o ‘C’ TICHET MASA
+o ‘D’ BON VALORIC
+o ‘B’ VOUCHER
+o ‘I’ CREDIT
+o ‘J’ METODE MODERNE DE PLATA
+o ‘K’ ALTE METODE 1 – programabilă;
+o ‘L’ ALTE METODE 2 – programabilă;
+o ‘M’ ALTE METODE 3 – programabilă;
+ Sign Nu este obligatoriu, Este permis doar + !
+ Amount Valoarea achitată de client pentru forma de plaăa specificată.
+ PCode un octet pentru răspuns astfel:
+o ‘F’ (45h) – fault (Eroare).
+o ‘D’ (44h) – daca valoarea achitată este mai mică decât valoarea rămasă de plată.
+o ‘R’ (52h) – dacă valoarea achitată este mai mare decât valoarea rămasă de plată. În acest caz se calculează REST și se include in răspuns ca Amount 1
+ Amount1
+o dacă PCode este R, reprezintă valoarea calculată pentru REST
+o dacă PCode este D, reprezintă valoarea rămasă de plată
+Când se executa prima comandă de PLATĂ din bon, se tipăresc următoarele linii:
+ TOTAL = valoarea calculată pentru total bon
+ Toitak TVA pe fiecare cotă TVA
+ Total TVA bon
+Nota:
+ Comanda nu se execută dacă nu există bon fiscal deschis.
+ Daca s-a executat o comanda de plată parțială, următoarea comandă nu poate fi decât tot o plată, până cand se achita tot bonul!
+54 (36h) TIPĂRIRE TEXT ÎN BONUL FISCAL
+Date: <Text>
+Răspuns: Fără date
+ Text Text tipărit imediat, dim maximum 38 caractere
+Comanda nu se execută dacă:
+ Nu există bon fiscal deschis
+Dacă exista mai mult de 38 de caractere in Text, acestea sunt ignorate, tipărindu-se doar 38 caractere.
+56 (38h) ÎNCHIDE BON FISCAL
+DatE: Fără date
+Response: Allreceipt, FiscReceipt
+ Allreceipts este contorul pentru toate documentele tipărite, fiscale și nefiscale (4 octeti) , de la ultimul raport Z
+ FiscReceipt Număr bon fiscal (4 octeți) – contor resetat de raportul Z
+Când se execută comanda, AMEF tipărește:
+ Numărul bonului fiscal, data și ora
+ Mesajul final, dacă este programat
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 14 din 28
+ Logotipul și seria fiscală
+ Textul centrat BON FISCAL.
+Comanda nu se execută dacă:
+ Nu există bon fiscal deschis
+ Nu s-a executat plata integrală a valorii bonului fiscal
+57 (39h) TIPĂRIRE INFORMAȚII CLIENT (CODUL FISCAL)
+Date: <Tab><Tab><Tab><Client><Tab><CUI><Tab><Address>
+Răspuns: Fără date
+Tab 09h separator
+Client Nume client – maximum 38 caractere
+CUI CUI C.F. sau C.I.F. client
+Address Adresa clientului – maximum 38 caractere
+Această comandă se va transmite înaintea comenzii de deschidere bon fiscal, și în comanda de deschidere bon fiscal trebuie adăugată opțiunea ”I” !
+58 (3Ah) VÂNZARE PLU (programat în casa de marcat)
+Date: <[Sign]PLU>[*[Sign2]<QTY>][,Percent][@<Price>]
+Răspuns: Fără date
+Sign Un octet care conține codul ASCII pentru ‘+’ sau ‘–‘. Dacă Sign este ’–’, este o comandă pentru corectare vânzare PLU.
+ Pentru executarea corecției trebuie să existe o vânzare PLU cu comanda 58h cu același număr PLU, aceeași cantitate și preț unitar;
+o AMEF verifică prezența vânzarii PLU de la începutul bonului fiscal și până la finalul bonului.
+o Cînd se execută comanda de corecție, messajul CORECTARE este tipărit pe o linie separată
+PLU cod PLU.
+QTY Cantitate PLU. Nu este obligatoriu
+ Maximum 9 cifre care includ numărul maxim de zecimale programat (3 zecimale implicit, dar se pot programa de la 1 la 5 zecimale pentru cantitate)
+ în lipsă se consideră cantitate.
+Sign2 Un octet de semn.
+ Daca semnul este –, comanda este STORNO ;i are ca efect Stornarea partiala cu conditia ca Valaorea Vanzarii de pe bon (corespunzatoare cotei TVA din comanda) din care se storneaza valoarea din comanda, sa fie mai mare decat valoarea stornata, astfel incat rezultatul sa fie pozitiv (sau zero).
+Percent acest parametru reprezintă valoarea procentului pentru reducere sau majorare, în funcție de semnul pus înaint (valori permise de la -99.99 la 99.99
+ Pentru reducere se transmite –xx.xx
+ Pentru majorare se transmite xx.xx
+ acest parametru este ignorat de comanda pentru CORECTARE
+NOTA: când se execută o CORECTARE a unei vânzări care conține si o reducere sau majorare, acestea se vor corecta automat, tipărindu-se separat pe bon.
+Price reprezintă prețul unitar, dacă PLU respectiv este programat cu opțiunea Preț Liber.
+Când se execută comanda,
+ AMEF tipărește următoarele:
+o Nume PLU Cantitate Unitate de măsură x Preț unitar preț total și simbol cotă TVA
+o Dacă informația din a doua linie depășește 38 caractere, Text 2 se va tipări pe o linie separată
+ Valoarea vânzării este adăugată la registrul de vânzări, pe cote TVA
+ Reducerea / Majorarea este tipărită pe o linie separată
+ AMEF afișează numele PLU și valoarea vânzării
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 15 din 28
+ Dacă există reducere / majorare, după afișarea vânzării, se afișează reducerea / majorarea respectivă
+Comanda nu se execută dacă:
+o PLU cu codul din comandă nu este programat în AMEF
+o Nu există bon fiscal deschis
+o Este depășit numărul maxim de vânzări in bon (250)
+o Cota TVA este invalidă
+o S-a transmis o formă de plată
+61 (3Dh) PROGRAMARE DATA ȘI ORA
+Date: <ZZ-LL-AA><space><HH:MM:SS>
+Răspuns: Fără date
+Nu este permisă programarea datei / orei anterior datei / orei ultimei înregistrări din MF
+Comanda este obligatorie după un Reset RAM
+Comanda se execută doar după efectuarea raportului fiscal Z
+62 (3Eh) CITIRE DATA ȘI ORA PROGRAMATE ÎN AMEF
+Date: Fără date.
+Response: <ZZ–LL–AA><Space><HH:MM:SS>
+Data si ora curente, din AMEF, sunt transmise în răspuncul AMEF.
+64 (40h) CITIRE ULTIMELE ÎNREGISTRĂRI DIN MF
+Data field: Fără date
+Response: Number,TaxN,TaxT ,TaxA,TaxB,TaxC,TaxD,TaxE,TaxF,Date
+Number reprezintă numărul Ănregistrării din MF – 4 octeți.
+TaxN,TaxT,TaxA,..TaxF Reprezintă total pe fiecare cotă TVA conform categoriilor N (SCUTITE) , T (ALTE TAXE), A, B, C, D, E, F.
+Date data înregistrării Z Z L L AA
+65 (41h) CITIRE TOTALURI NET PE COTE TVA PENTRU ZIUA CURENTA
+Date: Fără date
+Răspuns: NetTaxN,NetTaxT,NetTaxA,NetTaxB,NetTaxC,NetTaxD,NetTaxE,NetTaxF
+NetTaxN, NetTaxT, NetTaxA… NetTaxF valorile nete corespunzând fiecărei cote TVA, acumulate de la ultimul raport Z până în momentul executării comenzii.
+67 (43h) CITIRE TOTALURI ZILNICE PENTRU ZIUA CURENTA
+Date: Fără date
+Răspuns: Zrate,NegTotal,Refund,Paid,FiscReceipt,AllReceipt
+Zrate Total vânzari pe cota TVA ALTE TAXE.
+NegTotal Total CORECȚII.
+Refund Total stornări
+Paid Total Plată Numerar.
+Allreceipts Contorul pentru toate documentele tipărite, fiscale și nefiscale, de la ultimul raport Z
+FiscReceipt Număr bon fiscal (4 octeți) – contor resetat de raportul Z
+68 (44h) CITIRE NUMĂR RAPOARTE Z LIBERE ÎN MF
+Date: Fără date
+Răspuns: Logical, Physical
+Logical Numarul de rapoarte Z libere in MF
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 16 din 28
+Physical Se repeta acelasi numar
+69 (45h) RAPORT ZILNIC , RAPORT PERIODIC
+Date: [Option[N]]
+Răspuns: Closure,TotalN,TotalT,TotalA,TotalB,TotalC,TotalD,TotalE,TotalF
+Option Acest parametru nu este obligatoriu si specifica tipul de raport. Valoarea implicita este 0.
+= ‘0’ sau ‘1’ – raport fiscal Z
+= ‘2’ sau ‘3’ – raport X
+N daca este prezent, precizeaza ca raportul operatori nu se sterge
+Closure Numarul raportului fiscal Z inregistrat in MF – 4 cifre.
+TotalN,TotalT,TotalA,…TotalF total zilnic pe fiecare cota TVA N, T, A, B, C, D, E, F
+70 (46h) INTRODUCERE SOLD INIȚIAL / SCOATERE SUME DIN SERTAR
+Date: <[Sign]Amount>, [OpNumber] ,[Text]
+Răspuns: Code,CashSum,ServIt,ServOut
+Sign Semn (+ sau -)
+ Nici un semn sau semnul + reprezintă introducere sume în sertar
+ Semnul – reprezinta plata unor sume din sertar
+Amount Suma care trebuie inregistrată.
+OpNumber Număr operator (de la 1 la 10). Dacă nu este specificat, se alege implicit operator nr. 10.
+Text Text reprezentând Motivul Operațiunii sau alte informații.
+Code
+ ‘P’ – comanda este executată.
+ ‘F’ – comanda este respinsă. Motivul respingerii poate fi:
+o Suma introdusă pentru ”Plată din sertar”este mai mare decât numerar în sertar
+o Există un bon fiscal sau nefiscal deschis
+CashSum Valoarea Numerar în sertar disponibilă. Această valoare este redusă cu fiecare plată din sertar sau este marită cu fiecare introducere în sertar precum și cu incasările în numerar..
+ServIt Valoarea totală zilnică a sumelor introduse în sertar
+ServOut Valoarea totală zilnică a sumelor plătite din sertar
+72 (48h) FISCALIZARE
+Date: <SerialECR>,< TaxNo>
+Răspuns: ErrCode
+SerialECR Seria Fiscală
+TaxNo Cod fiscal / Cod îdentificare fiscală utilizator
+ Se verifică bitul de stare 5.3 pentru executarea cu succes a comenzii
+ErrCode Cod eroare sau 'P' pentru executare comandă cu succes.
+ Cod erori:
+1 – AMEF este deja fiscalizata;
+2 – Nu este programată Seria Fiscală;
+3 – Seria fiscală introdusă in comandă diferă de seria programată;
+4 – Există bon fiscal / nefiscal deschis;
+5 – Trebuie emise raportul fiscal Z si rapoarte periodice
+8 – Data și ora nu sunt programate.
+După fiscalizarea cu succes AMEF tipărește câteva bonuri nefiscale cu următoaterele informațiiȘ
+ Initializarea MF cu data și ora
+ Inițializare DMJE cu numar, data si ora
+ Bon fiscal TEST
+ Raport fiscal Z TEST.
+73 (49h) RAPORT MF DETALIAT DUPĂ NUMĂR Z
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 17 din 28
+Date: <StartNum>,<EndNum>
+Răspuns: Fără date
+StartNum Număr Z început perioadă (maximum 4 cifre).
+EndNum Număr Z sfârșit perioadă (maximum 4 cifre).
+Se tipărește raportul MF detaliat pentru perioada aleasă
+.
+74 (4Ah) STARE AMEF
+Date: <Mode>
+Răspuns: Fără date
+Mode Un octet, conținând:
+ ‘W’ – după ce s-au tipărit toți registri.
+ ‘X’ – fără întârziere.
+Se verifică Stare AMEF din mesajul de răspuns.
+76 (4Ch) STARE BON FISCAL
+Date: [Option]
+Răspuns: Open,Items,Amount, Paid
+Option ‘T’
+ dacă este prezentă opțiunea T , în răspuns va fi transmisă valoarea totală a bonului pentru plată
+ dacă nu exista opțiunea, răspunsul nu include valoarea plătită
+Open ‘1’ – există un bon fiscal sau nefiscal deschis;
+‘0’ – nu există bon fiscal / nefiscal deschisno open receipt.
+Items Numărul de vânzari din bonul curent
+Amount Valoarea totală a bonului curent.
+Paid Valoarea plătită din total valoare bon curent.
+Această comandă furnizează aplicației de pe PC starea bonului fiscal pentru eventuale refaceri sau continuare după o întrerupere a tipăririi bonului curent - de exemplu când apare o întrerupere de alimentare sau hârtie în timpul tipăririi
+79 (4Fh) RAPORT MF SUMAR DUPĂ DATĂ
+Date: <StartDate>,<EndDate>
+Răspuns: Fără date
+StartDate Data de început perioadă raportare (DDMMYY)
+EndDate Data de sfârșit perioadă raportare (DDMMYY)
+83 (53h) PUNCT ZECIMAL CANTITATE (numar zecimale si optiuni)
+Date: <Res1>< Res2><Res3> ,<Res4>,<Decimals><Options >
+Răspuns: Fără date
+Res1…Res3 Campuri rezervate (mereu 0)
+Res4 Nume rezervat (mereu 0)
+Decimals Numar zecimale (de la 2 la 5)
+Options Punctul zecimal folosit la cantitati, daca nu se introduce punctul zecimal.
+0 – doua zecimale indifferent de numarul de zecimale programat
+1 – virgula mobilA – pentru zecimale trebuie sa folosesc punctul zecimal
+2 – numarul maxim de zecimale programat
+Exemplu: 000 ,0,052 numar maxim zecimale 5 si optiune 2
+Nota: Atentie, este un spatiu dupa primele 3 campuri.
+84 (54h) TIPĂRIRE COD BARE
+Date: <Type>,<Data>,<PrnText>
+Răspuns: Fără date
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 18 din 28
+Type Tip cod bare: 1 = EAN 8, 2 = UPC-A, 3 = EAN 13
+Data Codul (de sub codul de bare)
+PrnText Un octet reprezentând activare (1) sau dezactivare (0) tipărire cod (text) sub codul de bare
+Notă: Înălțimea codului de bare se transmite în comanda 43 (2Bh)
+90 (5Ah) INFORMAȚII AMEF
+Date: <Calculate>
+Răspuns: < FwRev ><Space>< FwDate ><Space>< FwTime >,<ChSum>,<Country>,<Sw>,<ECRnum>
+Calculate Dacă are valoarea ‘1’, se calculează Check Sum pentru FW
+FwRev Versiunea de FW (6 caractere).
+Space 20h (1 byte).
+FwDate Data versiune FW – MM DD YYYY.
+Space 20h (1 byte).
+FwTime Ora versiune FW – HH:MM:SS.
+ChSum Valoarea Check Sum (4 caractere, hexadecimal string).
+Sw 4 bytes 0. (0000)
+Country Cod țară – un octet - 09 pentru Romania
+ECRnum Serie Fiscală AMEF (10 digits)
+91 (5Bh) PROGRAMARE SERIE FISCALĂ AMEF
+Date: <Country>,<ECRnum>,<Res>
+Răspuns: Result, CountryStr
+Country un octet - 09 pentru Romania
+ECRnum Serie Fiscală AMEF (10 digits)
+Result
+ ‘P’ – programare finalizată cu succes
+ ‘F’ – eroare;
+Res 0 (Rezervat)
+CountryStr Nume Țară (text)
+94 (5Eh) RAPORT MF DETALIAT DUPĂ DATĂ
+Date: <StartDate>,<EndDate>
+Răspuns: Fără date
+StartDate Dată început interval raportare (6 caractere DDMMYY)
+EndDate Dată sfârșit interval raportare (6 caractere DDMMYY)
+95 (5Fh) RAPORT MF SUMAR DUPĂ NUMĂR Z
+Date: <StartNum>,<EndNum>
+Răspuns: Fără date
+StartNum Număr Z început perioadă (maximum 4 cifre).
+EndNum Număr Z sfârșit perioadă (maximum 4 cifre).
+96 (60h) PROGRAMARE COTE TVA
+Date: <TaxA>,<TaxB>,<TaxC>,<TaxD>,<TaxE>,<TaxF>
+Răspuns: Result
+TaxA… TaxF Cotele TVA incluzând 2 zecimale după punctul zecimal  ХХ.ХХ.
+valoarea -1.00 se folosește pentru cotele TVA dezactivate
+Result Un octet conținând:
+ ‘P’ – fără eroare.
+ ‘F’ – eroare transmitere.
+Această comandă se folosește pentru programarea cotelor TVA.
+Este necesară emiterea Raportului Fiscal Z înaintea trasmiterii comenzii (comanda 106h).
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 19 din 28
+Modificarea cotelor TVA se poate face de maximum 30 ori
+97 (61h) CITIRE COTE TVA
+Date: Fără date
+Răspuns: TaxA,TaxB,TaxC,TaxD,TaxE,TaxF
+TaxA… TaxF Tax Cotele TVA programate în AMEF.
+99 (63h) CITIRE SERIE FISCALĂ ȘI COD FISCAL
+Date: Fără date
+Răspuns: FN
+FN Seria fiscală
+101 (65h) PROGRAMARE PAROLĂ OPERATOR
+Date: <OpNumber>,<OldPsw>,<NewPsw>
+Răspuns: Fără date
+OpNumber Număr operator (1 ÷ 10)
+OldPsw Parola veche (maximum 6 caractere)
+NewPsw Parola nouă (maximum 6 caractere)
+102 (66h) PROGRAMARE NUME OPERATOR
+Date: <OpNumber>,<Password>,<Name><Tab>[<Options>]
+Răspuns: Fără date
+OpNumber Număr operator de la 1 la 10
+Password Parolă (maximum 6 caractere).
+Name Nume Operator – maximum 38 caracere
+Tab 09h
+Options de la 1 la 127 (7 bits b1b2b3b4b5b6b7) stabilirea drepturilor de utilizare funcționalități:
+ b1 acces RAPOARTE Z
+ b2 acces RAPOARTE X
+ b3 permite STORNARE
+ b4 permite ANULARE BON
+ b5 permite MAJORARE
+ b6 permite REDUCER
+ b7 permite CORECTARE
+ Exemplu:
+103 (67h) INFORMAȚII BON FISCAL
+Date: Fără date
+Răspuns: CanVoid, TaxN,TaxT,TaxA,TaxB,TaxC,TaxD,TaxE,TaxF,Invoice,InvoiceNum
+Opțiune (zecimal)
+Opțiune (Binar)
+Operatiuni permise
+7
+111
+Operatorul are permisiunea de a efectua doar Majorare, Reducere si Corectare
+8
+1000
+Operatorul poate efectua doar Anulare Bon
+31
+11111
+Operatorul are permisiunea de a efectua Stornare, Aulare Bon, Majorare, Reducere si Corectare.
+Nu poate accesa RAPOARTE X si RAPOARTE Z
+127
+1111111
+Operatorul are toate drepturile
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 20 din 28
+CanVoid Valoarea 1 = corectarea este permisă, valoare 0 = corectare nepermisă.
+TaxN, TaxT, TaxA… TaxF Sumele din bonul curent, pe fiecare cotă TVA (N, T, A, B, C, D, E, F).
+Invoice are valoarea 0 pentru Versiunea Romania
+InvoiceNum are valoarea 0000000000 pentru Versiunea Romania
+104 (68h) RAPORT Z PENTRU UN OPERATOR
+Date: <Operator>,<Password>
+Răspuns: Fără date
+Operator Număr operator (1 la 10).
+Password: Parolă operator (maximum 6 caractere)
+Notă: Regiștrii raportului pe operatorul selectat sunt goliți fără tipărirea raportului
+Comanda nu se execută dacă parola este incorectă
+105 (69h) RAPORT OPERATORI
+Date: Fără date
+Răspuns: Fără date
+AMEF tipărește raportul detaliat pentru fiecare operator.
+106 (6Аh) DECHIDE SERTAR BANI
+Date: [<mSec>]
+Răspuns: Fără date
+mSec reprezintă durata impulsului aplicat pe solenoid sertar, in ms (5 – 150)
+Această comandă este folosită pentru programarea unei noi durate a impulsului pentru deschidere sertar. Dacă nu este specificată valoarea, valoarea implicită este 80ms.
+107 (6Bh) PROGRAMARE ȘI CITIRE PLU
+Date: <Option> [Data]
+Răspuns: Result[,Data]
+Option un octet pentru stabilire tip operațiune. Valori posibile: ‘P’, ‘D’, ‘R’, ‘F’, ‘N’
+ ‘P’ – programare
+ ‘D’ – Ștergere
+ ‘R’ – citire PLU programate
+ ‘F’ – cerere transmitere primul PLU
+ ‘N’ – trimitere date urmîtorul PLU
+ ‘C’ – trimitere date urmîtorul PLU
+ ‘P’ – programare PLU
+Date:
+<VAT><PLUNum>,<Price>,<Max>,<Name><LF>[<BC[,<Dept>[,<QTYoption>[,<Stock>
+[,<Group>[,<Last>[,<FreePrice>[,<MUnit> [,<Res1>,[<Code>]]]]]]]]]]
+Exemplu: PA1,10.00,200.00,art_01\n3800000600609,1,1,0.000,1,0,0,1
+VAT cota TVA (‘N’, ‘T’, ‘A’,’B’,’C’,’D’,’E’,’F’)
+PLUNum Cod PLU
+Price Preț unitar PLU (pentru PLU cu preț liber activat)
+Max.price Limită maximă valoare vânzare (preț x cantitate)
+Name Nume PLU – maximum 38 caractere
+LF 0Ah
+BC Cod Bare asociat
+Dept Cod Departament asociat
+QTYoption Un octet pentru tip cantitate fracționară: ‘1’ – permisă., ‘0’ – nepermisă.
+Stock Cantitate disponibilă în stoc (maxim 999999.999).
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 21 din 28
+Group Cod Grupă asociată de la 1 la 99
+Last Un octet pentru vânzare unică: ‘1’ activat, ‘0’ dezactivat
+FreePrice Un octet pentru Preț Liber: ‘1’ activat, ‘0’ dezactivat
+MUnit Cod Unitate de măsură: de la 1 la 10 (conform comandă programare UM 149 (95h)
+Res câmp rezervat
+Code Cod statistic PLU
+ Programarea PLU necesită emiterea raportului Z PLU !
+ Numărul PLU neprogramate încă este inclus în Result = răspuns la comandă.
+ ‘D’ – Ștergere programari PLU
+Date: <D><A > sau <D><PLU> sau <D><PLU1,PLU2>
+o A toate PLU cu valoare vânzări = zero sunt șterse.
+o PLU PLU selectat este șters dacă nu are vânzări.
+o PLU1,PLU2 PLU din interval care nu au vânzări sunt șterse.
+ ‘R’ – citire PLU programate
+Date: <R><PLU>
+Răspuns: <P>,<PLU>, <Date>, <VAT>,<SPrice>,<Max>,<Amount>, <Res1>, <Total>, <Res2><Name><LF><BC>,<Dept>,<QTYoption><Stock><Group><Last> <FreePrice>,<MUnit>, <Code>
+PLU cod PLU
+Date Data și ora programării PLU
+VAT cota TVA (‘N’, ‘T’, ‘A’,’B’,’C’,’D’,’E’,’F’)
+SPrice Preț unitar PLU (pentru PLU cu preț liber dezactivat)
+Max Limită maximă valoare vânzare (preț x cantitate)
+Amount Cantitate vândută
+Res1 Rezervat
+Total Valoare totală
+Res2 Rezervat
+Name Nume PLU – maximum 38 caractere
+LF 0Ah
+BC Cod bare
+Dept Cod Departament asociat
+QTYoption Un octet pentru tip cantitate fracțoonară: ‘1’ – permisă., ‘0’ – nepermisă.
+Stock Cantitate disponibilă în stoc (maxim 999999.999).
+Group Cod Grupă asociată de la 1 la 8
+Last Un octet pentru vânzare unică: ‘1’ activat, ‘0’ dezactivat
+FreePrice Un octet pentru Preț Liber: ‘1’ activat, ‘0’ dezactivat
+MUnit Cod Unitate de măsură: de la 1 la 10 (conform comandă programare UM 149 (95h)
+Code Cod statistic PLU
+ Programarea PLU necesită emiterea raportului Z PLU !
+ Numărul PLU neprogramate încă este inclus în Result = răspuns la comandă.
+Dacă codul PLU nu este programat (găsit) Result are valoarea ‘F’.
+ ‘F’ – cerere transmitere date, cu privire la primul PLU programat care este găsit în memoria AMEF
+Date: <F>
+• "N" - trimiterea datelor referitoare la următorul PLU programat care este găsit în memoria AMEF
+Data: <N>
+Răspunsul când opțiunea este "F" sau "N" este similară cu răspunsul pentru opțiunea "R".
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 22 din 28
+Rezultat: un octet
+"P" - executarea cu succes
+"F" - comanda nu este executată
+which is found in the device memory
+ ‘C’ – Sterge vanzari pentru PLU selectat / interval PLU selectat
+Date: <C><StartN>,<EndN>
+StartN Numaru primuluil PLU din interval
+EndN Numarul ultimului PLU din interval
+Nota : Exista si o posibilitate de a sterge vanzarile tuturor PLU daca StartN are valoarea mai mare decat EndN. Exemplu, Daca in campul Date este C1,3 se vor sterge vanzarile pentru PLU din intervalul 1 la 3. Dac in campul Date este C3,1, se sterg vanzarile pentru toate PLU existente in baza de date.
+108 (6Ch) RAPORT FISCAL ZILNIC & RAPORT PLU
+Data field: [<Option>[N]]
+Response: Closure,TotaN,TotalT,TotalA,TotalB,TotalC,TotalD,TotalE,TotalF
+Comanda este similară ci comanda 69 (45h) RAPORT ZILNIC dar Raportul Zilnic este urmat de Raportul PLU. Când raportul zilnic este RAPORT Z (cu ștergerea regiștrilor), și raportul PLU este Z PLU
+109 (6Dh) COPIE NEFISCALĂ BON FISCAL
+Data field: <Count>
+Răspuns: Fără date
+Count are valoarea 1 pentru compatibilitate cu aplicațiile mai vechi.
+AMEF tipărește o copie a ultimului bon fiscal, cu condiția să nu se fi emis un Raportl Fiscal Z după ultimul bon fiscal.
+110 (6Eh) CITIRE TOTALURI ZILNICE PE FORME DE PLATĂ 1, 2 și 3
+Date: Fără date
+Răspuns: Cash, Pay1, Pay2, Pay3, Closure, Receipt
+Cash Valoarea achitată cu NUMERAR
+Pay1, ..,Pay3 Valoarea achitată corespunzător fiecărei forme de plată
+Closure Numărul ultimului raport fiscal Z
+Receipt Numărul ultimului bon fiscal
+111 (6Fh) RAPORT PLU
+Data field: <RepType>
+Response: Code
+RepType
+‘0’ – Raport vânzări PLU
+‘1’ – Datele programate pentru PLU
+Code ‘P’ sau ‘F’
+"P" - executarea cu succes
+"F" - comanda nu este executată
+Toate PLU sunt sortate după codul PLU.
+112 (70h) INFORMAȚII VÂNZĂRI PE OPERATOR
+Date: <OpNum>
+Răspuns: Receipts,Total,Discount,Mark-up,Void,Name
+ OpNum Număr operator (1 … 10).
+ Receipts Numărul bonurilor fiscale emise te operatorul respectiv.
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 23 din 28
+ Total Numărul vânzărilor și total valoare, separate prin ‘:’.
+ Discount Numărul reducerilor și totalul acestora, separate prin ‘:’.
+ Mark-up Numărul majorărilor și totalul acestora, separate prin ‘:’.
+ Void Numărul corecțiilor și totalul lor, separate prin ‘:’.
+ Name Nume operator.
+113 (71h) CITIRE NUMĂRUL ULTIMULUI DOCUMENT TIPĂRIT
+Date: Fără date
+Răspuns: DocNum
+DocNum Numărul documentului (8 cifre)
+114 (72h) CITIRE ÎNREGISTRĂRI IN MF
+Data field: <FiscNum>[,Option[,FiscNum1]]
+Response: Code, TaxN,TaxT,TaxA,TaxB,TaxC,TacD,TaxE,TaxF,
+FiscNum Numărul primei înregistrări din MF selectate pentru perioada de raportare
+Option Precizează tipul informației solicitate pentru a fi transmisă
+ ‘0’ sau ‚4’– Totaluri pentru fiecare cotă TVA
+ ‘1’ sau ‚5’– Total NET pentru fiecare cotă TVA
+ ‘2’ sau ‚6’ – Total TVA pentru fiecare cotă TVA
+ ‘3’ – cote TVA
+FiscNum1 Numărul ultimei înregistrări din MF selectată pentru perioada de raportare
+Code Un octet conținând:
+‘P’ – date valide;
+‘F’ – inregistrări eronate; valoarea check sum calculată este diferită de cea din înregistrare;
+‘E’ – nu există înregistrări.
+TaxN,TaxT,TaxA,..,TaxF Total sume sau cotă TVA, în funcție de opțiune.
+AMEF transmite datele citite din MF
+115 (73h) PROGARMARE LOGO GRAFIC
+Data field: <Number>,<Data>
+Răspuns: Fără date
+Number Numărul liniei din Logo Grafic care se programează (- … 144).
+Data Datele din linia Logo Grafic care se programează.
+Comanda se execută de 144 ori (144 linii) pânp se programareză toate liniile Logo Grafic.
+Tipărireea Logo Grafic este activată prin comanda 43 (2Bh).
+Logo Grafic este tipărit la începutul fiecărui document, înainte de antetul fiscal
+.
+128 (80h) CITIRE PARAMETRI AMEF
+Date: Fără date
+Răspuns: <P1>,< P2>,<.....>,<P28>
+ P1 Dimensiunea Logo Grafic pe orizontală (număr pixeli pe linie)
+ P2 Dimensiunea Logo Grafic pe verticală (număr pixeli = număr linii)
+ P3 Număr forme plată
+ P4 Număr cote TVA
+ P5 Prima cotă TVA care poate fi modificată
+ P6 Neutilizat
+ P7 Neutilizat
+ P8 Lungime pentru operațiuni de calcul aritmetic intern
+ P9 Număr caractere pe linie
+ P10 Lungime (număr caratere) linii text
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 24 din 28
+ Р11 Număr caractere denumiri: Operator, PLU, departamente
+ Р12 Număr caractere Serie Fiscală
+ Р13 Rezervat
+ Р14 Număr cote TVA
+ Р15 Rezervat
+ Р16 Număr departamente
+ Р17 Număr PLU
+ Р18 Activare Stoc PLU (0,1)
+ Р19 Activare Cod Bare PLU (0,1)
+ Р20 Număr grupe
+ Р21 Număr operatori.
+ Р22 Retur (0 = nepermis pentru Romania)
+ Р23 Număr unități de măsură
+ Р24 Număr maxim tranzacții în bonul fiscal
+ P25 Număr linii pe afișajul extern
+ Р26 Număr caractere pe linie pentru afișajul extern
+ P27 Rezervat
+ P28 Activare PLU legat / Cod statistic (0 – NU, 1 PLU legat, 2 – Cod Statistic, 3 – ambele)
+ P28 Număr clienți
+130 (82h) ANULARE BON FISCAL NEFINALIZAT
+Date: Fără date
+Răspuns: Fără date
+AMEF anulează bonul fiscal nefinalizat.
+131 (83h) PROGRAMARE ȘI CITIRE DEPARTAMENTE
+Date: <Option><Data>
+Răspuns: Result[,Data]
+Option un octet pentru definirea tipului de operațiune
+ ‘P’ – programare
+ ‘R’ - citire
+Result un octetl:
+ ‘P’ – comanda executată cu succes
+ ‘F’ – comanda nu este executată
+‘P’ – Programare departamente
+Data field: <P><DeptNum>,<Name><LF><VAT><Price>[,<Group>[,<Last> [,<DisabledFreePrice> [,<МUnit>]]]]
+DeptNum Număr departament
+Name Nume departament
+LF 09h
+VAT Cota TVA
+Price Preț programat
+Group Guupa (1 … 8)
+Last Activare Vânzare Unică (0 inactiv, 1 activ)
+DisabledFreePrice Activare Preț Liber (1 inactiv, 0 activ)
+MUnit Link Cod Unitate de măsură (1 … 10)
+Notă: Dacă exista vânzări într-un departament, trebuie efectuat Raport Fiscal Z înainte de programare
+‘R’ – citire date programate pe departamente
+Data field: <R><DeptNum>
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 25 din 28
+Response: <P>,<DeptNum>,<Name><LF><VAT>,<Price>,<Quantity>,<Total>,<Group>, <Last>, <QTYoption>,<DisabledFreePrice>,<МUnit>
+Descrierea din Răspuns este aceeași cu cea pentru programare, la care se adaugă:
+Quantity Cantitate vîndută
+Total Total vânzări pe departament
+QTYoption 1 sau 0 (dezactivat / activat cantitate cu zecimale)
+Dacă nu există departamentul solicitat pentru citire, se returnează ‘F’.
+132 (84h) Programare tabel coduri Afișaj Extern
+Date: <BgnAddr>,<TblData[32]>
+Răspuns: Fără date
+BgnAddr Adresa inițială – sunt acceptate doar următoarele valori: 80, A0, C0 sau E0
+TblData[32] Datele programate – 32 octeti hexazecimal – 2 octeti pentru fiecare date de programat
+133 (85h) Configurare funcționare Afișah Extern
+Date: <Len>, <Row>,<CmdNo>,<CmdEnbl><CmdData[10]>
+Răspuns: Fără date
+Len Numărul de caractere pe linie pentru afișajul extern
+Row Numărul de linii
+CmdNo Fiecare comandă este o secvență de 10 octeti care va fi transmisă către Afișajul Extern în ordinea prezentată mai jos.Comanda 4 este transmisă după transmiterea primei linii, Comanda 5 este transmisă după transmiterea liniei a doua.
+CmdEnbl 1 = Comanda trebuie executată , 0 = Comanda nu trebuie executată
+CmdData[10] 10 octeți (comanda efectivă) în format hexazecimal, câte 2 simboluri pentru fiecare octet de date. Dacă este 0, trimiterea este optită
+138 (8Ah) ÎNREGISTRARE BACȘIȘ
+Data field: <Dept>@Amount
+Răspuns: Fără date
+Dept Cod departament – permis doar 8
+Amount Valoarea primită pentru BACȘIȘ
+Pentru a Înregistra un BACȘIȘ trebuie să existe bon fiscal deschis!
+Bonul pentru BACȘIȘ este de tip Vânzare Unică, adică se închide automat după vânzarea Bacșișului!
+Comanda de Vânzare Departamete nu se execută dacă:
+ Prețul este 0;
+ Este transmis preț liber, dar prețul liber pe departament este dezactivat
+ Nu există bon fiscal deschis;
+ Depășire număr maxim vânzări pe bon;
+ A fost efectuată o plată cu comanda 53 (35h)
+149 (95h) PROGRAMARE / CITIRE TEXTE UNITĂȚI DE MĂSURĂ ȘI FORME PLATĂ
+Data field: <Option><Data>
+Response: Depends on the Option
+Option un octet pentru tip operație:
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 26 din 28
+ ‘P’ – programare;
+ ‘R’ – citire date programate.
+‘P’ – programare texte forme plată și unități de măsură.
+Date: <P><FieldNum>,<Text>
+Răspuns: Fără date
+‘R’ – citire date programate.
+Date: <R><FieldNum>
+Răspuns: FieldNum, Data
+FieldNum Cod text : 0 … 11 ext field number - from 0 to 13 (dacă esxistă 4 forme de plată programabile sau 0 … 18 dacă există 9 forme de plată programabile
+- 0 … 9 reprezintă codul unității de măsură
+- 10 … 18 reprezintă codul fomei de plată
+- Unitățile de măsură permit maximum 5 caractere
+- Denumirea formei de plată – maximum 28 caractere
+Valorile implicite sunt
+FieldNum Default names
+Uități de măsură:
+0 fără
+1 kg
+2 g
+3 m
+4 m2
+5 m3
+6 l
+7 t
+8 kWh
+9 buc
+Forme de plată:
+10 CARD
+11 TICHET MASA
+12 BON VALORIC
+13 VOUCHER
+14 CREDIT
+15 NEW PAYMENT
+16 ALTE METODE 1
+17 ALTE METODE 2
+18 ALTE METODE 3
+172 (ACh) VITEZA DE COMUNICAȚIE
+Date: <SpeedPC>,<SpeedDisplay>
+Răspuns: No data
+SpeedPC o cifră de la 1 la 9 conform tabel de mai jos pentru PC
+SpeedDisplay o cifră de la 1 la 9 conform tabel de mai jos pentru Afișaj Extern
+Value
+Rate
+0 ÷ 2
+1200 b/s
+3
+2400 b/s
+4
+4800 b/s;
+5
+9600 b/s
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 27 din 28
+173 (ADh) SUME CORESPUNZĂTOARE FIECĂREI FORME DE PLATĂ
+Date: Fără date
+Răspuns: Cash, Pay1, Pay2, Pay3, Pay4, Pay5, Pay6, Pay7, Pay8, Pay9,Closure,Receipt
+Cash valoare NUMERAR
+Pay1 … Pay 9 valoare pentru fiecare formă de plată
+Closure Numărul ultimei înregistrări in MF (numărul raportului Z)
+Receipt Numărul bonurilor fiscale din ziua curentă
+184 (B8h) COMMODITY GROUPS
+Date: <OpType>Data
+Răspuns: Fara date
+OpType un octet pentru tip operatie – valori posibile P programare sau R citire
+‘P’ – Programare Grupe
+Date: <P><GrNum>,<Option><Name>
+Răspuns: Fara date
+‘R’ – Citire Grupe.
+Date: <R><GrNum>
+Răspuns: GrNum,Option,Name
+GrNum Numar Grupa
+Name Nume Grupa
+Option 1 = Grup activat 0 = Grup dezactivat
+186 (BAh) RAPORT MF RAM RESETS
+Date: Fără date
+Răspuns: No data
+AMEF tipărește raporul Reset RAM din MF
+187 (BBh) RAPORT MF MODIFICĂRI COTE TVA
+Date: Fără date
+Răspuns: Fără date
+AMEF tipărește raportul modificărilot cote TVA din MF
+196 (C4h) DAY OPEN - CHECK
+Data field: No data
+The first value in the response: 1/0 - Day open/not open
+224 (E0h) CHECK ECR FOR REQUEST COMMAND
+Data field: No data
+Response: flg,Qty,PLUId,number,money
+flg - 0 no request
+6
+19200 b/s
+7
+38400 b/s
+8
+57600 b/s
+9
+115200 b/s
+Succes M7 Service PROTOCOL DE COMUNICAȚIE
+Pagina 28 din 28
+flg - 1 PLU sale request is available - Qty - Requested quantity x.xxx, PLUId - PLU barcode
+flg - 2 reserved
+flg - 3 receipt open request - number – receiptNo //example: 3,,,rcpNo
+flg - 4 receipt cancel request - number – receiptNo //example: 4,,,rcpNo
+flg - 5 Subtotal request - PLUId - Subtotal sum //example: 5,,stlAmount
+flg - 6 Cash out request - money – sum //example: 6,,,,money
+flg - 7 Cash in request - money – sum //example: 7,,,,money
+flg - 8 Receipt close request Data – //Example: 8,,pType1,Amount1,pType2,Amount2, pType3,
+Amount3,pType4,Amount4,pType5,Amount5, pType6, Amount6, pType7,Amount7, pType8,Amount8,
+pType9,Amount9 pType10,Amount10,TotalPayAmount,RoundedAmount,rcpNo
+flg - 9 Day close request Data //Example: 9,,N,AmountN, T,AmountT, A,AmountA,B,AmountB,
+C,AmountC,D,AmountD,E, AmountE, F,AmountF, RefundAmount, StornoAmount,zNo
+225 (E1h) INPUT DATA
+Data field: charTokTaxLtr,DeptCode,PLUName\nPrice,MsrLink,Perc,Netto OutData: ResFlgResCode
+Response: No data
+InpData example: "PB1,Coca Cola 1.5L\n1235,10,-5.25,0"
+CharTok - 'P'if the requested PLU was found or 'E' – if it is not found
+TaxLtr - Tax category symbol 'A','B','C','D' etc.
+DeptCode - Department code
+PLUName - PLU name
+Price - Single price
+MsrLink - Measure unit index: 1 - "" , 2 - "kg.", 3 - "g." , 4 - "m.", 5 - "m2.", 6 - "m3.", 7 - "l."
+8 - "t." , 9 - "kwh", 10 - "buc"
+Perc - If different from zero, defines percent mark-up > 0 or discount < 0
+Neto - If different from zero, defines value mark-up > 0 or discount < 0
+227 (E3h) FUNCTION ENABLE
+Data field: Flag
+Response: No data
+Flag P/E P-Enable E-disable

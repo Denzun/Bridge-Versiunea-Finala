@@ -1,0 +1,14 @@
+BonFolder=D:\Projects\POS-Bridge-master\POS-Bridge-master 1\POS-Bridge-master\Distributie\POSBridge\Bon
+OperatorCode=1
+OperatorPassword=0000
+RunAtStartup=1
+ComPort=COM9
+BaudRate=115200
+DudePath=C:\Program Files (x86)\Datecs Applications\DUDE\DUDE.exe
+UseEthernet=0
+IpAddress=192.168.1.219
+TcpPort=9100
+DeviceType=Incotex
+ConnectionType=Serial
+DeviceSerialNumber=AUTO
+TenantCode=demo

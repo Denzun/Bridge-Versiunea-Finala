@@ -1,0 +1,8 @@
+POS Bridge E2E Local Report - 2026-02-11 12:41:02
+ScenarioSet=A
+ComPort=COM6, BaudRate=115200, OperatorCode=1
+WatchFolder=D:/Proiecte Cursor/POS Bridge/Bon/E2E_Run
+
+FAIL [A] ConnectionCheck (3.64s) - Failed to connect to device on COM6 at 115200 baud. Error: open_Connection failed: -33022 - Device not connected
+
+E2E suite finished: FAIL (1 failed scenario(s) of 1).

@@ -1,0 +1,146 @@
+<Window x:Class="POSBridge.WPF.PaymentRequiredWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Activare Necesară - POS Bridge" 
+        Height="450" Width="650"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Background="#FF1E1E1E">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40">
+            <!-- Icon -->
+            <TextBlock Text="&#xE785;" 
+                       FontFamily="Segoe MDL2 Assets" 
+                       FontSize="80" 
+                       Foreground="#FFE74C3C"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,25"/>
+            
+            <!-- Title -->
+            <TextBlock Text="ACTIVARE NECESARĂ" 
+                       FontSize="34" 
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+            
+            <!-- Subtitle -->
+            <TextBlock Text="Dispozitiv inregistrat automat. Asteapta activare manuala." 
+                       FontSize="16"
+                       Foreground="#FFB0B0B0"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,0"/>
+            
+            <!-- Status Message -->
+            <Border Background="#FF2D2D2D" 
+                    CornerRadius="8" 
+                    Padding="20" 
+                    Margin="0,25,0,0"
+                    MaxWidth="550">
+                <TextBlock x:Name="StatusMessage" 
+                           FontSize="14"
+                           Foreground="#FFE74C3C"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"/>
+            </Border>
+            
+            <!-- Device Info -->
+            <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center">
+                <TextBlock x:Name="SerialNumberText"
+                           FontSize="13"
+                           Foreground="#FF808080"
+                           HorizontalAlignment="Center"/>
+                <TextBlock x:Name="TenantText"
+                           FontSize="13"
+                           Foreground="#FF808080"
+                           HorizontalAlignment="Center"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+            
+            <!-- Instructions -->
+            <TextBlock Text="Dispozitivul a fost inregistrat automat si este in asteptarea activarii manuale de catre administrator."
+                       FontSize="14"
+                       Foreground="#FFB0B0B0"
+                       HorizontalAlignment="Center"
+                       Margin="0,30,0,0"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+            
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,35,0,0">
+                <Button x:Name="RetryButton"
+                        Content="Reîncearcă" 
+                        Width="130" 
+                        Height="42"
+                        Margin="0,0,15,0"
+                        Click="RetryButton_Click"
+                        Background="#FF0078D4"
+                        Foreground="White"
+                        FontSize="14"
+                        BorderThickness="0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="4"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF106EBE"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
+                <Button x:Name="ExitButton"
+                        Content="Ieșire" 
+                        Width="130" 
+                        Height="42"
+                        Click="ExitButton_Click"
+                        Background="#FF3C3C3C"
+                        Foreground="White"
+                        FontSize="14"
+                        BorderThickness="0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="4"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF505050"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+            
+            <!-- Footer -->
+            <TextBlock Text="POS Bridge © 2026 - Device Activation System"
+                       FontSize="11"
+                       Foreground="#FF606060"
+                       HorizontalAlignment="Center"
+                       Margin="0,30,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

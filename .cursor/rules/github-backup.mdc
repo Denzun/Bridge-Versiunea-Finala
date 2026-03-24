@@ -1,0 +1,14 @@
+---
+description: Regula pentru backup (transfer) în GitHub
+alwaysApply: true
+---
+
+# Backup către GitHub
+
+- Folosește Git pentru backup: `git status`, `git add`, `git commit`, `git push`.
+- Asigură-te că remote-ul corect este setat înainte de `push`.
+- Dacă se cere backup complet, include toate fișierele (inclusiv `bin/`, `obj/`, `Bon/`).
+- Cere o descriere scurtă pentru fiecare backup (mesaj de commit).
+- Oferă versionare opțională cu tag (ex: `v1.0.0`) și împinge tag-urile.
+- Dacă lipsesc `user.name` / `user.email`, cere utilizatorului să le seteze.
+- Confirmă la final URL-ul repo-ului și branch-ul împins.

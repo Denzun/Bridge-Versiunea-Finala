@@ -1,0 +1,5 @@
+{
+  "scenarioId": "A",
+  "name": "ConnectionCheck",
+  "description": "Validates device connection with COM/baud/operator credentials before GUI file scenarios."
+}

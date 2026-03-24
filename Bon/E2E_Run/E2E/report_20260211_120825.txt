@@ -1,0 +1,8 @@
+POS Bridge E2E Local Report - 2026-02-11 12:08:19
+ScenarioSet=B
+ComPort=COM6, BaudRate=115200, OperatorCode=1
+WatchFolder=D:\Proiecte Cursor\POS Bridge\Bon\E2E_Run
+
+FAIL [B] FiscalSuccess (0.73s) - Unexpected BONOK. Expected=1, Actual=0; ERRCODE=-102002; ERRINFO=DUDE COM Error -102002: Operator error: Wrong operator password
+
+E2E suite finished: FAIL (1 failed scenario(s) of 1).

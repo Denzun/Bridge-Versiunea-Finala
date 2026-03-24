@@ -1,0 +1,41 @@
+---
+description: Mod de distribuire POS Bridge - actualizare folder Distributie
+alwaysApply: false
+---
+
+# Distribuție POS Bridge
+
+## Comandă de publicare
+
+```bash
+dotnet publish POSBridge.WPF -c Release -r win-x86 --self-contained false -o "Distributie\POSBridge"
+```
+
+- **win-x86** obligatoriu (DUDE COM e 32-bit)
+- **--self-contained false** = framework-dependent (necesită .NET 8 Desktop Runtime x86 pe calculator țintă)
+
+## Fix System.IO.Ports (OBLIGATORIU)
+
+Pachetul NuGet `System.IO.Ports` poate copia un stub în rădăcina output-ului care aruncă "System.IO.Ports is currently only supported on Windows" pe unele calculatoare.
+
+**Soluție**: Target în `POSBridge.WPF.csproj` care copiază implementarea Windows după publish:
+
+```xml
+<Target Name="CopyWinPortsAfterPublish" AfterTargets="Publish">
+  <Copy SourceFiles="$(PublishDir)runtimes\win\lib\net8.0\System.IO.Ports.dll"
+        DestinationFiles="$(PublishDir)System.IO.Ports.dll"
+        Condition="Exists('$(PublishDir)runtimes\win\lib\net8.0\System.IO.Ports.dll')" />
+</Target>
+```
+
+## Structură Distributie
+
+- `Distributie\POSBridge\` - aplicația (exe + dll-uri)
+- `Distributie\DUDE\` - driver Datecs
+- `Distributie\INSTRUCTIUNI_INSTALARE.txt` - pași instalare + depanare
+
+## Pe calculator țintă
+
+- .NET Desktop Runtime 8.0 **x86** (nu x64)
+- Driver DUDE instalat
+- Port COM corect selectat

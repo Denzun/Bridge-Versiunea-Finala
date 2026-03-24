@@ -1,0 +1,10 @@
+POS Bridge E2E Local Report - 2026-02-11 12:37:05
+ScenarioSet=ABC
+ComPort=COM6, BaudRate=115200, OperatorCode=1
+WatchFolder=D:/Proiecte Cursor/POS Bridge/Bon/E2E_Run
+
+FAIL [A] ConnectionCheck (3.62s) - Failed to connect to device on COM6 at 115200 baud. Error: open_Connection failed: -33022 - Device not connected
+FAIL [B] FiscalSuccess - Skipped due to connection precheck failure: Failed to connect to device on COM6 at 115200 baud. Error: open_Connection failed: -33022 - Device not connected
+FAIL [C] ParserInvalidFile (120.30s) - Timeout waiting response file: D:/Proiecte Cursor/POS Bridge/Bon/E2E_Run\Raspuns\E2E_C_20260211_123713_726.txt
+
+E2E suite finished: FAIL (3 failed scenario(s) of 3).

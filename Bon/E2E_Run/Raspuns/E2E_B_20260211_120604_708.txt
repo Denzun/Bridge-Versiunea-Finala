@@ -1,0 +1,3 @@
+BONOK=0
+ERRCODE=-111024
+ERRINFO=DUDE COM Error -111024: Registration mode error: End of 24 hour blocking

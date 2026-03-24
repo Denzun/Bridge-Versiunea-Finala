@@ -1,0 +1,2 @@
+S^ARTICOL TEST^1^1000^buc^5^1
+P^1^1

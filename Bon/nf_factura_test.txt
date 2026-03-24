@@ -1,0 +1,35 @@
+TL^FACTURA
+TL^NR.  3 DIN 17.02.2026
+TL^-------------------------------
+TL^  MANDU MIHAI
+TL^ADRESA:
+TL^CNP____________________
+TL^
+TL^-------------------------------
+TL^PRODUSE
+TL^-------------------------------
+TL^CAPSUNI
+TL^10.0  X  1.0  =  10.0
+TL^-------------------------------
+TL^CIRESE
+TL^6.0  X  1.0  =  6.0
+TL^-------------------------------
+TL^KIWI
+TL^5.0  X  1.0  =  5.0
+TL^-------------------------------
+TL^MERE GALBENE
+TL^2.5  X  1.0  =  2.5
+TL^-------------------------------
+TL^TOTAL FARA TVA        21.17
+TL^TOTAL TVA             2.33
+TL^TOTAL DE PLATA        23.5
+TL^-------------------------------
+TL^NUMELE DELEGATULUI
+TL^  MANDU MIHAI
+TL^DATA 17.02.2026 10:45:57
+TL^SEMNATURA 
+TL^*
+TL^*
+TL^******************************
+TL^*
+TL^*

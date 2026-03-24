@@ -1,0 +1,198 @@
+=============================================================================
+  PLAN DE TESTARE: Funcționalități Cash In / Cash Out
+=============================================================================
+
+Data implementării: 16 Februarie 2026
+Funcționalitate: Introducere și Scoatere Numerar prin Folder Monitorizat
+
+=============================================================================
+MODIFICĂRI EFECTUATE:
+=============================================================================
+
+1. FolderWatcherService.cs:
+   - Adăugată metoda IsSpecialCommand() pentru detectarea comenzilor I^ și O^
+   - Modificată logica ProcessFileAsync() pentru a redirecționa comenzile speciale
+
+2. MainWindow.xaml.cs:
+   - Extins ProcessSpecialCommandAsync() pentru a procesa comenzile I^ și O^
+   - Adăugat parsing pentru valoare și validare
+   - Actualizat mesajul de log la pornirea monitorizării
+
+3. FiscalEngine.cs:
+   - Adăugată verificare pentru comenzi standalone CashIn/CashOut
+   - Comenzile I^ și O^ se execută FĂRĂ bon fiscal deschis
+   - Returnează mesaj de succes specific cu suma
+
+=============================================================================
+TESTE DE EXECUTAT:
+=============================================================================
+
+TEST 1: Cash In - Introducere Numerar
+--------------------------------------
+Pas 1: Creează fișier "test_cashin_100.txt" cu conținut: I^100.00^
+Pas 2: Copiază în folder Bon/
+Pas 3: Verifică:
+   ✓ Fișierul este procesat automat
+   ✓ Apare în jurnal: "Cash In: 100.00 lei"
+   ✓ Fișierul este mutat în Bon/Procesate/
+   ✓ Casa de marcat a înregistrat operațiunea
+
+REZULTAT AȘTEPTAT:
+   - Success: true
+   - ReceiptNumber: "Cash In: 100.00 lei"
+   - Operațiunea apare în raport X/Z
+
+
+TEST 2: Cash Out - Scoatere Numerar
+------------------------------------
+Pas 1: Creează fișier "test_cashout_50.txt" cu conținut: O^50.00^
+Pas 2: Copiază în folder Bon/
+Pas 3: Verifică:
+   ✓ Fișierul este procesat automat
+   ✓ Apare în jurnal: "Cash Out: 50.00 lei"
+   ✓ Fișierul este mutat în Bon/Procesate/
+   ✓ Casa de marcat a înregistrat operațiunea
+
+REZULTAT AȘTEPTAT:
+   - Success: true
+   - ReceiptNumber: "Cash Out: 50.00 lei"
+   - Operațiunea apare în raport X/Z
+
+
+TEST 3: Validare - Suma Zero
+-----------------------------
+Pas 1: Creează fișier "test_invalid_zero.txt" cu conținut: I^0^
+Pas 2: Copiază în folder Bon/
+Pas 3: Verifică:
+   ✓ Fișierul este procesat
+   ✓ Apare eroare în jurnal: "amount must be greater than 0"
+   ✓ Fișierul este mutat în Bon/Erori/
+   ✓ Se creează fișier .log cu eroarea
+
+REZULTAT AȘTEPTAT:
+   - Success: false
+   - ErrorMessage: conține "greater than 0"
+
+
+TEST 4: Validare - Valoare Invalidă
+------------------------------------
+Pas 1: Creează fișier "test_invalid_text.txt" cu conținut: I^abc^
+Pas 2: Copiază în folder Bon/
+Pas 3: Verifică:
+   ✓ Fișierul este procesat
+   ✓ Apare eroare în jurnal: "Invalid amount"
+   ✓ Fișierul este mutat în Bon/Erori/
+
+REZULTAT AȘTEPTAT:
+   - Success: false
+   - ErrorMessage: conține "Invalid amount"
+
+
+TEST 5: Validare - Format Incomplet
+------------------------------------
+Pas 1: Creează fișier "test_incomplete.txt" cu conținut: I^
+Pas 2: Copiază în folder Bon/
+Pas 3: Verifică:
+   ✓ Fișierul este procesat
+   ✓ Apare eroare în jurnal
+   ✓ Fișierul este mutat în Bon/Erori/
+
+REZULTAT AȘTEPTAT:
+   - Success: false
+   - ErrorMessage: conține "requires amount"
+
+
+TEST 6: Integrare - Comenzi Multiple în Serie
+----------------------------------------------
+Pas 1: Creează 3 fișiere:
+   - "serie1_cashin.txt": I^100^
+   - "serie2_cashout.txt": O^30^
+   - "serie3_cashin.txt": I^50^
+Pas 2: Copiază toate în folder Bon/ simultan
+Pas 3: Verifică:
+   ✓ Toate fișierele sunt procesate în ordine
+   ✓ Toate apar cu succes în jurnal
+   ✓ Toate sunt mutate în Bon/Procesate/
+   ✓ Comenzile apar în raport X
+
+REZULTAT AȘTEPTAT:
+   - Toate comenzile executate cu succes
+   - Ordinea este respectată (serial processing)
+
+
+TEST 7: Compatibilitate - Comenzi Existente
+--------------------------------------------
+Pas 1: Creează fișier "test_bon_normal.txt":
+   S^Produs Test^10.00^1^buc^1^1^
+   P^1^10.00^
+Pas 2: Copiază în folder Bon/
+Pas 3: Verifică:
+   ✓ Bonul se procesează normal (fără interferențe)
+   ✓ Nu există conflicte cu noile funcționalități
+
+REZULTAT AȘTEPTAT:
+   - Bon procesat cu succes
+   - Sistemul funcționează ca înainte
+
+
+TEST 8: Rapoarte - Verificare X și Z
+-------------------------------------
+Pas 1: Execută câteva operațiuni CashIn/CashOut
+Pas 2: Creează "raport_x.txt" cu conținut: X^
+Pas 3: Verifică raportul X tipărit
+Pas 4: Verifică că operațiunile CashIn/CashOut apar în raport
+
+REZULTAT AȘTEPTAT:
+   - Operațiunile apar în secțiunea CashIn/CashOut
+   - Sumele sunt corecte
+
+
+TEST 9: Butoane UI - Compatibilitate
+-------------------------------------
+Pas 1: Testează butoanele CashIn și CashOut din UI
+Pas 2: Verifică că funcționează normal
+Pas 3: Testează apoi prin fișiere
+
+REZULTAT AȘTEPTAT:
+   - Ambele metode (UI și fișiere) funcționează corect
+   - Nu există conflicte
+
+
+TEST 10: Performance - Procesare Rapidă
+----------------------------------------
+Pas 1: Creează 10 fișiere CashIn/CashOut
+Pas 2: Copiază toate simultan în Bon/
+Pas 3: Măsoară timpul de procesare
+
+REZULTAT AȘTEPTAT:
+   - Toate fișierele procesate în < 30 secunde
+   - Nu există blocări sau erori
+   - SemaphoreSlim asigură procesare serială
+
+=============================================================================
+CHECKLIST FINAL:
+=============================================================================
+
+□ Toate testele executate
+□ Nu există erori de compilare
+□ Nu există erori de lint
+□ Documentația README creată
+□ Exemple de fișiere create
+□ Funcționalitatea testată cu dispozitiv real
+□ Rapoartele X/Z verificate
+□ Compatibilitate backwards testată
+□ Performance verificat
+
+=============================================================================
+NOTIȚE:
+=============================================================================
+
+- Comenzile I^ și O^ sunt procesate ca "special commands" (standalone)
+- Nu deschid bon fiscal - sunt operațiuni de serviciu
+- Se înregistrează în rapoartele fiscale
+- Procesarea este serială (thread-safe)
+- Validarea se face la 2 niveluri:
+  1. În MainWindow.ProcessSpecialCommandAsync()
+  2. În FiscalEngine standalone command handler
+
+=============================================================================

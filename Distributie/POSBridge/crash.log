@@ -1,0 +1,10 @@
+UI CRASH: 3/24/2026 10:11:37 AM
+
+System.MissingMethodException: Method not found: 'Boolean POSBridge.Devices.Datecs.FiscalEngine.get_IsConnectedCached()'.
+   at POSBridge.WPF.MainWindow.ConnectAndMaybeStartWatcherAsync(Boolean autoStartWatcher)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at POSBridge.WPF.MainWindow.ConnectAndMaybeStartWatcherAsync(Boolean autoStartWatcher)
+   at POSBridge.WPF.MainWindow.ConnectButton_Click(Object sender, RoutedEventArgs e)
+   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__128_0(Object state)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)

@@ -1,0 +1,8 @@
+POS Bridge E2E Local Report - 2026-02-11 12:05:59
+ScenarioSet=B
+ComPort=COM6, BaudRate=115200, OperatorCode=1
+WatchFolder=D:\Proiecte Cursor\POS Bridge\Bon\E2E_Run
+
+FAIL [B] FiscalSuccess (2.50s) - Unexpected BONOK. Expected=1, Actual=0
+
+E2E suite finished: FAIL (1 failed scenario(s) of 1).

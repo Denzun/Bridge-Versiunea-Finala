@@ -1,0 +1,9 @@
+POS Bridge E2E Local Report - 2026-02-11 12:44:14
+ScenarioSet=B
+ComPort=COM6, BaudRate=115200, OperatorCode=1
+WatchFolder=D:/Proiecte Cursor/POS Bridge/Bon/E2E_Run
+
+PASS [A*] ConnectionPrecheckForFileScenarios (1.39s) - Connected on COM6@115200. Operator credentials valid (1/****).
+PASS [B] FiscalSuccess (4.26s) - BONOK=1; moved=E2E_B_20260211_124420_526.txt
+
+E2E suite finished: PASS (2 scenario(s)).

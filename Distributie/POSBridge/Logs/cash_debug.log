@@ -1,0 +1,6 @@
+[14:57:06.803] CashIn amount=50.00, data_string="50.00,1"
+[14:57:06.804] CashIn packet (17 bytes): 01 2B 23 46 35 30 2E 30 30 2C 31 05 30 31 3E 39 03
+[14:57:07.318] CashIn response (17 bytes): 01 2B 23 46 04 A0 90 84 80 80 80 05 30 33 3D 31 03
+[14:57:07.318] CashIn status (6 bytes): A0 90 84 80 80 80
+[14:57:07.319] CashIn status flags: [Eroare generală, 24h de la primul bon]
+[14:57:07.320] CashIn ERROR: 24 ore de la primul bon fiscal - emiteți raportul Z

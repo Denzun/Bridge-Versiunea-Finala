@@ -1,0 +1,4 @@
+TL^Bon nr 43745; utilizator: admin
+S^ADAPTOR 1 2 70MM 04627^500^1000^buc^1^1
+P^1^500
+

@@ -1,0 +1,1033 @@
+<Window x:Class="POSBridge.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="POS Bridge - Sincronizare fără erori" 
+        Height="700" Width="1200"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        Icon="Assets/pos-bridge.png">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- HEADER -->
+        <Border Grid.Row="0" 
+                Style="{StaticResource ModernCard}" 
+                Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="Assets/pos-bridge.png" 
+                           Width="48" 
+                           Height="48" 
+                           Margin="0,0,15,0"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="POS Bridge" 
+                                   FontSize="24" 
+                                   FontWeight="Bold" 
+                                   Foreground="{StaticResource TextBrush}"/>
+                        <TextBlock Text="Sincronizare fără erori" 
+                                   FontSize="12" 
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   Margin="0,2,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" 
+                            Orientation="Horizontal" 
+                            VerticalAlignment="Center">
+                    <Ellipse x:Name="StatusLed" 
+                             Width="12" 
+                             Height="12" 
+                             Fill="{StaticResource ErrorBrush}" 
+                             Margin="0,0,10,0"/>
+                    <TextBlock x:Name="StatusText" 
+                               Text="Deconectat" 
+                               FontSize="14" 
+                               FontWeight="SemiBold" 
+                               Foreground="{StaticResource TextBrush}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- MAIN CONTENT -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- LOG AREA -->
+            <Border Grid.Column="0" 
+                    Style="{StaticResource ModernCard}" 
+                    Margin="0,0,20,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" 
+                               Text="Jurnal activitate" 
+                               FontSize="18" 
+                               FontWeight="SemiBold" 
+                               Foreground="{StaticResource TextBrush}" 
+                               Margin="0,0,0,10"/>
+                    
+                    <!-- Device Info (Multi-Vendor Architecture) -->
+                    <Border Grid.Row="1" 
+                            Background="#E8F5E9" 
+                            BorderBrush="#4CAF50"
+                            BorderThickness="2"
+                            CornerRadius="8" 
+                            Padding="12,10" 
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <!-- Row 1: Device Info -->
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="🏭 Vendor:" FontSize="12" FontWeight="SemiBold" Foreground="#2E7D32" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="VendorNameText" Grid.Column="1" Text="Datecs" FontSize="13" FontWeight="Bold" Foreground="#1B5E20" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Model:" FontSize="12" FontWeight="SemiBold" Foreground="#2E7D32" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="ModelNameText" Grid.Column="3" Text="—" FontSize="13" FontWeight="Bold" Foreground="#1B5E20" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                            </Grid>
+                            
+                            <!-- Row 2: Serial & Device Name -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Serie:" FontSize="11" Foreground="#558B2F" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SerieFabricatieText" Grid.Column="1" Text="—" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Nume:" FontSize="11" Foreground="#558B2F" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="NumeDispozitivText" Grid.Column="3" Text="—" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <!-- Row 3: Serie Fiscală & Cod Fiscal -->
+                            <Grid Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Serie Fiscală:" FontSize="11" Foreground="#558B2F" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SerieFiscalaText" Grid.Column="1" Text="—" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="Cod Fiscal:" FontSize="11" Foreground="#558B2F" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="CodFiscalText" Grid.Column="3" Text="—" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Log TextBox -->
+                    <Border Grid.Row="2" 
+                            Background="#F8F9FA" 
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                        <ScrollViewer x:Name="LogScrollViewer" 
+                                      VerticalScrollBarVisibility="Auto">
+                            <TextBox x:Name="LogTextBox" 
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="10"
+                                     FontFamily="Consolas"
+                                     FontSize="12"
+                                     IsReadOnly="True"
+                                     TextWrapping="Wrap"
+                                     Foreground="{StaticResource TextBrush}"/>
+                        </ScrollViewer>
+                    </Border>
+                    
+                    <!-- Statistics -->
+                    <Border Grid.Row="3" 
+                            Background="#F8F9FA" 
+                            CornerRadius="8" 
+                            Padding="15" 
+                            Margin="0,15,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Total Processed -->
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Total procesate" 
+                                           FontSize="12" 
+                                           Foreground="#636E72"/>
+                                <TextBlock x:Name="TotalProcessedText" 
+                                           Text="0" 
+                                           FontSize="24" 
+                                           FontWeight="Bold" 
+                                           Foreground="{StaticResource PrimaryBrush}"/>
+                            </StackPanel>
+
+                            <!-- Success -->
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Reușite" 
+                                           FontSize="12" 
+                                           Foreground="#636E72"/>
+                                <TextBlock x:Name="SuccessCountText" 
+                                           Text="0" 
+                                           FontSize="24" 
+                                           FontWeight="Bold" 
+                                           Foreground="{StaticResource SuccessBrush}"/>
+                            </StackPanel>
+
+                            <!-- Errors -->
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Erori" 
+                                           FontSize="12" 
+                                           Foreground="#636E72"/>
+                                <TextBlock x:Name="ErrorCountText" 
+                                           Text="0" 
+                                           FontSize="24" 
+                                           FontWeight="Bold" 
+                                           Foreground="{StaticResource ErrorBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            
+            <!-- CONTROL PANEL -->
+            <Border Grid.Column="1" 
+                    Style="{StaticResource ModernCard}">
+                <TabControl x:Name="MainTabControl" BorderThickness="0" Background="Transparent">
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Border Name="Border" BorderThickness="0" Background="Transparent" Padding="15,8">
+                                            <ContentPresenter ContentSource="Header" 
+                                                            HorizontalAlignment="Center" 
+                                                            VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#E3F2FD"/>
+                                                <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,2"/>
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+                        </Style>
+                    </TabControl.Resources>
+                    
+                    <!-- MAIN TAB -->
+                    <TabItem Header="⚙️ Principal">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="5">
+                            <StackPanel>
+                        
+                        <!-- CONNECTION SECTION -->
+                        <TextBlock Text="DISPOZITIV FISCAL" 
+                                   FontSize="12" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#636E72" 
+                                   Margin="0,0,0,10"/>
+
+                        <!-- Vendor Selection -->
+                        <TextBlock Text="Tip dispozitiv (Multi-Vendor)" 
+                                   FontSize="12" 
+                                   Foreground="#636E72" 
+                                   Margin="0,0,0,4"/>
+                        <ComboBox x:Name="DeviceTypeComboBox"
+                                  Height="32"
+                                  FontSize="12"
+                                  HorizontalAlignment="Stretch"
+                                  Margin="0,0,0,12"
+                                  SelectionChanged="DeviceTypeComboBox_SelectionChanged"
+                                  ToolTip="Selectează tipul de casă de marcat (Datecs, Tremol, Elcom)"/>
+
+                        <TextBlock Text="COMUNICAȚIE" 
+                                   FontSize="12" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#636E72" 
+                                   Margin="0,0,0,8"/>
+
+                        <!-- Connection Type Selector -->
+                        <StackPanel Margin="0,0,0,12">
+                            <TextBlock Text="Tip conexiune" 
+                                       FontSize="12" 
+                                       Foreground="#636E72" 
+                                       Margin="0,0,0,4"/>
+                            <ComboBox x:Name="ConnectionTypeComboBox"
+                                      Height="32"
+                                      FontSize="12"
+                                      HorizontalAlignment="Stretch"
+                                      SelectionChanged="ConnectionTypeComboBox_SelectionChanged"/>
+                        </StackPanel>
+
+                        <!-- Serial Connection Settings -->
+                        <StackPanel x:Name="SerialSettingsPanel" Visibility="Visible">
+                            <!-- COM Port și Baud Rate pe același rând -->
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- COM Port -->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Port COM" 
+                                               FontSize="12" 
+                                               Foreground="#636E72" 
+                                               Margin="0,0,0,4"/>
+                                    <ComboBox x:Name="PortComboBox"
+                                              Height="32"
+                                              FontSize="12"
+                                              HorizontalAlignment="Stretch"
+                                              SelectionChanged="PortComboBox_SelectionChanged"/>
+                                </StackPanel>
+                                
+                                <!-- Baud Rate -->
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="Viteza transmisie" 
+                                               FontSize="12" 
+                                               Foreground="#636E72" 
+                                               Margin="0,0,0,4"/>
+                                    <ComboBox x:Name="BaudComboBox"
+                                              Height="32"
+                                              FontSize="12"
+                                              HorizontalAlignment="Stretch"
+                                              SelectionChanged="BaudComboBox_SelectionChanged"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Ethernet Connection Settings -->
+                        <StackPanel x:Name="EthernetSettingsPanel" Visibility="Collapsed">
+                            <!-- IP Address și Port pe același rând -->
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- IP Address -->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="IP Address" 
+                                               FontSize="12" 
+                                               Foreground="#636E72" 
+                                               Margin="0,0,0,4"/>
+                                    <TextBox x:Name="IpAddressBox"
+                                             Text="192.168.1.219"
+                                             Height="32"
+                                             FontSize="12"
+                                             Padding="8"
+                                             BorderBrush="{StaticResource BorderBrush}"
+                                             HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+                                
+                                <!-- TCP Port -->
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="Port" 
+                                               FontSize="12" 
+                                               Foreground="#636E72" 
+                                               Margin="0,0,0,4"/>
+                                    <TextBox x:Name="TcpPortBox"
+                                             Text="9100"
+                                             Height="32"
+                                             FontSize="12"
+                                             Padding="8"
+                                             BorderBrush="{StaticResource BorderBrush}"
+                                             HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Operator Code și Password pe același rând -->
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Operator Code -->
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Cod operator" 
+                                           FontSize="12" 
+                                           Foreground="#636E72" 
+                                           Margin="0,0,0,4"/>
+                                <TextBox x:Name="OperatorCodeBox"
+                                         Text="1"
+                                         Height="32"
+                                         FontSize="12"
+                                         Padding="8"
+                                         BorderBrush="{StaticResource BorderBrush}"
+                                         HorizontalAlignment="Stretch"
+                                         LostFocus="OperatorCodeBox_LostFocus"/>
+                            </StackPanel>
+                            
+                            <!-- Operator Password -->
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Parolă operator" 
+                                           FontSize="12" 
+                                           Foreground="#636E72" 
+                                           Margin="0,0,0,4"/>
+                                <TextBox x:Name="OperatorPasswordBox"
+                                         Height="32"
+                                         FontSize="12"
+                                         Padding="8"
+                                         BorderBrush="{StaticResource BorderBrush}"
+                                         HorizontalAlignment="Stretch"
+                                         LostFocus="OperatorPasswordBox_LostFocus"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Button x:Name="ConnectButton" 
+                                Content="📡 Conectare dispozitiv" 
+                                Style="{StaticResource ModernButton}" 
+                                Click="ConnectButton_Click" 
+                                Margin="0,0,0,6"/>
+
+                        <Button x:Name="CancelConnectionButton"
+                                Content="⏸️ Anulează conectarea"
+                                Style="{StaticResource ErrorButton}"
+                                Click="CancelConnectionButton_Click"
+                                Visibility="Collapsed"
+                                Margin="0,0,0,12"/>
+
+                        <Button x:Name="DisconnectButton" 
+                                Content="⏹️ Deconectare dispozitiv" 
+                                Style="{StaticResource ErrorButton}" 
+                                Click="DisconnectButton_Click" 
+                                IsEnabled="False" 
+                                Margin="0,0,0,12"/>
+                        
+                        <Separator Margin="0,15"/>
+                        
+                        <!-- WATCHER SECTION -->
+                        <TextBlock Text="MONITORIZARE FOLDER" 
+                                   FontSize="12" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#636E72" 
+                                   Margin="0,5,0,10"/>
+                        
+                        <Button x:Name="StartWatcherButton" 
+                                Content="▶️ Pornește monitorizarea" 
+                                Style="{StaticResource SuccessButton}" 
+                                Click="StartWatcherButton_Click" 
+                                IsEnabled="False" 
+                                Margin="0,0,0,12"/>
+                        
+                        <Button x:Name="StopWatcherButton" 
+                                Content="⏸️ Oprește monitorizarea" 
+                                Style="{StaticResource ErrorButton}" 
+                                Click="StopWatcherButton_Click" 
+                                IsEnabled="False" 
+                                Margin="0,0,0,12"/>
+                        
+                        <Separator Margin="0,15"/>
+                        
+                        <!-- FOLDER INFO -->
+                        <TextBlock Text="FOLDER MONITORIZAT" 
+                                   FontSize="12" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#636E72" 
+                                   Margin="0,5,0,10"/>
+                        
+                        <Border Background="#F8F9FA" 
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1" 
+                                CornerRadius="6"
+                                Padding="10">
+                            <TextBox x:Name="FolderPathBox" 
+                                     Text=".\Bon\" 
+                                     FontSize="12" 
+                                     FontFamily="Consolas"
+                                     Foreground="{StaticResource TextBrush}" 
+                                     TextWrapping="Wrap"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     IsReadOnly="False"/>
+                        </Border>
+                        
+                        <Button x:Name="BrowseFolderButton"
+                                Content="📁 Selectează folder"
+                                Style="{StaticResource ModernButton}"
+                                Click="BrowseFolderButton_Click"
+                                Margin="0,10,0,12"
+                                HorizontalAlignment="Stretch"/>
+
+                        <Button x:Name="ApplyFolderButton"
+                                Content="✅ Aplică folder"
+                                Style="{StaticResource ModernButton}"
+                                Click="ApplyFolderButton_Click"
+                                Margin="0,0,0,12"
+                                HorizontalAlignment="Stretch"/>
+                        
+                        <Button Content="📁 Deschide folder" 
+                                Style="{StaticResource ModernButton}" 
+                                Click="OpenFolderButton_Click"
+                                Margin="0,0,0,12"/>
+                        
+                        <Separator Margin="0,15"/>
+                        
+                        <!-- UTILITIES -->
+                        <TextBlock Text="UTILITĂȚI" 
+                                   FontSize="12" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#636E72" 
+                                   Margin="0,5,0,10"/>
+
+                        <CheckBox x:Name="StartupWithWindowsCheckBox"
+                                  Content="Pornește automat la pornirea Windows"
+                                  FontSize="12"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,0,0,12"
+                                  Checked="StartupWithWindowsCheckBox_Changed"
+                                  Unchecked="StartupWithWindowsCheckBox_Changed"/>
+                        
+                        <Button Content="🔍 Testează conexiunea" 
+                                x:Name="TestConnectionButton"
+                                Style="{StaticResource ModernButton}" 
+                                Click="TestConnectionButton_Click"
+                                IsEnabled="True"
+                                Margin="0,0,0,12"/>
+                        
+                        <Button Content="📋 Informații dispozitiv"
+                                x:Name="DeviceInfoButton"
+                                Style="{StaticResource ModernButton}"
+                                Click="OpenDeviceInfoWindow_Click"
+                                Margin="0,0,0,12"
+                                IsEnabled="True"/>
+                        
+                        <Button Content="🗑️ Șterge jurnal" 
+                                Style="{StaticResource ModernButton}" 
+                                Click="ClearLogButton_Click"/>
+                                
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    
+                    <!-- AUXILIARY TAB -->
+                    <TabItem Header="🛠️ Auxiliar">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="5">
+                            <StackPanel>
+                                
+                                <!-- CASH OPERATIONS -->
+                                <TextBlock Text="OPERAȚIUNI NUMERAR" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <TextBlock Text="Sumă (lei)" 
+                                           FontSize="12" 
+                                           Foreground="#636E72" 
+                                           Margin="0,0,0,4"/>
+                                <TextBox x:Name="CashAmountBox"
+                                         Text="50.00"
+                                         Margin="0,0,0,10"
+                                         Height="32"
+                                         FontSize="12"
+                                         Padding="8"
+                                         BorderBrush="{StaticResource BorderBrush}"
+                                         HorizontalAlignment="Stretch"
+                                         IsEnabled="True"/>
+
+                                <Button x:Name="CashInButton"
+                                        Content="💰 Introducere numerar"
+                                        Style="{StaticResource SuccessButton}"
+                                        Click="CashInButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="True"/>
+
+                                <Button x:Name="CashOutButton"
+                                        Content="💸 Scoatere numerar"
+                                        Style="{StaticResource ErrorButton}"
+                                        Click="CashOutButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="True"/>
+
+                                <Separator Margin="0,15"/>
+
+                                <!-- PRINTER OPERATIONS -->
+                                <TextBlock Text="OPERAȚIUNI IMPRIMANTĂ" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <TextBlock Text="Alimentare hârtie (linii)" 
+                                           FontSize="12" 
+                                           Foreground="#636E72" 
+                                           Margin="0,0,0,4"/>
+                                <TextBox x:Name="FeedLinesBox"
+                                         Text="3"
+                                         Margin="0,0,0,10"
+                                         Height="32"
+                                         FontSize="12"
+                                         Padding="8"
+                                         BorderBrush="{StaticResource BorderBrush}"
+                                         HorizontalAlignment="Stretch"
+                                         IsEnabled="False"/>
+
+                                <Button x:Name="FeedPaperButton"
+                                        Content="🧾 Alimentează hârtie"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="FeedPaperButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <TextBlock Text="OPERAȚIUNI BON" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <Button x:Name="CancelReceiptButton"
+                                        Content="❌ Anulează bon blocat"
+                                        Style="{StaticResource ErrorButton}"
+                                        Click="CancelReceiptButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Separator Margin="0,15"/>
+
+                                <!-- REPORTS -->
+                                <TextBlock Text="RAPOARTE FISCALE" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <Button x:Name="XReportButton"
+                                        Content="📊 Raport X (Intermediar)"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="XReportButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="True"/>
+
+                                <Button x:Name="ZReportButton"
+                                        Content="📋 Raport Z (Zilnic)"
+                                        Style="{StaticResource ErrorButton}"
+                                        Click="ZReportButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="True"/>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    
+                    <!-- REPORTS TAB -->
+                    <TabItem x:Name="RapoarteTab" Header="📊 Rapoarte">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="5">
+                            <StackPanel>
+                                
+                                <!-- RAPOARTE ZILNICE -->
+                                <TextBlock Text="RAPOARTE ZILNICE" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <Button x:Name="EcrReportButton"
+                                        Content="📊 Raport ECR"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="EcrReportButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="DepartmentsReportButton"
+                                        Content="🏢 Raport Departamente"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="DepartmentsReportButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="ItemGroupsReportButton"
+                                        Content="📦 Raport Grupe articole"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="ItemGroupsReportButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Separator Margin="0,10"/>
+
+                                <!-- MEMORIE FISCALA -->
+                                <TextBlock Text="MEMORIE FISCALA" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <TextBlock Text="Interval date:" 
+                                           FontSize="11" Foreground="#636E72" Margin="0,0,0,4"/>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DatePicker x:Name="FmDateStartPicker" 
+                                                Grid.Column="0" Height="28" FontSize="11"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                ToolTip="De la"/>
+                                    <DatePicker x:Name="FmDateEndPicker" 
+                                                Grid.Column="2" Height="28" FontSize="11"
+                                                BorderBrush="{StaticResource BorderBrush}"
+                                                ToolTip="Pana la"/>
+                                </Grid>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="FmDateShortButton"
+                                            Content="📅 MF Date (scurt)"
+                                            Style="{StaticResource ModernButton}"
+                                            Click="FmDateShortButton_Click"
+                                            FontSize="11" Padding="8,10"
+                                            HorizontalAlignment="Stretch"
+                                            IsEnabled="False"/>
+                                    <Button x:Name="FmDateDetailButton"
+                                            Grid.Column="2"
+                                            Content="📅 MF Date (detaliat)"
+                                            Style="{StaticResource ModernButton}"
+                                            Click="FmDateDetailButton_Click"
+                                            FontSize="11" Padding="8,10"
+                                            HorizontalAlignment="Stretch"
+                                            IsEnabled="False"/>
+                                </Grid>
+
+                                <TextBlock Text="Interval numere Z:" 
+                                           FontSize="11" Foreground="#636E72" Margin="0,4,0,4"/>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="FmZStartBox" 
+                                             Grid.Column="0" Height="28" FontSize="11" Padding="6,4"
+                                             BorderBrush="{StaticResource BorderBrush}"
+                                             ToolTip="De la Z"/>
+                                    <TextBox x:Name="FmZEndBox" 
+                                             Grid.Column="2" Height="28" FontSize="11" Padding="6,4"
+                                             BorderBrush="{StaticResource BorderBrush}"
+                                             ToolTip="Pana la Z"/>
+                                </Grid>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="FmZShortButton"
+                                            Content="🔢 MF Z (scurt)"
+                                            Style="{StaticResource ModernButton}"
+                                            Click="FmZShortButton_Click"
+                                            FontSize="11" Padding="8,10"
+                                            HorizontalAlignment="Stretch"
+                                            IsEnabled="False"/>
+                                    <Button x:Name="FmZDetailButton"
+                                            Grid.Column="2"
+                                            Content="🔢 MF Z (detaliat)"
+                                            Style="{StaticResource ModernButton}"
+                                            Click="FmZDetailButton_Click"
+                                            FontSize="11" Padding="8,10"
+                                            HorizontalAlignment="Stretch"
+                                            IsEnabled="False"/>
+                                </Grid>
+
+                                <Separator Margin="0,10"/>
+
+                                <!-- OPERATORI SI PLU -->
+                                <TextBlock Text="OPERATORI / PLU" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <Button x:Name="OperatorsReportButton"
+                                        Content="👤 Raport operatori"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="OperatorsReportButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="PluReportButton"
+                                        Content="🏷️ Raport PLU"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="PluReportButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Separator Margin="0,10"/>
+
+                                <!-- DIAGNOSTIC SI INFORMATII -->
+                                <TextBlock Text="DIAGNOSTIC / INFO" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+
+                                <Button x:Name="DiagnosticButton"
+                                        Content="🔧 Diagnostic"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="DiagnosticButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="DailyInfoButton"
+                                        Content="📋 Info zilnice"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="DailyInfoButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="LastFiscalButton"
+                                        Content="📄 Ultima inreg. fiscala"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="LastFiscalButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="DailyTaxButton"
+                                        Content="💰 Info TVA zilnice"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="DailyTaxButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="ExtDeviceInfoButton"
+                                        Content="ℹ️ Info extinse AMEF"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="ExtDeviceInfoButton_Click"
+                                        Margin="0,0,0,8"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                                <Button x:Name="RemainingZButton"
+                                        Content="🔢 Z-uri ramase in MF"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="RemainingZButton_Click"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    
+                    
+                    <!-- ACTIVATION TAB -->
+                    <TabItem Header="🔐 Activare">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="5">
+                            <StackPanel>
+                                
+                                <!-- ACTIVATION STATUS -->
+                                <TextBlock Text="STATUS ACTIVARE" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+                                
+                                <Border x:Name="ActivationStatusBorder"
+                                        Background="#E8F5E9" 
+                                        BorderBrush="#4CAF50"
+                                        BorderThickness="2"
+                                        CornerRadius="8" 
+                                        Padding="15" 
+                                        Margin="0,0,0,15">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="ActivationStatusIcon"
+                                                   Grid.Column="0" 
+                                                   Text="✅" 
+                                                   FontSize="32" 
+                                                   Margin="0,0,15,0"
+                                                   VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock x:Name="ActivationStatusText"
+                                                       Text="Dispozitiv activat" 
+                                                       FontSize="16" 
+                                                       FontWeight="Bold" 
+                                                       Foreground="#2E7D32"/>
+                                            <TextBlock x:Name="ActivationMessageText"
+                                                       Text="Aplicația funcționează normal." 
+                                                       FontSize="12" 
+                                                       Foreground="#558B2F"
+                                                       Margin="0,5,0,0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                
+                                <!-- DEVICE INFO -->
+                                <TextBlock Text="INFORMAȚII DISPOZITIV" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+                                
+                                <Border Background="#F8F9FA" 
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1" 
+                                        CornerRadius="8" 
+                                        Padding="15" 
+                                        Margin="0,0,0,15">
+                                    <StackPanel>
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Serial Number:" FontSize="12" FontWeight="SemiBold" Foreground="#636E72"/>
+                                            <TextBox x:Name="DeviceSerialTextBox" Grid.Column="1" Text="—" FontSize="12" FontFamily="Consolas" IsReadOnly="True" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Tenant Code:" FontSize="12" FontWeight="SemiBold" Foreground="#636E72"/>
+                                            <TextBox x:Name="DeviceTenantTextBox" Grid.Column="1" Text="—" FontSize="12" FontFamily="Consolas" IsReadOnly="True" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Serie Fiscală:" FontSize="12" FontWeight="SemiBold" Foreground="#636E72"/>
+                                            <TextBox x:Name="FiscalPrinterSeriesTextBox" Grid.Column="1" Text="—" FontSize="12" FontFamily="Consolas" IsReadOnly="True" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Model:" FontSize="12" FontWeight="SemiBold" Foreground="#636E72"/>
+                                            <TextBox x:Name="DeviceModelTextBox" Grid.Column="1" Text="—" FontSize="12" IsReadOnly="True" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Status:" FontSize="12" FontWeight="SemiBold" Foreground="#636E72"/>
+                                            <TextBox x:Name="DeviceStatusTextBox" Grid.Column="1" Text="—" FontSize="12" FontWeight="Bold" IsReadOnly="True" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Prima autent.:" FontSize="12" FontWeight="SemiBold" Foreground="#636E72"/>
+                                            <TextBox x:Name="FirstAuthDateTextBox" Grid.Column="1" Text="—" FontSize="12" IsReadOnly="True" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextBrush}"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Separator Margin="0,10"/>
+                                
+                                <!-- ACTIONS -->
+                                <TextBlock Text="ACȚIUNI" 
+                                           FontSize="12" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#636E72" 
+                                           Margin="0,5,0,10"/>
+                                
+                                <Button x:Name="CheckActivationButton"
+                                        Content="🔄 Verifică activarea" 
+                                        Style="{StaticResource ModernButton}"
+                                        Click="CheckActivationButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"/>
+                                
+                                <Button x:Name="TestActivationServerButton"
+                                        Content="🌐 Test conexiune server activare" 
+                                        Style="{StaticResource ModernButton}"
+                                        Click="TestActivationServerButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"/>
+                                
+                                <Button x:Name="CopySerialButton"
+                                        Content="📋 Copiază Serial Number" 
+                                        Style="{StaticResource ModernButton}"
+                                        Click="CopySerialButton_Click"
+                                        Margin="0,0,0,12"
+                                        HorizontalAlignment="Stretch"/>
+                                
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    
+                </TabControl>
+            </Border>
+        </Grid>
+        
+        <!-- STATUS BAR + FOOTER -->
+        <Border Grid.Row="2" 
+                Background="{StaticResource WhiteBrush}" 
+                CornerRadius="8" 
+                Padding="15,10" 
+                Margin="0,20,0,0">
+            <StackPanel>
+                <TextBlock x:Name="StatusBarText" 
+                           Text="Gata de conectare. Apasă 'Conectare dispozitiv' pentru a porni." 
+                           FontSize="12" 
+                           Foreground="#636E72"/>
+                <TextBlock x:Name="FooterDemoText" 
+                           FontSize="12"
+                           FontWeight="Bold"
+                           Foreground="#E74C3C"
+                           Margin="0,4,0,0"
+                           Visibility="Collapsed"/>
+            </StackPanel>
+        </Border>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,9 @@
+{
+  "scenarios": [
+    { "id": "A", "name": "ConnectionCheck", "enabledByDefault": true },
+    { "id": "B", "name": "FiscalSuccessCashExact", "enabledByDefault": true },
+    { "id": "C", "name": "ParserInvalidFile", "enabledByDefault": true },
+    { "id": "D", "name": "FiscalCashOverpayChange", "enabledByDefault": true },
+    { "id": "E", "name": "FiscalMixedCardCash", "enabledByDefault": true }
+  ]
+}

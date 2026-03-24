@@ -1,0 +1,3 @@
+BONOK=0
+ERRCODE=-102002
+ERRINFO=DUDE COM Error -102002: Operator error: Wrong operator password

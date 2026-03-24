@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.Core", "POSBridge.Core\POSBridge.Core.csproj", "{E5536B30-AD04-4157-A86B-82CCFCEFEAB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.Devices.Datecs", "POSBridge.Devices.Datecs\POSBridge.Devices.Datecs.csproj", "{03B2AA44-DCBF-42E4-8CA6-F33A5B023A65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.API", "POSBridge.API\POSBridge.API.csproj", "{C32E3332-3AFC-4432-9A18-48168479D396}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.WPF", "POSBridge.WPF\POSBridge.WPF.csproj", "{71044688-0BF0-4D5A-9025-B620CE5E78AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.E2E.Local", "POSBridge.E2E.Local\POSBridge.E2E.Local.csproj", "{8DE33A25-39FB-40C8-BFF7-17FFD5449D54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.Abstractions", "POSBridge.Abstractions\POSBridge.Abstractions.csproj", "{78C1E0C9-FD9F-4E21-A57D-FFC055B26843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POSBridge.Devices.Incotex", "POSBridge.Devices.Incotex\POSBridge.Devices.Incotex.csproj", "{86DD2B67-0848-438F-8C9C-84D9E7CD6818}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5536B30-AD04-4157-A86B-82CCFCEFEAB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5536B30-AD04-4157-A86B-82CCFCEFEAB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5536B30-AD04-4157-A86B-82CCFCEFEAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5536B30-AD04-4157-A86B-82CCFCEFEAB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03B2AA44-DCBF-42E4-8CA6-F33A5B023A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B2AA44-DCBF-42E4-8CA6-F33A5B023A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B2AA44-DCBF-42E4-8CA6-F33A5B023A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B2AA44-DCBF-42E4-8CA6-F33A5B023A65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32E3332-3AFC-4432-9A18-48168479D396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32E3332-3AFC-4432-9A18-48168479D396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32E3332-3AFC-4432-9A18-48168479D396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32E3332-3AFC-4432-9A18-48168479D396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71044688-0BF0-4D5A-9025-B620CE5E78AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71044688-0BF0-4D5A-9025-B620CE5E78AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71044688-0BF0-4D5A-9025-B620CE5E78AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71044688-0BF0-4D5A-9025-B620CE5E78AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE33A25-39FB-40C8-BFF7-17FFD5449D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE33A25-39FB-40C8-BFF7-17FFD5449D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE33A25-39FB-40C8-BFF7-17FFD5449D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE33A25-39FB-40C8-BFF7-17FFD5449D54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C1E0C9-FD9F-4E21-A57D-FFC055B26843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C1E0C9-FD9F-4E21-A57D-FFC055B26843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C1E0C9-FD9F-4E21-A57D-FFC055B26843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C1E0C9-FD9F-4E21-A57D-FFC055B26843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DD2B67-0848-438F-8C9C-84D9E7CD6818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DD2B67-0848-438F-8C9C-84D9E7CD6818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DD2B67-0848-438F-8C9C-84D9E7CD6818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DD2B67-0848-438F-8C9C-84D9E7CD6818}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,21 @@
+---
+description: Datecs DUDE middleware rules and x86 requirement
+alwaysApply: true
+---
+
+# Datecs DUDE Middleware Rules
+
+- Always target **x86** in project Build settings; DUDE COM is 32-bit.
+- Use DUDE COM ProgID `dude.CFD_DUDE` (not `Datecs.FiscalDevice`).
+- RS232 connect flow:
+  - `set_TransportType(0)` → RS232
+  - `set_RS232(portNumber, baudRate)`
+  - `open_Connection()` and verify `connected_ToDevice`
+- Execute commands via mandatory 5-step workflow:
+  - Clear → Input (`set_InputParam_ByName`) → Execute (`execute_Command_ByName`) → Check error (`lastError_Code`, `lastError_Message`) → Output (`get_OutputParam_ByName`)
+- Folder watcher rules:
+  - Monitor `.\Bon` with `FileSystemWatcher`
+  - Process serially with `SemaphoreSlim(1,1)`
+  - Delay **500ms** before reading files
+  - On success move to `.\Bon\Procesate`; on failure move to `.\Bon\Erori` + log error
+- Use DUDE docs in `Drivere/DUDE/DOCUMENTATION` (`CommandsList.xls`, `ErrorCodes.xls`) as source of truth.
