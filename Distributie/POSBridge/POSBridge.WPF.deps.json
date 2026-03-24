@@ -14,6 +14,7 @@
           "POSBridge.Core": "1.0.0",
           "POSBridge.Devices.Datecs": "1.0.0",
           "POSBridge.Devices.Incotex": "1.0.0",
+          "POSBridge.Devices.SmartPay": "1.0.0",
           "System.Management": "10.0.3"
         },
         "runtime": {
@@ -305,6 +306,18 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "POSBridge.Devices.SmartPay/1.0.0": {
+        "dependencies": {
+          "POSBridge.Abstractions": "1.0.0",
+          "System.IO.Ports": "10.0.3"
+        },
+        "runtime": {
+          "POSBridge.Devices.SmartPay.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -491,6 +504,11 @@
       "sha512": ""
     },
     "POSBridge.Devices.Incotex/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "POSBridge.Devices.SmartPay/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

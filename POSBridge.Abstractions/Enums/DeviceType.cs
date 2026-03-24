@@ -23,5 +23,10 @@ public enum DeviceType
     /// <summary>
     /// Elcom - Reserved pentru viitor
     /// </summary>
-    Elcom = 4
+    Elcom = 4,
+    
+    /// <summary>
+    /// SmartPay/Ingenico (iCT, iPP, Desk series) - Serial/Bluetooth
+    /// </summary>
+    SmartPay = 5
 }

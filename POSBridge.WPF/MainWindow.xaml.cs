@@ -2069,6 +2069,15 @@ public partial class MainWindow : Window
                 }
                 EthernetSettingsPanel.Visibility = Visibility.Collapsed;
             }
+            else if (_selectedDeviceType == DeviceType.SmartPay)
+            {
+                // SmartPay/Ingenico uses Serial (USB virtual COM port via driver)
+                ConnectionTypeComboBox.Items.Add(new ComboBoxItem { Content = "📡 Serial (COM Port)", Tag = "Serial" });
+                ConnectionTypeComboBox.SelectedIndex = 0;
+                _connectionType = "Serial";
+                SerialSettingsPanel.Visibility = Visibility.Visible;
+                EthernetSettingsPanel.Visibility = Visibility.Collapsed;
+            }
             else
             {
                 ConnectionTypeComboBox.Items.Add(new ComboBoxItem { Content = "📡 Serial (COM Port)", Tag = "Serial" });
