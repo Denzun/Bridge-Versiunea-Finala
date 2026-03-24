@@ -4,6 +4,7 @@ using POSBridge.Core;
 using POSBridge.Abstractions;
 using POSBridge.Abstractions.Enums;
 using POSBridge.Abstractions.Models;
+using POSBridge.Devices.SmartPay;
 using MessageBox = System.Windows.MessageBox;
 
 namespace POSBridge.WPF;
@@ -29,6 +30,51 @@ public partial class MainWindow
             ConnectionLogger.WriteSection($"ÎNCEPUT CONEXIUNE - {deviceName} ({connDesc})");
             Log($"Conectare la {deviceName} prin {connDesc}...");
             UpdateStatus("Se conectează...", Colors.Orange);
+
+            // SmartPay: Check driver before connecting
+            if (_selectedDeviceType == Abstractions.Enums.DeviceType.SmartPay)
+            {
+                var driverStatus = SmartPayDriverInstaller.CheckDriverStatus();
+                
+                if (!driverStatus.DeviceConnected)
+                {
+                    throw new Exception("Ingenico device not detected. Please connect the device via USB and power it on.");
+                }
+
+                if (!driverStatus.DriverInstalled || string.IsNullOrEmpty(driverStatus.ComPort))
+                {
+                    Log("⚠ SmartPay driver not installed. Attempting automatic installation...");
+                    var progress = new Progress<string>(msg => Log($"  → {msg}"));
+                    var installResult = await SmartPayDriverInstaller.InstallDriverAsync(progress);
+                    
+                    if (!installResult.Success)
+                    {
+                        throw new Exception($"Driver installation failed: {installResult.Message}");
+                    }
+                    
+                    Log($"✅ Driver installed! Device on {installResult.ComPort}");
+                    
+                    // Update COM port in settings
+                    if (!string.IsNullOrEmpty(installResult.ComPort))
+                    {
+                        _comPort = installResult.ComPort;
+                        PortComboBox.SelectedItem = _comPort;
+                        SaveSettings();
+                    }
+                }
+                else
+                {
+                    Log($"✅ SmartPay driver OK. Device on {driverStatus.ComPort}");
+                    
+                    // Auto-select COM port if not set
+                    if (!string.IsNullOrEmpty(driverStatus.ComPort) && 
+                        (string.IsNullOrEmpty(_comPort) || _comPort == "AUTO"))
+                    {
+                        _comPort = driverStatus.ComPort;
+                        PortComboBox.SelectedItem = _comPort;
+                    }
+                }
+            }
 
             // Create device instance
             if (_currentDevice is IDisposable disposable)

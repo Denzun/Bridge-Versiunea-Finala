@@ -310,7 +310,8 @@
       "POSBridge.Devices.SmartPay/1.0.0": {
         "dependencies": {
           "POSBridge.Abstractions": "1.0.0",
-          "System.IO.Ports": "10.0.3"
+          "System.IO.Ports": "10.0.3",
+          "System.Management": "10.0.3"
         },
         "runtime": {
           "POSBridge.Devices.SmartPay.dll": {

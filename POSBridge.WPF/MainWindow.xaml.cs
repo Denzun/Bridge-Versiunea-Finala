@@ -23,6 +23,7 @@ using Application = System.Windows.Application;
 // This ensures assemblies are loaded before FiscalDeviceFactory.CreateDevice() uses reflection
 #pragma warning disable CS8019 // Unnecessary using directive (needed for assembly loading)
 using POSBridge.Devices.Incotex;
+using POSBridge.Devices.SmartPay;
 #pragma warning restore CS8019
 
 namespace POSBridge.WPF;
@@ -815,9 +816,46 @@ public partial class MainWindow : Window
                 return; // ConnectAndMaybeStartWatcherAsync deja afișează eroarea dacă a eșuat
             }
             
-            // Incotex / alte dispozitive: folosește fluxul multi-vendor
+            // Incotex / SmartPay / alte dispozitive: folosește fluxul multi-vendor
             if (_selectedDeviceType != DeviceType.Datecs)
             {
+                // SmartPay: Check driver status
+                if (_selectedDeviceType == DeviceType.SmartPay)
+                {
+                    Log("🔍 Checking SmartPay driver status...");
+                    var driverStatus = SmartPayDriverInstaller.CheckDriverStatus();
+                    
+                    if (!driverStatus.DeviceConnected)
+                    {
+                        Log("❌ SmartPay device not detected");
+                        MessageBox.Show(
+                            "Ingenico terminal not detected.\n\nPlease:\n1. Connect via USB\n2. Power on the device\n3. Install the driver",
+                            "Test Connection - SmartPay",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    Log($"✅ SmartPay detected. Model: {driverStatus.DetectedModel}, COM: {driverStatus.ComPort ?? "N/A"}");
+                    
+                    if (!driverStatus.DriverInstalled || string.IsNullOrEmpty(driverStatus.ComPort))
+                    {
+                        Log("⚠ Driver not installed or no COM port assigned");
+                        var result = MessageBox.Show(
+                            "Ingenico driver not installed.\n\nDo you want to install it automatically?",
+                            "Install Driver?",
+                            MessageBoxButton.YesNo,
+                            MessageBoxImage.Question);
+                        
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            // Use the SmartPay connection handler which includes driver install
+                            await ConnectSmartPayDeviceAsync(autoStartWatcher: false);
+                        }
+                        return;
+                    }
+                }
+
                 if (_selectedDeviceType == DeviceType.Incotex)
                 {
                     var probe = ProbeIncotexWindowsDevice();
