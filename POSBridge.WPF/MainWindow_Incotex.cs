@@ -1,3 +1,4 @@
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using POSBridge.Core;
@@ -22,6 +23,16 @@ public partial class MainWindow
     {
         bool connectionFailed = false;
         Exception? connectionError = null;
+        
+        // CLAUDE FIX: Cancel any previous attempt and clean up
+        _connectCts?.Cancel();
+        if (_currentDevice != null)
+        {
+            Log("🔄 Cleaning up previous connection attempt...");
+            try { await _currentDevice.DisconnectAsync(); } catch { }
+            _currentDevice = null;
+            await Task.Delay(500); // Let port fully release
+        }
         
         try
         {
@@ -134,6 +145,31 @@ public partial class MainWindow
             _currentDevice = null;
             _currentDevice = FiscalDeviceFactory.CreateDevice(_selectedDeviceType);
             
+            // DIAGNOSTIC: Run direct serial test for SmartPay
+            if (_selectedDeviceType == Abstractions.Enums.DeviceType.SmartPay && _currentDevice is SmartPayDevice smartPayDevice)
+            {
+                try
+                {
+                    Directory.CreateDirectory(@"C:\Temp");
+                    string diagPort = _comPort;
+                    if (string.IsNullOrEmpty(diagPort) || diagPort == "USB")
+                        diagPort = "COM10"; // Default fallback
+                        
+                    Log($"🔬 Running SmartPay direct diagnostic on {diagPort}...");
+                    File.WriteAllText(@"C:\Temp\smartpay_status.txt", $"Starting diagnostic on {diagPort} at {DateTime.Now}\n");
+                    
+                    bool diagResult = await smartPayDevice.DiagnoseAsync(diagPort);
+                    
+                    Log($"🔬 Diagnostic result: {(diagResult ? "SUCCESS ✓" : "FAILED ✗")}");
+                    File.AppendAllText(@"C:\Temp\smartpay_status.txt", $"Diagnostic result: {diagResult}\n");
+                }
+                catch (Exception ex)
+                {
+                    Log($"🔬 Diagnostic ERROR: {ex.Message}");
+                    try { File.WriteAllText(@"C:\Temp\smartpay_error.txt", $"ERROR: {ex}"); } catch { }
+                }
+            }
+            
             // Build connection settings from UI/saved settings
             var connType = Abstractions.Enums.ConnectionType.Serial;
             string port = _comPort;
@@ -166,12 +202,28 @@ public partial class MainWindow
             int connectTimeoutMs = 15000;
             var ct = _connectCts?.Token ?? CancellationToken.None;
             var connectTask = _currentDevice.ConnectAsync(settings);
-            var cancelTask = Task.Delay(Timeout.Infinite, ct).ContinueWith(_ => false, TaskContinuationOptions.OnlyOnCanceled);
-            var completed = await Task.WhenAny(connectTask, Task.Delay(connectTimeoutMs), cancelTask);
+            var completed = await Task.WhenAny(connectTask, Task.Delay(connectTimeoutMs, ct));
+            
             if (ct.IsCancellationRequested)
+            {
+                // Cancelled by user - disconnect and clean up
+                try { await _currentDevice.DisconnectAsync(); } catch { }
+                _currentDevice = null;
                 throw new OperationCanceledException("Conectarea a fost anulată.");
+            }
+            
             if (completed != connectTask)
+            {
+                // Timeout - the connectTask is still running! 
+                // We MUST NOT await it again. Just clean up.
+                Log("⚠ Connection timeout - cleaning up...");
+                try { await _currentDevice.DisconnectAsync(); } catch { }
+                _currentDevice = null;
+                await Task.Delay(500); // Let port fully release
                 throw new TimeoutException($"Conexiunea a expirat ({connectTimeoutMs / 1000}s). Verificați că dispozitivul este conectat și pornit.");
+            }
+            
+            // Only await if connectTask actually completed
             bool connected = await connectTask;
             
             if (connected)

@@ -1,3 +1,4 @@
+using System.IO.Ports;
 using POSBridge.Abstractions;
 using POSBridge.Abstractions.Enums;
 using POSBridge.Abstractions.Exceptions;
@@ -26,35 +27,177 @@ public class SmartPayDevice : IFiscalDevice
         Capabilities = CreateCapabilities();
     }
 
+        private CancellationTokenSource? _connectCts;
+
+    /// <summary>
+    /// Direct diagnostic test - bypasses all wrapper code
+    /// </summary>
+    public async Task<bool> DiagnoseAsync(string portName)
+    {
+        return await Task.Run(() =>
+        {
+            var log = new System.Text.StringBuilder();
+            SerialPort? port = null;
+            
+            try
+            {
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] Opening {portName}...");
+                port = new SerialPort(portName, 115200)
+                {
+                    DataBits = 8, Parity = Parity.None, StopBits = StopBits.One,
+                    Handshake = Handshake.None, DtrEnable = false, RtsEnable = true,
+                    ReadTimeout = 3000, WriteTimeout = 3000
+                };
+                port.Open();
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] Port opened OK");
+                
+                Thread.Sleep(100);
+                port.DiscardInBuffer();
+                port.DiscardOutBuffer();
+
+                // ENQ
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] Sending ENQ...");
+                port.Write(new byte[] { 0x05 }, 0, 1);
+                int enq = port.ReadByte();
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] ENQ response: 0x{enq:X2}");
+
+                if (enq != 0x06)
+                    throw new Exception($"ENQ got 0x{enq:X2}, expected ACK");
+
+                Thread.Sleep(50);
+                port.DiscardInBuffer();
+
+                // Packet: 02 00 04 A0 00 01 01 03 06 35
+                byte[] packet = { 0x02, 0x00, 0x04, 0xA0, 0x00, 0x01, 0x01, 0x03, 0x06, 0x35 };
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] BytesToWrite before: {port.BytesToWrite}");
+                port.Write(packet, 0, packet.Length);
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] BytesToWrite after:  {port.BytesToWrite}");
+                
+                int resp = port.ReadByte();
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] Packet response: 0x{resp:X2} → {(resp == 0x06 ? "ACK ✓" : resp == 0x15 ? "NAK ✗" : "???")}");
+
+                // Write result to a file we CAN see
+                Directory.CreateDirectory(@"C:\Temp");
+                System.IO.File.WriteAllText(@"C:\Temp\smartpay_diag.txt", log.ToString());
+                return resp == 0x06;
+            }
+            catch (Exception ex)
+            {
+                log.AppendLine($"[{DateTime.Now:HH:mm:ss.fff}] EXCEPTION: {ex.Message}");
+                Directory.CreateDirectory(@"C:\Temp");
+                System.IO.File.WriteAllText(@"C:\Temp\smartpay_diag.txt", log.ToString());
+                return false;
+            }
+            finally
+            {
+                try { port?.Close(); port?.Dispose(); } catch { }
+            }
+        });
+    }
+
     public async Task<bool> ConnectAsync(ConnectionSettings settings)
     {
         if (settings == null)
             throw new ArgumentNullException(nameof(settings));
 
+        // IMMEDIATE FILE WRITE - before anything else
+        try
+        {
+            Directory.CreateDirectory(@"C:\Temp");
+            File.WriteAllText(@"C:\Temp\smartpay_entry.txt", 
+                $"SmartPay ConnectAsync ENTERED at {DateTime.Now:HH:mm:ss.fff}\nPort: {settings.Port}\nBaud: {settings.BaudRate}");
+        }
+        catch (Exception ex)
+        {
+            // Ignore file write errors
+        }
+
+        // Cancel any previous in-flight connect
+        _connectCts?.Cancel();
+        _connectCts?.Dispose();
+        _connectCts = new CancellationTokenSource();
+        var ct = _connectCts.Token;
+
         return await Task.Run(() =>
         {
-            try
+            string port = settings.Port ?? "COM1";
+            int[] baudRates;
+            
+            // If specific baud rate provided, try only that one
+            if (settings.BaudRate > 0)
             {
-                string port = settings.Port ?? "COM1";
-                int baud = settings.BaudRate > 0 ? settings.BaudRate : 115200;
+                baudRates = new[] { settings.BaudRate };
+            }
+            else
+            {
+                // Auto-detect: try common baud rates
+                baudRates = new[] { 115200, 9600, 19200, 38400 };
+            }
 
-                _serial.Connect(port, baud);
-                _connectionSettings = settings;
-
-                // Get device info to verify connection and get model
-                var info = GetDeviceInfoAsync().Result;
-                if (!string.IsNullOrEmpty(info.ModelName))
+            Exception? lastError = null;
+            
+            foreach (int baud in baudRates)
+            {
+                // Check cancellation before each attempt
+                ct.ThrowIfCancellationRequested();
+                
+                try
                 {
-                    ModelName = info.ModelName;
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] Trying {port} @ {baud} baud...");
+                    _serial.Connect(port, baud);
+                    _connectionSettings = settings;
+                    
+                    // Try to communicate
+                    SmartPayDebug.Log("[ConnectAsync] About to call GetDeviceInfo for verification...");
+                    var info = GetDeviceInfoAsync().GetAwaiter().GetResult();
+                    SmartPayDebug.Log($"[ConnectAsync] GetDeviceInfo returned: Success={!string.IsNullOrEmpty(info.FirmwareVersion)}, Model={info.ModelName}");
+                    
+                    if (!string.IsNullOrEmpty(info.ModelName))
+                    {
+                        ModelName = info.ModelName;
+                    }
+                    
+                    // Success! Remember the working baud rate
+                    if (settings.BaudRate == 0)
+                    {
+                        settings.BaudRate = baud;
+                    }
+                    
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] Connected at {baud} baud!");
+                    return true;
                 }
-
-                return _serial.IsConnected;
+                catch (FiscalDeviceException ex) when (ex.Message.Contains("NAK") || ex.Message.Contains("Timeout"))
+                {
+                    // Wrong baud rate or terminal not responding - try next
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] Failed at {baud}: {ex.Message}");
+                    lastError = ex;
+                    _serial.Disconnect(); // Proper cleanup
+                    Thread.Sleep(500); // Wait for port release
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    lastError = ex;
+                    _serial.Disconnect(); // Proper cleanup
+                    Thread.Sleep(500);
+                    if (baudRates.Length == 1) throw;
+                }
             }
-            catch (Exception ex)
-            {
-                throw new FiscalDeviceException($"Failed to connect to SmartPay: {ex.Message}", ex);
-            }
-        });
+            
+            // All baud rates failed - include debug log
+            string debugLog = SmartPayDebug.GetLogContents();
+            SmartPayDebug.FlushToFile();
+            
+            throw new FiscalDeviceException(
+                $"Failed to connect to SmartPay.\n\n" +
+                $"Last error: {lastError?.Message}\n\n" +
+                $"DEBUG LOG:\n{debugLog}\n\n" +
+                $"Check:\n" +
+                $"1. Terminal is powered on and in ECR mode\n" +
+                $"2. Correct COM port selected ({port})\n" +
+                $"3. USB cable is connected properly\n" +
+                $"4. Ingenico USB drivers are installed");
+        }, ct);
     }
 
     public async Task DisconnectAsync()
@@ -83,9 +226,14 @@ public class SmartPayDevice : IFiscalDevice
         {
             try
             {
+                SmartPayDebug.Log("[GetDeviceInfo] Building GetInfo packet...");
+                
                 // Build Get Info command
                 var packet = BuildPacket(CommandCode.GetInfo);
+                SmartPayDebug.Log($"[GetDeviceInfo] Packet built, calling SendAndReceive...");
+                
                 var response = _serial.SendAndReceive(packet);
+                SmartPayDebug.Log($"[GetDeviceInfo] SendAndReceive returned {response.Length} bytes");
                 var (success, respCode, tags) = ParseResponse(response);
 
                 var info = new DeviceInfo

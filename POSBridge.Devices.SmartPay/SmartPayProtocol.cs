@@ -15,6 +15,7 @@ public static class SmartPayProtocol
     public const byte ACK = 0x06;
     public const byte NAK = 0x15;
     public const byte ENQ = 0x05;
+    public const byte EOT = 0x04;
 
     // Request Command Tags (0xA000)
     public const ushort TAG_COMMAND = 0xA000;
@@ -146,16 +147,56 @@ public static class SmartPayProtocol
         // ETX
         ms.WriteByte(ETX);
         
-        // Calculate CRC on everything from STX to ETX
-        // IMPORTANT: Use CRC-16/BUYPASS, not IBM!
-        var packet = ms.ToArray();
-        var crc = Crc16Buypass.CalculateForRequest(packet);
+        // Calculate CRC on TLV data only (NOT including STX, Length, ETX)
+        // Verified against spec example: 02 00 04 a0 00 01 01 03 06 35
+        // CRC (0x0635) is calculated on TLV bytes only: a0 00 01 01
+        var crc = Crc16Buypass.CalculateForRequest(dataBytes);
         ms.Write(crc, 0, crc.Length);
         
         var finalPacket = ms.ToArray();
         
         // Debug: Log the packet
-        System.Diagnostics.Debug.WriteLine($"[SmartPay] BuildPacket: {ToHexString(finalPacket)}");
+        string packetHex = ToHexString(finalPacket);
+        System.Diagnostics.Debug.WriteLine($"[SmartPay] BuildPacket {command}: {packetHex}");
+        System.Console.WriteLine($"[SmartPay] BuildPacket {command}: {packetHex}");
+        SmartPayDebug.Log($"[BuildPacket] Command={command}, Packet: {packetHex}");
+        
+        // Verify against known-good example for GetInfo
+        if (command == CommandCode.GetInfo)
+        {
+            byte[] expectedBytes = new byte[] { 0x02, 0x00, 0x04, 0xA0, 0x00, 0x01, 0x01, 0x03, 0x06, 0x35 };
+            string expected = "02 00 04 A0 00 01 01 03 06 35";
+            
+            // Byte-by-byte comparison
+            bool match = finalPacket.Length == expectedBytes.Length;
+            if (match)
+            {
+                for (int i = 0; i < expectedBytes.Length; i++)
+                {
+                    if (finalPacket[i] != expectedBytes[i])
+                    {
+                        match = false;
+                        System.Diagnostics.Debug.WriteLine($"[SmartPay] Byte mismatch at pos {i}: expected 0x{expectedBytes[i]:X2}, got 0x{finalPacket[i]:X2}");
+                        break;
+                    }
+                }
+            }
+            
+            if (!match)
+            {
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] WARNING: Packet mismatch!");
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Expected: {expected}");
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Actual:   {packetHex}");
+                SmartPayDebug.Log($"[BuildPacket] WARNING: Packet mismatch!");
+                SmartPayDebug.Log($"[BuildPacket] Expected: {expected}");
+                SmartPayDebug.Log($"[BuildPacket] Actual:   {packetHex}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"[SmartPay] Packet verified OK (matches spec example)");
+                SmartPayDebug.Log($"[BuildPacket] Packet verified OK (matches spec example)");
+            }
+        }
         
         return finalPacket;
     }
@@ -224,11 +265,16 @@ public static class SmartPayProtocol
             if (dataEnd >= packet.Length || packet[dataEnd] != ETX)
                 return (false, ResponseCode.GenericError, tags);
 
-            // Verify CRC using CRC-16/BUYPASS
-            var dataWithEtx = new byte[dataEnd + 1]; // From STX to ETX
-            Array.Copy(packet, 0, dataWithEtx, 0, dataWithEtx.Length);
+            // Verify CRC on TLV data only (NOT including STX, Length, ETX)
+            var tlvData = new byte[length]; // Just the TLV bytes
+            Array.Copy(packet, dataStart, tlvData, 0, length);
             
-            if (!Crc16Buypass.VerifyResponse(dataWithEtx))
+            // CRC in response is LSB, MSB (matches Conexa implementation)
+            // Position: ETX at dataEnd, CRC at dataEnd+1 (LSB) and dataEnd+2 (MSB)
+            ushort receivedCrc = (ushort)(packet[dataEnd + 1] | (packet[dataEnd + 2] << 8));
+            ushort computedCrc = Crc16Buypass.CalculateValue(tlvData);
+            
+            if (computedCrc != receivedCrc)
                 return (false, ResponseCode.GenericError, tags);
 
             // Parse TLV tags from data

@@ -5,8 +5,7 @@ namespace POSBridge.Devices.SmartPay;
 
 /// <summary>
 /// Serial communication wrapper for SmartPay/Ingenico terminals.
-/// Implements the ENQ-ACK handshake and packet communication protocol.
-/// Fixed based on Claude's analysis.
+/// Full implementation per SmartPay ECR Link v1.8 specification.
 /// </summary>
 public class SmartPaySerialWrapper : IDisposable
 {
@@ -16,247 +15,370 @@ public class SmartPaySerialWrapper : IDisposable
 
     public bool IsConnected => _serialPort?.IsOpen ?? false;
 
-    /// <summary>
-    /// Connects to the SmartPay terminal via serial port.
-    /// </summary>
     public void Connect(string portName, int baudRate = 115200)
     {
         lock (_lock)
         {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            
+            SmartPayDebug.Log($"[Connect] Log file: {SmartPayDebug.GetLogFilePath()}");
+            SmartPayDebug.Log($"[Connect] Starting connection to {portName} @ {baudRate}...");
+            SmartPayDebug.Log($"[Connect] Current thread: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            
             Disconnect();
+            SmartPayDebug.Log($"[Connect] Disconnect completed in {sw.ElapsedMilliseconds}ms");
 
             try
             {
-                _serialPort = new SerialPort(portName, baudRate)
+                var availablePorts = SerialPort.GetPortNames();
+                SmartPayDebug.Log($"[Connect] Available ports: {string.Join(", ", availablePorts)}");
+                
+                if (!availablePorts.Contains(portName))
                 {
-                    DataBits = 8,
-                    Parity = Parity.None,
-                    StopBits = StopBits.One,
-                    Handshake = Handshake.None,
-                    DtrEnable = true,  // CRITICAL: Required by Ingenico
-                    RtsEnable = true,  // CRITICAL: Required by Ingenico
-                    ReadTimeout = 10000,  // 10 seconds
-                    WriteTimeout = 5000   // 5 seconds
-                };
+                    throw new FiscalDeviceException($"Serial port {portName} not found. Available: {string.Join(", ", availablePorts)}");
+                }
 
+                SmartPayDebug.Log($"[Connect] Creating SerialPort...");
+                
+                // EXACTLY like diagnostic tool - create with settings at construction
+                _serialPort = new SerialPort();
+                _serialPort.PortName = portName;
+                _serialPort.BaudRate = baudRate;
+                _serialPort.DataBits = 8;
+                _serialPort.Parity = Parity.None;
+                _serialPort.StopBits = StopBits.One;
+                _serialPort.Handshake = Handshake.None;
+                _serialPort.DtrEnable = false;
+                _serialPort.RtsEnable = true;  // Important: RTS high
+                _serialPort.ReadTimeout = 3000;  // Match diagnostic tool
+                _serialPort.WriteTimeout = 3000;
+                
+                SmartPayDebug.Log($"[Connect] SerialPort created at T+{sw.ElapsedMilliseconds}ms");
+
+                SmartPayDebug.Log($"[Connect] Opening port...");
                 _serialPort.Open();
-
-                // Reset terminal state on connect
-                ResetSession();
-
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] Connected to {portName} @ {baudRate}");
+                SmartPayDebug.Log($"[Connect] Port.Open() completed at T+{sw.ElapsedMilliseconds}ms");
+                SmartPayDebug.Log($"[Connect] Port settings - IsOpen: {_serialPort.IsOpen}, RTS: {_serialPort.RtsEnable}, DTR: {_serialPort.DtrEnable}");
+                
+                // EXACTLY like diagnostic tool: 200ms sleep after open
+                SmartPayDebug.Log($"[Connect] Sleeping 200ms for port stabilization...");
+                Thread.Sleep(200);
+                SmartPayDebug.Log($"[Connect] Sleep done at T+{sw.ElapsedMilliseconds}ms");
+                
+                // Clear any garbage
+                _serialPort.DiscardInBuffer();
+                _serialPort.DiscardOutBuffer();
+                
+                int pendingBefore = _serialPort.BytesToRead;
+                if (pendingBefore > 0)
+                {
+                    byte[] junk = new byte[pendingBefore];
+                    _serialPort.Read(junk, 0, pendingBefore);
+                    SmartPayDebug.Log($"[Connect] Cleared {pendingBefore} junk bytes from buffer");
+                }
+                
+                SmartPayDebug.Log($"[Connect] SUCCESS - Port ready at T+{sw.ElapsedMilliseconds}ms");
             }
-            catch (TimeoutException)
+            catch (UnauthorizedAccessException)
             {
-                throw new FiscalDeviceException($"Timeout connecting to SmartPay on {portName}");
+                SmartPayDebug.Log($"[Connect] FAILED - UnauthorizedAccessException at T+{sw.ElapsedMilliseconds}ms");
+                throw new FiscalDeviceException($"Cannot access {portName}. Port in use.");
             }
-            catch (Exception ex) when (ex is not FiscalDeviceException)
+            catch (Exception ex)
             {
-                throw new FiscalDeviceException($"Failed to connect to SmartPay: {ex.Message}");
+                SmartPayDebug.Log($"[Connect] FAILED - {ex.GetType().Name}: {ex.Message} at T+{sw.ElapsedMilliseconds}ms");
+                throw new FiscalDeviceException($"Failed to connect: {ex.Message}");
             }
         }
     }
 
-    /// <summary>
-    /// Sends EOT to reset terminal session state.
-    /// Call this before starting new communication after errors.
-    /// </summary>
-    public void ResetSession()
-    {
-        if (_serialPort == null || !_serialPort.IsOpen)
-            return;
-
-        try
-        {
-            _serialPort.DiscardInBuffer();
-            _serialPort.DiscardOutBuffer();
-            
-            // Send EOT to reset terminal state
-            _serialPort.Write(new byte[] { 0x04 }, 0, 1);
-            _serialPort.BaseStream.Flush();
-            Thread.Sleep(200);
-            
-            _serialPort.DiscardInBuffer();
-        }
-        catch { }
-    }
-
-    /// <summary>
-    /// Sends a packet with full ENQ-ACK handshake and waits for response.
-    /// Fixed implementation based on Claude's analysis.
-    /// </summary>
     public byte[] SendAndReceive(byte[] packet)
     {
         lock (_lock)
         {
+            // CRITICAL DEBUG OUTPUT
+            System.Diagnostics.Debug.WriteLine($"[SmartPay] === Transaction {DateTime.Now} ===");
+            System.Diagnostics.Debug.WriteLine($"[SmartPay] Packet bytes: {Hex(packet)}");
+            System.Console.WriteLine($"[SmartPay] Packet: {Hex(packet)}");
+            
+            SmartPayDebug.Log($"=== Transaction {DateTime.Now} ===");
+            SmartPayDebug.Log($"Packet: {Hex(packet)}");
+            
             if (_serialPort == null || !_serialPort.IsOpen)
-                throw new FiscalDeviceException("Not connected to SmartPay terminal");
+                throw new FiscalDeviceException("Not connected");
 
             try
             {
-                // Step 1: Reset session state
-                ResetSession();
-                Thread.Sleep(100);
-
-                // Step 2: Send ENQ to initiate communication
-                System.Diagnostics.Debug.WriteLine("[SmartPay] Sending ENQ...");
+                // Step 1: Send ENQ and wait for ACK (simplified like diagnostic tool)
+                SmartPayDebug.Log("Step 1: Sending ENQ...");
+                
+                _serialPort.DiscardInBuffer();
+                _serialPort.DiscardOutBuffer();
+                
                 _serialPort.Write(new byte[] { SmartPayProtocol.ENQ }, 0, 1);
                 _serialPort.BaseStream.Flush();
-
-                // Step 3: Wait for ACK to ENQ
-                int enqAck = _serialPort.ReadByte();
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] ENQ response: 0x{enqAck:X2}");
                 
-                if (enqAck != SmartPayProtocol.ACK)
+                // Wait for ENQ to be transmitted
+                int enqWait = 0;
+                while (_serialPort.BytesToWrite > 0 && enqWait < 50)
                 {
-                    if (enqAck == SmartPayProtocol.NAK)
-                        throw new FiscalDeviceException("SmartPay NAK to ENQ - device busy or error");
-                    throw new FiscalDeviceException($"Expected ACK to ENQ, got 0x{enqAck:X2}");
+                    Thread.Sleep(1);
+                    enqWait++;
                 }
-
-                // Step 4: Send the packet
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] Sending packet ({packet.Length} bytes): {ToHexString(packet)}");
-                _serialPort.Write(packet, 0, packet.Length);
-                _serialPort.BaseStream.Flush();
-
-                // Step 5: Wait for ACK confirming packet received
-                int pktAck = _serialPort.ReadByte();
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] Packet ACK: 0x{pktAck:X2}");
                 
-                if (pktAck == SmartPayProtocol.NAK)
-                    throw new FiscalDeviceException("Packet NAKed - check CRC/framing");
-                if (pktAck != SmartPayProtocol.ACK)
-                    throw new FiscalDeviceException($"Expected ACK after packet, got 0x{pktAck:X2}");
-
-                // Step 6: Drain to STX (response start)
-                System.Diagnostics.Debug.WriteLine("[SmartPay] Waiting for response STX...");
-                byte stx = DrainToStx();
-                System.Diagnostics.Debug.WriteLine("[SmartPay] Got STX, reading response...");
-
-                // Step 7: Read 2-byte length
-                byte[] lengthBytes = ReadExact(2);
-                ushort dataLength = (ushort)((lengthBytes[0] << 8) | lengthBytes[1]);
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] Response data length: {dataLength}");
-
-                // Step 8: Read data + ETX + CRC(2)
-                byte[] remaining = ReadExact(dataLength + 3);
-
-                // Step 9: Validate ETX position
-                if (remaining[dataLength] != SmartPayProtocol.ETX)
-                    throw new FiscalDeviceException($"Missing ETX at expected position, got 0x{remaining[dataLength]:X2}");
-
-                // Step 10: Validate response CRC (LSB, MSB for responses)
-                // Build array for CRC verification: STX + LEN + DATA + ETX
-                byte[] crcInput = new byte[1 + 2 + dataLength + 1];
-                crcInput[0] = stx;
-                Array.Copy(lengthBytes, 0, crcInput, 1, 2);
-                Array.Copy(remaining, 0, crcInput, 3, dataLength);
-                crcInput[crcInput.Length - 1] = SmartPayProtocol.ETX;
+                SmartPayDebug.Log("  TX: ENQ (0x05)");
                 
-                // IMPORTANT: Use CRC-16/BUYPASS, not IBM!
-                ushort computedCrc = Crc16Buypass.CalculateValue(crcInput);
-                ushort receivedCrc = (ushort)(remaining[dataLength + 1] | (remaining[dataLength + 2] << 8));
+                int enqResponse;
+                try
+                {
+                    enqResponse = _serialPort.ReadByte();
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] ENQ Response: 0x{enqResponse:X2} ({CtrlName((byte)enqResponse)})");
+                    System.Console.WriteLine($"[SmartPay] ENQ Response: 0x{enqResponse:X2} ({CtrlName((byte)enqResponse)})");
+                    SmartPayDebug.Log($"  RX: 0x{enqResponse:X2} ({CtrlName((byte)enqResponse)})");
+                }
+                catch (TimeoutException)
+                {
+                    SmartPayDebug.Log("  TIMEOUT - no response to ENQ, trying once more...");
+                    Thread.Sleep(500);
+                    _serialPort.Write(new byte[] { SmartPayProtocol.ENQ }, 0, 1);
+                    enqResponse = _serialPort.ReadByte();
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] ENQ Response (2nd): 0x{enqResponse:X2} ({CtrlName((byte)enqResponse)})");
+                    System.Console.WriteLine($"[SmartPay] ENQ Response (2nd): 0x{enqResponse:X2} ({CtrlName((byte)enqResponse)})");
+                    SmartPayDebug.Log($"  RX (2nd try): 0x{enqResponse:X2} ({CtrlName((byte)enqResponse)})");
+                }
                 
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] CRC: received=0x{receivedCrc:X4}, computed=0x{computedCrc:X4}");
+                if (enqResponse != SmartPayProtocol.ACK)
+                {
+                    SmartPayDebug.Log($"  Expected ACK, got {CtrlName((byte)enqResponse)} - aborting");
+                    _serialPort.Write(new byte[] { SmartPayProtocol.EOT }, 0, 1);
+                    throw new FiscalDeviceException($"Terminal not ready (got {CtrlName((byte)enqResponse)})");
+                }
                 
-                if (receivedCrc != computedCrc)
-                    throw new FiscalDeviceException($"CRC mismatch: got 0x{receivedCrc:X4}, expected 0x{computedCrc:X4}");
+                SmartPayDebug.Log("  ENQ accepted!");
 
-                // Step 11: Send final ACK
-                _serialPort.Write(new byte[] { SmartPayProtocol.ACK }, 0, 1);
-                _serialPort.BaseStream.Flush();
+                // Step 2: Small delay and flush before packet (like diagnostic tool)
+                SmartPayDebug.Log("Step 2: 50ms delay then send packet...");
+                Thread.Sleep(50);
+                _serialPort.DiscardInBuffer();
+                _serialPort.DiscardOutBuffer();
 
-                // Step 12: Return just the TLV data (exclude ETX and CRC)
-                byte[] data = new byte[dataLength];
-                Array.Copy(remaining, 0, data, 0, dataLength);
+                // Step 3: Send packet with retry (Spec says try on NAK)
+                SmartPayDebug.Log("Step 3: Sending packet (up to 3 attempts)...");
+                SmartPayDebug.Log($"  Packet bytes ({packet.Length}): {Hex(packet)}");
                 
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] Response received: {data.Length} bytes of data");
-                return data;
+                // Verify packet structure
+                if (packet.Length >= 2)
+                {
+                    ushort lenInPacket = (ushort)((packet[1] << 8) | packet[2]);
+                    SmartPayDebug.Log($"  Packet length field: {lenInPacket}, actual data length: {packet.Length - 5}");
+                }
+                
+                byte[]? responseData = null;
+                
+                for (int attempt = 0; attempt < 3; attempt++)
+                {
+                    SmartPayDebug.Log($"  Packet attempt {attempt + 1}/3");
+                    SmartPayDebug.Log($"  TX ({packet.Length} bytes): {Hex(packet)}");
+                    
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] Writing {packet.Length} bytes to port...");
+                    System.Console.WriteLine($"[SmartPay] TX: {Hex(packet)}");
+                    
+                    _serialPort.Write(packet, 0, packet.Length);
+                    
+                    // CRITICAL FIX: Force flush at OS level (Claude's fix + BaseStream.Flush)
+                    _serialPort.BaseStream.Flush();
+                    
+                    // Wait for OS transmit buffer to empty
+                    int waitLoops = 0;
+                    while (_serialPort.BytesToWrite > 0 && waitLoops < 100)
+                    {
+                        Thread.Sleep(1);
+                        waitLoops++;
+                    }
+                    
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] BytesToWrite after Write: {_serialPort.BytesToWrite} (waited {waitLoops}ms)");
+                    SmartPayDebug.Log($"  BytesToWrite after Write: {_serialPort.BytesToWrite} (waited {waitLoops}ms)");
+                    
+                    System.Diagnostics.Debug.WriteLine($"[SmartPay] Write complete, waiting for ACK/NAK...");
+                    
+                    int packetAck;
+                    try
+                    {
+                        packetAck = _serialPort.ReadByte();
+                        System.Diagnostics.Debug.WriteLine($"[SmartPay] Packet response: 0x{packetAck:X2} ({CtrlName((byte)packetAck)})");
+                        System.Console.WriteLine($"[SmartPay] RX: 0x{packetAck:X2} ({CtrlName((byte)packetAck)})");
+                        SmartPayDebug.Log($"  RX: 0x{packetAck:X2} ({CtrlName((byte)packetAck)})");
+                    }
+                    catch (TimeoutException)
+                    {
+                        SmartPayDebug.Log("  TIMEOUT - no response to packet");
+                        Thread.Sleep(500);
+                        continue; // Retry
+                    }
+                    
+                    if (packetAck == SmartPayProtocol.NAK) // 0x15
+                    {
+                        // Spec: NAK after packet means retry
+                        SmartPayDebug.Log("  NAK received - packet rejected by terminal!");
+                        SmartPayDebug.Log("  This usually means CRC error or malformed packet.");
+                        
+                        // Check if terminal sends any diagnostic bytes after NAK
+                        Thread.Sleep(200);
+                        int diagBytes = _serialPort.BytesToRead;
+                        if (diagBytes > 0)
+                        {
+                            byte[] diag = new byte[diagBytes];
+                            _serialPort.Read(diag, 0, diagBytes);
+                            SmartPayDebug.Log($"  Diagnostic bytes after NAK: {Hex(diag)}");
+                        }
+                        
+                        SmartPayDebug.Log("  Will retry in 500ms...");
+                        Thread.Sleep(500);
+                        continue;
+                    }
+                    
+                    if (packetAck != SmartPayProtocol.ACK) // Not 0x06
+                    {
+                        SmartPayDebug.Log($"  UNEXPECTED: expected ACK (0x06), got 0x{packetAck:X2} ({CtrlName((byte)packetAck)})");
+                        throw new FiscalDeviceException($"Expected ACK after packet, got 0x{packetAck:X2}");
+                    }
+                    
+                    // ACK received - now read response
+                    SmartPayDebug.Log("  Packet ACKed! Reading terminal response...");
+                    responseData = ReadResponsePacket();
+                    
+                    // Verify response CRC
+                    if (!ValidateResponseCRC(responseData, out byte[] tlvData))
+                    {
+                        // Spec: NAK bad response, terminal will resend
+                        SmartPayDebug.Log("  Response CRC bad - sending NAK to request resend...");
+                        _serialPort.Write(new byte[] { SmartPayProtocol.NAK }, 0, 1);
+                        Thread.Sleep(1000);
+                        continue;
+                    }
+                    
+                    // Good response - ACK it
+                    SmartPayDebug.Log("  Response OK - sending ACK");
+                    _serialPort.Write(new byte[] { SmartPayProtocol.ACK }, 0, 1);
+                    SmartPayDebug.Log("SUCCESS!");
+                    return tlvData;
+                }
+                
+                // All 3 attempts failed
+                SmartPayDebug.Log("ERROR: All packet attempts failed - sending EOT");
+                _serialPort.Write(new byte[] { SmartPayProtocol.EOT }, 0, 1);
+                throw new FiscalDeviceException("Failed after 3 packet attempts");
             }
-            catch (TimeoutException)
+            catch (Exception)
             {
-                throw new FiscalDeviceException("Timeout waiting for SmartPay response. Check:\n1. Device is powered on\n2. Correct COM port selected\n3. Baud rate is correct (usually 115200)");
-            }
-            catch (FiscalDeviceException)
-            {
+                // On any error, try to send EOT to abort session
+                try
+                {
+                    SmartPayDebug.Log("Exception - sending EOT to abort session");
+                    _serialPort.Write(new byte[] { SmartPayProtocol.EOT }, 0, 1);
+                }
+                catch { }
                 throw;
             }
-            catch (Exception ex)
-            {
-                throw new FiscalDeviceException($"Communication error: {ex.Message}");
-            }
         }
     }
-
-    /// <summary>
-    /// Reads exactly 'count' bytes from the serial port.
-    /// </summary>
-    private byte[] ReadExact(int count)
+    
+    private byte[] ReadResponsePacket()
     {
-        byte[] buffer = new byte[count];
-        int offset = 0;
+        // Read STX
+        int stx = _serialPort.ReadByte();
+        if (stx != SmartPayProtocol.STX)
+            throw new FiscalDeviceException($"Expected STX, got 0x{stx:X2}");
         
-        while (offset < count)
+        // Read length (2 bytes, MSB first)
+        byte[] lenBytes = new byte[2];
+        lenBytes[0] = (byte)_serialPort.ReadByte();
+        lenBytes[1] = (byte)_serialPort.ReadByte();
+        ushort dataLen = (ushort)((lenBytes[0] << 8) | lenBytes[1]);
+        
+        SmartPayDebug.Log($"  Response length: {dataLen}");
+        
+        // Read data + ETX + CRC
+        byte[] respData = new byte[dataLen + 3]; // data + ETX + CRC(2)
+        int totalRead = 0;
+        while (totalRead < respData.Length)
         {
-            int r = _serialPort.Read(buffer, offset, count - offset);
-            if (r == 0)
-            {
-                System.Diagnostics.Debug.WriteLine($"[SmartPay] ReadExact: 0 bytes, waiting... ({offset}/{count})");
-                Thread.Sleep(50);
-                continue;
-            }
-            offset += r;
-            System.Diagnostics.Debug.WriteLine($"[SmartPay] ReadExact: read {r} bytes, total {offset}/{count}");
+            totalRead += _serialPort.Read(respData, totalRead, respData.Length - totalRead);
         }
         
-        return buffer;
-    }
-
-    /// <summary>
-    /// Drains bytes until STX is found.
-    /// Logs any unexpected bytes for diagnostics.
-    /// </summary>
-    private byte DrainToStx()
-    {
-        const int maxAttempts = 30;
+        SmartPayDebug.Log($"  RX response: {Hex(respData)}");
         
-        for (int i = 0; i < maxAttempts; i++)
-        {
-            int b = _serialPort.ReadByte();
-            System.Diagnostics.Debug.WriteLine($"[SmartPay] Drain byte: 0x{b:X2}");
-            
-            if (b == SmartPayProtocol.STX)
-                return (byte)b;
-            
-            if (b == 0x04) // EOT
-                throw new FiscalDeviceException("Terminal sent EOT (0x04) - session aborted. CRC or framing error likely.");
-            
-            if (b == SmartPayProtocol.NAK)
-                throw new FiscalDeviceException("Terminal sent NAK (0x15) - packet rejected");
-        }
+        // Verify ETX
+        if (respData[dataLen] != SmartPayProtocol.ETX)
+            throw new FiscalDeviceException("Missing ETX in response");
         
-        throw new FiscalDeviceException("Never received STX after 30 attempts");
+        return respData;
     }
-
-    /// <summary>
-    /// Helper for hex logging.
-    /// </summary>
-    private static string ToHexString(byte[] data)
+    
+    private bool ValidateResponseCRC(byte[] responseData, out byte[] tlvData)
     {
-        return string.Join(" ", data.Select(b => $"{b:X2}"));
+        // responseData = [data bytes...][ETX][CRC LSB][CRC MSB]
+        int dataLen = responseData.Length - 3;
+        
+        tlvData = new byte[dataLen];
+        Array.Copy(responseData, 0, tlvData, 0, dataLen);
+        
+        ushort receivedCrc = (ushort)(responseData[dataLen + 1] | (responseData[dataLen + 2] << 8));
+        ushort computedCrc = Crc16Buypass.CalculateValue(tlvData);
+        
+        SmartPayDebug.Log($"  CRC: received=0x{receivedCrc:X4}, computed=0x{computedCrc:X4}");
+        
+        return receivedCrc == computedCrc;
     }
 
     public void Disconnect()
     {
         lock (_lock)
         {
-            try
+            if (_serialPort != null)
             {
-                _serialPort?.Close();
+                try
+                {
+                    // Spec: Send EOT to properly close session
+                    if (_serialPort.IsOpen)
+                    {
+                        SmartPayDebug.Log("Sending EOT before disconnect...");
+                        try { _serialPort.Write(new byte[] { SmartPayProtocol.EOT }, 0, 1); } catch { }
+                        Thread.Sleep(100);
+                        
+                        _serialPort.DiscardInBuffer();
+                        _serialPort.DiscardOutBuffer();
+                        _serialPort.Close();
+                    }
+                    _serialPort.Dispose();
+                }
+                catch { /* ignore */ }
+                finally
+                {
+                    _serialPort = null;
+                    Thread.Sleep(300);
+                }
             }
-            catch { }
-            _serialPort = null;
         }
+    }
+
+    private static string Hex(byte[] data)
+    {
+        return string.Join(" ", data.Select(b => $"{b:X2}"));
+    }
+
+    private static string CtrlName(byte b)
+    {
+        return b switch
+        {
+            0x02 => "STX",
+            0x03 => "ETX",
+            0x04 => "EOT",
+            0x05 => "ENQ",
+            0x06 => "ACK",
+            0x15 => "NAK",
+            _ => $"0x{b:X2}"
+        };
     }
 
     public void Dispose()

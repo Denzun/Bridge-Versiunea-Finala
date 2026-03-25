@@ -90,12 +90,12 @@ public static class Crc16Buypass
     /// </summary>
     public static bool TestAgainstExample()
     {
-        // Get Info packet: STX through ETX
-        byte[] test = { 0x02, 0x00, 0x04, 0xa0, 0x00, 0x01, 0x01, 0x03 };
+        // Get Info packet: TLV data only (NOT including STX, Length, ETX)
+        byte[] test = { 0xa0, 0x00, 0x01, 0x01 };  // Command tag + GetInfo value
         ushort crc = CalculateValue(test);
         
         // Must equal 0x0635
-        // Sent as MSB first: 0x06, 0x35
+        // Full packet: 02 00 04 a0 00 01 01 03 06 35
         return crc == 0x0635;
     }
 
