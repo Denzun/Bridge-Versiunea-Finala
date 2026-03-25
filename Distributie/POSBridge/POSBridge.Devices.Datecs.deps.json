@@ -207,18 +207,12 @@
       },
       "POSBridge.Abstractions/1.0.0": {
         "runtime": {
-          "POSBridge.Abstractions.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "POSBridge.Abstractions.dll": {}
         }
       },
       "POSBridge.Core/1.0.0": {
         "runtime": {
-          "POSBridge.Core.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "POSBridge.Core.dll": {}
         }
       }
     }

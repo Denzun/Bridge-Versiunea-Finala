@@ -25,7 +25,7 @@
                        HorizontalAlignment="Center"/>
             
             <!-- Subtitle -->
-            <TextBlock Text="Dispozitiv inregistrat automat. Asteapta activare manuala." 
+            <TextBlock Text="Acest dispozitiv nu este activat." 
                        FontSize="16"
                        Foreground="#FFB0B0B0"
                        HorizontalAlignment="Center"
@@ -59,7 +59,7 @@
             </StackPanel>
             
             <!-- Instructions -->
-            <TextBlock Text="Dispozitivul a fost inregistrat automat si este in asteptarea activarii manuale de catre administrator."
+            <TextBlock Text="Vă rugăm contactați administratorul pentru activarea acestui dispozitiv."
                        FontSize="14"
                        Foreground="#FFB0B0B0"
                        HorizontalAlignment="Center"

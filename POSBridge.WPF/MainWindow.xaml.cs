@@ -23,7 +23,6 @@ using Application = System.Windows.Application;
 // This ensures assemblies are loaded before FiscalDeviceFactory.CreateDevice() uses reflection
 #pragma warning disable CS8019 // Unnecessary using directive (needed for assembly loading)
 using POSBridge.Devices.Incotex;
-using POSBridge.Devices.SmartPay;
 #pragma warning restore CS8019
 
 namespace POSBridge.WPF;
@@ -45,7 +44,7 @@ public partial class MainWindow : Window
     private string _ipAddress = "192.168.1.219";
     private int _tcpPort = 9100;
     private DeviceType _selectedDeviceType = DeviceType.Incotex; // Default to Incotex
-    private string _connectionType = "Serial"; // Default to Serial (most Incotex use CDC driver)
+    private string _connectionType = "USB"; // Default to USB Direct for Incotex
     private const string DebugLogPath = @"d:\Proiecte Cursor\POS Bridge\.cursor\debug.log";
     private static readonly string LogFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
     private int _totalProcessed;
@@ -130,10 +129,6 @@ public partial class MainWindow : Window
     {
         try
         {
-            // Check if started with -tray argument (auto-startup)
-            var args = Environment.GetCommandLineArgs();
-            var startMinimizedToTray = args.Contains("-tray");
-            
             // Create Bon folder structure if it doesn't exist
             EnsureBonFolders(_bonFolder);
 
@@ -143,15 +138,6 @@ public partial class MainWindow : Window
             LoadConnectionType();
             LoadActivationInfo();
             UpdateDemoFooter();
-            
-            // If started from auto-startup, hide window and show only tray icon
-            if (startMinimizedToTray)
-            {
-                Hide();
-                WindowState = WindowState.Minimized;
-                ShowInTaskbar = false;
-                Log("Aplicație pornită automat. Dashboard ascuns (click pe tray icon pentru a deschide).");
-            }
 
             Log("Aplicație pornită.");
             Log($"Folder monitorizat: {_bonFolder}");
@@ -209,7 +195,6 @@ public partial class MainWindow : Window
             Log("Inițializare DUDE COM Server...");
             UpdateStatus("Se conectează...", Colors.Orange);
 
-            System.Diagnostics.Debug.WriteLine($"[DEBUG] Datecs Connect: _ipAddress='{_ipAddress}', _useEthernet={_useEthernet}, DeviceType={_selectedDeviceType}");
             ConnectionLogger.WriteSection($"ÎNCEPUT CONEXIUNE - Datecs {(_useEthernet ? $"Ethernet {_ipAddress}:{_tcpPort}" : $"Serial {_comPort}@{_baudRate}")}");
 
             var (opCode, opPwd) = GetOperatorCredentials();
@@ -221,9 +206,7 @@ public partial class MainWindow : Window
 
             if (_useEthernet)
             {
-                var uiIp = IpAddressBox.Text.Trim();
-                System.Diagnostics.Debug.WriteLine($"[DEBUG] Connect: IpAddressBox.Text = '{uiIp}', _ipAddress = '{_ipAddress}'");
-                _ipAddress = uiIp;
+                _ipAddress = IpAddressBox.Text.Trim();
                 if (int.TryParse(TcpPortBox.Text, out int manualPort) && manualPort > 0 && manualPort <= 65535)
                     _tcpPort = manualPort;
 
@@ -245,24 +228,14 @@ public partial class MainWindow : Window
                             Dispatcher.Invoke(() => Log($"🔌 Încercare port manual: {portToTry.Value}"));
                             try
                             {
-                                System.Diagnostics.Debug.WriteLine($"[CONNECT] ForceReset FiscalEngine...");
-                                _fiscalEngine.ForceReset(); // Reset before each attempt
-                                
-                                System.Diagnostics.Debug.WriteLine($"[CONNECT] Calling InitializeForTCP({_ipAddress}, {portToTry.Value})...");
                                 _fiscalEngine.InitializeForTCP(_ipAddress, portToTry.Value);
-                                System.Diagnostics.Debug.WriteLine($"[CONNECT] InitializeForTCP completed, waiting 500ms...");
-                                Thread.Sleep(500); // DUDE needs time after connection
-                                System.Diagnostics.Debug.WriteLine($"[CONNECT] Calling TestConnection...");
                                 connected = _fiscalEngine.TestConnection();
-                                System.Diagnostics.Debug.WriteLine($"[CONNECT] TestConnection returned: {connected}");
                                 if (connected)
                                     successfulPort = portToTry.Value;
                             }
-                            catch (Exception ex)
+                            catch
                             {
-                                System.Diagnostics.Debug.WriteLine($"[CONNECT] Port {portToTry.Value} failed: {ex.Message}");
-                                Dispatcher.Invoke(() => Log($"Port {portToTry.Value} a eșuat: {ex.Message}"));
-                                _fiscalEngine.ForceReset(); // Reset after failed attempt
+                                Dispatcher.Invoke(() => Log($"Port {portToTry.Value} a eșuat, scanare automată..."));
                             }
                         }
 
@@ -274,7 +247,6 @@ public partial class MainWindow : Window
                                 Log($"🔍 Scanare automată: 3999, 9100, 4999, 9999, 8000, 4000, 5000...");
                                 Log($"⏱️ Durată estimată: ~15 secunde");
                             });
-                            _fiscalEngine.ForceReset(); // Reset before auto-scan
                             successfulPort = _fiscalEngine.InitializeForTCPAutoPort(_ipAddress);
                             if (successfulPort.HasValue)
                                 connected = _fiscalEngine.TestConnection();
@@ -339,7 +311,7 @@ public partial class MainWindow : Window
 
             SaveSettings();
 
-            int timeoutMs = _useEthernet ? 30000 : 8000; // 30s for Ethernet (DUDE needs more time)
+            int timeoutMs = _useEthernet ? 12000 : 8000;
             var ct = _connectCts?.Token ?? CancellationToken.None;
             var cancelTask = Task.Delay(Timeout.Infinite, ct).ContinueWith(_ => false, TaskContinuationOptions.OnlyOnCanceled);
             var completed = await Task.WhenAny(connectTask, Task.Delay(timeoutMs), cancelTask);
@@ -816,46 +788,9 @@ public partial class MainWindow : Window
                 return; // ConnectAndMaybeStartWatcherAsync deja afișează eroarea dacă a eșuat
             }
             
-            // Incotex / SmartPay / alte dispozitive: folosește fluxul multi-vendor
+            // Incotex / alte dispozitive: folosește fluxul multi-vendor
             if (_selectedDeviceType != DeviceType.Datecs)
             {
-                // SmartPay: Check driver status
-                if (_selectedDeviceType == DeviceType.SmartPay)
-                {
-                    Log("🔍 Checking SmartPay driver status...");
-                    var driverStatus = SmartPayDriverInstaller.CheckDriverStatus();
-                    
-                    if (!driverStatus.DeviceConnected)
-                    {
-                        Log("❌ SmartPay device not detected");
-                        MessageBox.Show(
-                            "Ingenico terminal not detected.\n\nPlease:\n1. Connect via USB\n2. Power on the device\n3. Install the driver",
-                            "Test Connection - SmartPay",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Warning);
-                        return;
-                    }
-
-                    Log($"✅ SmartPay detected. Model: {driverStatus.DetectedModel}, COM: {driverStatus.ComPort ?? "N/A"}");
-                    
-                    if (!driverStatus.DriverInstalled || string.IsNullOrEmpty(driverStatus.ComPort))
-                    {
-                        Log("⚠ Driver not installed or no COM port assigned");
-                        var result = MessageBox.Show(
-                            "Ingenico driver not installed.\n\nDo you want to install it automatically?",
-                            "Install Driver?",
-                            MessageBoxButton.YesNo,
-                            MessageBoxImage.Question);
-                        
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            // Use the SmartPay connection handler which includes driver install
-                            await ConnectSmartPayDeviceAsync(autoStartWatcher: false);
-                        }
-                        return;
-                    }
-                }
-
                 if (_selectedDeviceType == DeviceType.Incotex)
                 {
                     var probe = ProbeIncotexWindowsDevice();
@@ -1101,22 +1036,7 @@ public partial class MainWindow : Window
     /// </summary>
     private async Task<bool> TryAutoDetectIncotexSerialAsync()
     {
-        string[] ports;
-        try
-        {
-            ports = SerialPort.GetPortNames().OrderBy(p => p).ToArray();
-        }
-        catch (PlatformNotSupportedException)
-        {
-            Log("⚠ Auto-scan Incotex: System.IO.Ports nu este disponibil pe această platformă.");
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Log($"⚠ Auto-scan Incotex: Eroare la detectarea porturilor - {ex.Message}");
-            return false;
-        }
-        
+        var ports = SerialPort.GetPortNames().OrderBy(p => p).ToArray();
         var baudRates = new[] { 115200, 57600, 38400, 19200, 9600 };
 
         if (ports.Length == 0)
@@ -1412,7 +1332,7 @@ public partial class MainWindow : Window
                     Log("Nu s-a putut determina calea aplicației pentru pornire automată.");
                     return;
                 }
-                key.SetValue(valueName, $"\"{exePath}\" -tray");
+                key.SetValue(valueName, $"\"{exePath}\"");
                 Log("✓ Pornire automată la startup activată.");
             }
             else
@@ -1982,59 +1902,34 @@ public partial class MainWindow : Window
         {
             _activationService ??= new DeviceActivationService();
             var serial = GetDeviceSerialNumberFromApp();
-            var (success, message) = await _activationService.SendDeviceInfoAsync(serial, model, fiscalPrinterSeries, _tenantCode);
-            
-            if (success)
-            {
-                Log($"✓ Model și serie transmise la server: {model} / {fiscalPrinterSeries}");
-            }
-            else
-            {
-                Log($"⚠ Eroare transmitere server: {message}");
-            }
+            await _activationService.SendDeviceInfoAsync(serial, model, fiscalPrinterSeries);
+            Log($"✓ Model și serie transmise la server: {model} / {fiscalPrinterSeries}");
         }
         catch (Exception ex)
         {
-            Log($"✗ Eroare transmitere server: {ex.Message}");
+            Log($"Transmitere model/serie la server: {ex.Message}");
         }
     }
 
     private void LoadComPorts()
     {
-        try
+        PortComboBox.Items.Clear();
+        var ports = SerialPort.GetPortNames().OrderBy(p => p).ToArray();
+        foreach (var port in ports)
         {
-            PortComboBox.Items.Clear();
-            var ports = SerialPort.GetPortNames().OrderBy(p => p).ToArray();
-            foreach (var port in ports)
-            {
-                PortComboBox.Items.Add(port);
-            }
+            PortComboBox.Items.Add(port);
+        }
 
-            if (ports.Length > 0)
-            {
-                var preferred = ports.FirstOrDefault(p => p.Equals(_comPort, StringComparison.OrdinalIgnoreCase));
-                PortComboBox.SelectedItem = preferred ?? ports[0];
-                Log($"Porturi COM detectate: {string.Join(", ", ports)}");
-                Log($"Port COM selectat din setări: {_comPort}");
-            }
-            else
-            {
-                Log("Niciun port COM detectat.");
-            }
-        }
-        catch (PlatformNotSupportedException)
+        if (ports.Length > 0)
         {
-            Log("⚠ System.IO.Ports nu este disponibil pe această platformă.");
-            // Add a dummy item to prevent UI errors
-            PortComboBox.Items.Add("COM1 (fallback)");
-            PortComboBox.SelectedIndex = 0;
+            var preferred = ports.FirstOrDefault(p => p.Equals(_comPort, StringComparison.OrdinalIgnoreCase));
+            PortComboBox.SelectedItem = preferred ?? ports[0];
+            Log($"Porturi COM detectate: {string.Join(", ", ports)}");
+            Log($"Port COM selectat din setări: {_comPort}");
         }
-        catch (Exception ex)
+        else
         {
-            Log($"⚠ Eroare la detectarea porturilor COM: {ex.Message}");
-            // Add a dummy item to prevent UI errors
-            PortComboBox.Items.Add(_comPort);
-            PortComboBox.SelectedIndex = 0;
+            Log("Niciun port COM detectat.");
         }
     }
 
@@ -2070,7 +1965,7 @@ public partial class MainWindow : Window
 
     /// <summary>
     /// Populate ConnectionTypeComboBox based on the selected device type.
-    /// Incotex supports Serial and USB Direct; Datecs supports Serial, USB, and Ethernet.
+    /// Incotex only supports USB Direct; Datecs supports Serial, USB, and Ethernet.
     /// </summary>
     private void UpdateConnectionTypeOptions()
     {
@@ -2081,39 +1976,10 @@ public partial class MainWindow : Window
 
             if (_selectedDeviceType == DeviceType.Incotex)
             {
-                // Incotex supports both Serial (COM port) and USB Direct (WinUSB)
-                ConnectionTypeComboBox.Items.Add(new ComboBoxItem { Content = "📡 Serial (COM Port)", Tag = "Serial" });
                 ConnectionTypeComboBox.Items.Add(new ComboBoxItem { Content = "🔌 USB Direct", Tag = "USB" });
-                
-                // Default to Serial if not previously set to USB
-                if (_connectionType == "USB")
-                {
-                    ConnectionTypeComboBox.SelectedIndex = 1;
-                }
-                else
-                {
-                    ConnectionTypeComboBox.SelectedIndex = 0;
-                    _connectionType = "Serial";
-                }
-                
-                // Show Serial settings by default, hide USB/Ethernet
-                if (_connectionType == "USB")
-                {
-                    SerialSettingsPanel.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    SerialSettingsPanel.Visibility = Visibility.Visible;
-                }
-                EthernetSettingsPanel.Visibility = Visibility.Collapsed;
-            }
-            else if (_selectedDeviceType == DeviceType.SmartPay)
-            {
-                // SmartPay/Ingenico uses Serial (USB virtual COM port via driver)
-                ConnectionTypeComboBox.Items.Add(new ComboBoxItem { Content = "📡 Serial (COM Port)", Tag = "Serial" });
                 ConnectionTypeComboBox.SelectedIndex = 0;
-                _connectionType = "Serial";
-                SerialSettingsPanel.Visibility = Visibility.Visible;
+                _connectionType = "USB";
+                SerialSettingsPanel.Visibility = Visibility.Collapsed;
                 EthernetSettingsPanel.Visibility = Visibility.Collapsed;
             }
             else
@@ -2127,14 +1993,8 @@ public partial class MainWindow : Window
 
                 if (_connectionType == "Ethernet")
                 {
-                    System.Diagnostics.Debug.WriteLine($"[DEBUG] Setting IpAddressBox.Text = {_ipAddress}, IpAddressBox is null: {IpAddressBox == null}");
-                    if (IpAddressBox != null)
-                    {
-                        IpAddressBox.Text = _ipAddress;
-                        System.Diagnostics.Debug.WriteLine($"[DEBUG] Set IpAddressBox.Text to: {IpAddressBox.Text}");
-                    }
-                    if (TcpPortBox != null)
-                        TcpPortBox.Text = _tcpPort.ToString();
+                    IpAddressBox.Text = _ipAddress;
+                    TcpPortBox.Text = _tcpPort.ToString();
                     SerialSettingsPanel.Visibility = Visibility.Collapsed;
                     EthernetSettingsPanel.Visibility = Visibility.Visible;
                 }
@@ -2186,7 +2046,7 @@ public partial class MainWindow : Window
                 // Update vendor name in UI
                 VendorNameText.Text = FiscalDeviceFactory.GetDeviceTypeName(deviceType).Split(' ')[0];
 
-                // Refresh connection type options (Incotex = Serial/USB, Datecs = Serial/USB/Ethernet)
+                // Refresh connection type options (Incotex = USB only, Datecs = Serial/USB/Ethernet)
                 UpdateConnectionTypeOptions();
                 
                 if (!FiscalDeviceFactory.IsDeviceTypeSupported(deviceType))
@@ -2226,9 +2086,9 @@ public partial class MainWindow : Window
                 SerialSettingsPanel.Visibility = Visibility.Collapsed;
                 EthernetSettingsPanel.Visibility = Visibility.Visible;
                 
-                // Update UI from saved settings (not the other way around!)
-                IpAddressBox.Text = _ipAddress;
-                TcpPortBox.Text = _tcpPort.ToString();
+                _ipAddress = IpAddressBox.Text;
+                if (int.TryParse(TcpPortBox.Text, out int port))
+                    _tcpPort = port;
                     
                 Log($"🌐 Conexiune schimbată la: Ethernet ({_ipAddress}:{_tcpPort})");
             }
@@ -2456,7 +2316,6 @@ public partial class MainWindow : Window
             }
             Show();
             WindowState = WindowState.Normal;
-            ShowInTaskbar = true;
             Activate();
         }
         catch (Exception ex)
@@ -3046,18 +2905,10 @@ public partial class MainWindow : Window
             DeviceStatusTextBox.Text = App.IsDeviceActivated ? "Activated" : "Deactivated";
             FirstAuthDateTextBox.Text = "—";
 
-            Log($"[ACTIVARE] Initial IsDeviceActivated={App.IsDeviceActivated}");
-            
             if (App.IsDeviceActivated)
-            {
                 UpdateActivationStatus(true, "Dispozitiv activat", "Aplicația funcționează normal.");
-                Log("[ACTIVARE] UI set to ACTIVAT (green)");
-            }
             else
-            {
                 UpdateActivationStatus(false, "Dispozitiv neactivat", "Mod demo - 30 zile.");
-                Log("[ACTIVARE] UI set to NEACTIVAT (red)");
-            }
 
             // Fetch full activation info from server in background
             _ = RefreshActivationInfoFromServerAsync();
@@ -3089,14 +2940,12 @@ public partial class MainWindow : Window
                 if (result.IsActivated)
                 {
                     App.IsDeviceActivated = true;
-                    UpdateActivationStatus(true, "Dispozitiv activat", "Aplicația funcționează normal.");
-                    Log($"[ACTIVARE] Server returned IsActivated=TRUE, UI updated to green");
+                    UpdateActivationStatus(true, "Dispozitiv activat", result.Message);
                 }
                 else
                 {
                     App.IsDeviceActivated = false;
-                    UpdateActivationStatus(false, "Dispozitiv neactivat", "Contactați administratorul pentru activare.");
-                    Log($"[ACTIVARE] Server returned IsActivated=FALSE, UI kept red. Reason: {result.Message}");
+                    UpdateActivationStatus(false, "Dispozitiv neactivat", result.Message);
                 }
                 UpdateDemoFooter();
             });
@@ -3201,7 +3050,6 @@ public partial class MainWindow : Window
             {
                 ActivationStatusBorder.Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#E8F5E9");
                 ActivationStatusBorder.BorderBrush = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#4CAF50");
-                ActivationStatusIcon.Text = "✅";
                 ActivationStatusText.Text = statusText;
                 ActivationStatusText.Foreground = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#2E7D32");
                 ActivationMessageText.Text = message;
@@ -3211,7 +3059,6 @@ public partial class MainWindow : Window
             {
                 ActivationStatusBorder.Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#FFEBEE");
                 ActivationStatusBorder.BorderBrush = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#E74C3C");
-                ActivationStatusIcon.Text = "❌";
                 ActivationStatusText.Text = statusText;
                 ActivationStatusText.Foreground = (System.Windows.Media.Brush)new BrushConverter().ConvertFrom("#C62828");
                 ActivationMessageText.Text = message;
@@ -3335,7 +3182,7 @@ public partial class MainWindow : Window
 
             if (result.IsActivated)
             {
-                UpdateActivationStatus(true, "Dispozitiv activat", "Aplicația funcționează normal.");
+                UpdateActivationStatus(true, "Dispozitiv activat", $"{result.Message}\nModel: {result.Model}");
                 Log($"✅ Verificare activare: {result.Message} | Status: {result.Status} | Model: {result.Model} | Serie fiscală: {result.FiscalPrinterSeries}");
                 MessageBox.Show(
                     $"Dispozitivul este activat și funcționează normal.\n\n" +
@@ -3344,7 +3191,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                UpdateActivationStatus(false, "Dispozitiv neactivat", "Contactați administratorul pentru activare.");
+                UpdateActivationStatus(false, "Dispozitiv neactivat", result.Message);
                 Log($"⚠️ Verificare activare: {result.Message} | Status: {result.Status}");
                 MessageBox.Show($"Dispozitivul nu este activat.\n\nStatus: {result.Status}\n{result.Message}\n\nContactați administratorul.", 
                     "Activare Necesară", MessageBoxButton.OK, MessageBoxImage.Warning);

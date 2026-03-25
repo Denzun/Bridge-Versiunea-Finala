@@ -80,23 +80,24 @@ public partial class App : System.Windows.Application
             WriteLog($"Serial Number: {_deviceSerialNumber}");
             WriteLog($"Tenant Code: {_tenantCode}");
             
-            // Check activation status on server
+            // Check activation status
             var result = await _activationService.CheckActivationAsync(_deviceSerialNumber);
             
-            // Device is enabled (activated)
             if (result.IsActivated)
             {
-                WriteLog($"Dispozitiv activat: {result.Model} (Serie fiscala: {result.FiscalPrinterSeries})");
-                IsDeviceActivated = true;
+                WriteLog($"Dispozitiv activat: {result.Model} (Serie fiscală: {result.FiscalPrinterSeries})");
                 return true;
             }
             
-            // Device not registered - auto-register on first run
-            if (result.NeedsRegistration)
+            // Device not activated - show payment required window
+            WriteLog($"Dispozitiv neactivat: {result.Message}");
+            
+            // Try to register if not found
+            if (result.Message.Contains("not registered", StringComparison.OrdinalIgnoreCase) ||
+                result.Message.Contains("nu este înregistrat", StringComparison.OrdinalIgnoreCase))
             {
-                WriteLog("Dispozitiv nou detectat. Inregistrare automata...");
+                WriteLog("Înregistrare dispozitiv nou...");
                 var (model, fiscalSeries) = GetDeviceModelAndSeriesFromSettings();
-                
                 var registerResult = await _activationService.RegisterDeviceAsync(
                     _deviceSerialNumber,
                     _tenantCode,
@@ -104,28 +105,28 @@ public partial class App : System.Windows.Application
                     model: model
                 );
                 
-                WriteLog($"Rezultat inregistrare: {registerResult.Message}");
+                WriteLog($"Rezultat înregistrare: {registerResult.Message}");
                 
-                if (registerResult.Status == "REGISTERED" || registerResult.Status == "ALREADY_REGISTERED")
+                // Update result for display
+                result = new ActivationResult
                 {
-                    // Device registered but disabled by default - needs manual enabling
-                    WriteLog("Dispozitiv inregistrat. Asteapta activare manuala din panoul de administrare.");
-                    // Store info for UI display
-                    IsDeviceActivated = false;
-                    return false;
-                }
+                    IsActivated = registerResult.IsActivated,
+                    Message = registerResult.Message,
+                    SerialNumber = _deviceSerialNumber,
+                    TenantCode = _tenantCode,
+                    CanRetry = true
+                };
             }
             
-            // Device registered but not enabled, or other activation issues
-            WriteLog($"Dispozitiv neactivat: {result.Message}");
-            IsDeviceActivated = false;
+            // Nu mai afișăm fereastra de activare - aplicația pornește direct cu MainWindow
+            // Footer-ul va afișa "demo 30 zile" când nu este activat
             return false;
         }
         catch (Exception ex)
         {
             WriteLog($"Eroare verificare activare: {ex.Message}");
-            // Continue with local mode (demo) if server check fails
-            IsDeviceActivated = false;
+            
+            // Eroare la verificare - pornim cu mod demo
             return false;
         }
     }
@@ -286,7 +287,7 @@ public partial class App : System.Windows.Application
                     await _activationService.SendHeartbeatAsync(_deviceSerialNumber);
                     var (model, fiscalSeries) = GetDeviceModelAndSeriesFromSettings();
                     if (model != "N/A" || fiscalSeries != "N/A")
-                        await _activationService.SendDeviceInfoAsync(_deviceSerialNumber, model, fiscalSeries, _tenantCode);
+                        await _activationService.SendDeviceInfoAsync(_deviceSerialNumber, model, fiscalSeries);
                 }
             }
             catch

@@ -4,18 +4,19 @@ using System.Text.Json;
 namespace POSBridge.Core.Services;
 
 /// <summary>
-/// Service for POS device licensing and registration via Conexa API.
-/// Devices register automatically on first run. New devices are disabled by default.
+/// Service for checking POS device activation status via Platforma API (v13.0.0).
+/// Each device is identified by its unique serial number and must be activated before use.
 /// </summary>
 public class DeviceActivationService
 {
     private readonly HttpClient _httpClient;
-    private const string API_BASE_URL = "https://0dmin.app.store.ro/conexa/api/licentiere/posdevice";
+    private const string API_BASE_URL = "http://0dmin.app.store.ro";
+    private const string API_PATH = "/api/posdevice";
 
     public string FullCheckUrl(string serialNumber) =>
-        $"{API_BASE_URL}/check?serialNumber={Uri.EscapeDataString(serialNumber)}";
+        $"{API_BASE_URL}{API_PATH}/check?serialNumber={Uri.EscapeDataString(serialNumber)}";
 
-    public string FullRegisterUrl => $"{API_BASE_URL}/register";
+    public string FullRegisterUrl => $"{API_BASE_URL}{API_PATH}/register";
 
     public string BaseUrl => API_BASE_URL;
 
@@ -26,8 +27,7 @@ public class DeviceActivationService
     }
 
     /// <summary>
-    /// Checks device activation status on the server.
-    /// Called on startup and periodically (heartbeat).
+    /// Checks if the device is activated on the server.
     /// </summary>
     public async Task<ActivationResult> CheckActivationAsync(string serialNumber)
     {
@@ -36,26 +36,12 @@ public class DeviceActivationService
             var url = FullCheckUrl(serialNumber);
             var response = await _httpClient.GetAsync(url);
             
-            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                // Device not registered - will auto-register on first run
-                return new ActivationResult
-                {
-                    IsActivated = false,
-                    Status = "NOT_REGISTERED",
-                    Message = "Dispozitivul nu este inregistrat. Se va inregistra automat.",
-                    CanRetry = true,
-                    NeedsRegistration = true
-                };
-            }
-            
             if (!response.IsSuccessStatusCode)
             {
                 return new ActivationResult
                 {
                     IsActivated = false,
-                    Status = "ERROR",
-                    Message = $"Eroare server: {response.StatusCode}",
+                    Message = $"Server error: {response.StatusCode}",
                     CanRetry = true
                 };
             }
@@ -66,32 +52,18 @@ public class DeviceActivationService
                 PropertyNameCaseInsensitive = true
             });
             
-            // Workaround: Backend sometimes returns Enabled=false but Status="Activated"
-            // Check both the boolean AND the status string
-            var isActivated = result?.Enabled ?? false;
-            if (!isActivated && !string.IsNullOrEmpty(result?.Status))
-            {
-                if (result.Status.Equals("Activated", StringComparison.OrdinalIgnoreCase) ||
-                    result.Status.Equals("ACTIVE", StringComparison.OrdinalIgnoreCase) ||
-                    result.Status.Equals("ENABLED", StringComparison.OrdinalIgnoreCase))
-                {
-                    isActivated = true;
-                }
-            }
-            
             return new ActivationResult
             {
-                IsActivated = isActivated,
-                Status = result?.Status ?? "UNKNOWN",
-                Message = result?.Message ?? "Status necunoscut",
-                SerialNumber = result?.SerialNumber ?? serialNumber,
+                IsActivated = result?.IsActivated ?? false,
+                Status = result?.Status ?? string.Empty,
+                Message = result?.Message ?? "Unknown status",
+                SerialNumber = result?.SerialNumber ?? string.Empty,
                 FiscalPrinterSeries = result?.FiscalPrinterSeries ?? string.Empty,
                 Model = result?.Model ?? string.Empty,
                 TenantCode = result?.TenantCode ?? string.Empty,
                 FirstAuthenticationDate = result?.FirstAuthenticationDate,
                 LastCheckIn = result?.LastCheckIn,
-                CanRetry = false,
-                NeedsRegistration = false
+                CanRetry = false
             };
         }
         catch (TaskCanceledException)
@@ -99,8 +71,7 @@ public class DeviceActivationService
             return new ActivationResult
             {
                 IsActivated = false,
-                Status = "TIMEOUT",
-                Message = "Timeout la conexiune. Verificati conexiunea la internet.",
+                Message = "Connection timeout. Please check your internet connection.",
                 CanRetry = true
             };
         }
@@ -109,22 +80,19 @@ public class DeviceActivationService
             return new ActivationResult
             {
                 IsActivated = false,
-                Status = "ERROR",
-                Message = $"Eroare: {ex.Message}",
+                Message = $"Error: {ex.Message}",
                 CanRetry = true
             };
         }
     }
 
     /// <summary>
-    /// Registers a new device with the server (auto-registration on first run).
-    /// Devices are disabled by default and need manual enabling after verification.
+    /// Registers a new device with the server (API v13.0.0).
+    /// Requires fiscalPrinterSeries and model from the connected fiscal printer.
     /// </summary>
     public async Task<ActivationResult> RegisterDeviceAsync(
-        string serialNumber, 
-        string tenantCode,
-        string? fiscalPrinterSeries = null, 
-        string? model = null)
+        string serialNumber, string tenantCode,
+        string fiscalPrinterSeries, string model)
     {
         try
         {
@@ -132,8 +100,8 @@ public class DeviceActivationService
             {
                 serialNumber,
                 tenantCode,
-                fiscalPrinterSeries = fiscalPrinterSeries ?? string.Empty,
-                model = model ?? string.Empty
+                fiscalPrinterSeries,
+                model
             };
             
             var json = JsonSerializer.Serialize(request);
@@ -141,28 +109,14 @@ public class DeviceActivationService
             
             var response = await _httpClient.PostAsync(FullRegisterUrl, content);
             
-            if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
-            {
-                return new ActivationResult
-                {
-                    IsActivated = false,
-                    Status = "ALREADY_REGISTERED",
-                    Message = "Dispozitivul este deja inregistrat.",
-                    CanRetry = false,
-                    NeedsRegistration = false
-                };
-            }
-            
             if (!response.IsSuccessStatusCode)
             {
                 var errorBody = await response.Content.ReadAsStringAsync();
                 return new ActivationResult
                 {
                     IsActivated = false,
-                    Status = "ERROR",
-                    Message = $"Inregistrare esuata: {response.StatusCode} - {errorBody}",
-                    CanRetry = true,
-                    NeedsRegistration = true
+                    Message = $"Registration failed: {response.StatusCode} - {errorBody}",
+                    CanRetry = true
                 };
             }
             
@@ -174,12 +128,9 @@ public class DeviceActivationService
             
             return new ActivationResult
             {
-                IsActivated = result?.Enabled ?? false,
-                Status = result?.Status ?? "REGISTERED",
-                Message = result?.Message ?? "Dispozitiv inregistrat cu succes. Asteapta activarea manuala.",
-                SerialNumber = result?.SerialNumber ?? serialNumber,
-                CanRetry = false,
-                NeedsRegistration = false
+                IsActivated = result?.IsActivated ?? false,
+                Message = result?.Message ?? "Registration completed",
+                CanRetry = false
             };
         }
         catch (Exception ex)
@@ -187,10 +138,8 @@ public class DeviceActivationService
             return new ActivationResult
             {
                 IsActivated = false,
-                Status = "ERROR",
-                Message = $"Eroare inregistrare: {ex.Message}",
-                CanRetry = true,
-                NeedsRegistration = true
+                Message = $"Registration error: {ex.Message}",
+                CanRetry = true
             };
         }
     }
@@ -214,55 +163,43 @@ public class DeviceActivationService
     /// Sends device model and fiscal printer series to the server (check-in).
     /// Used when device connects to update server records.
     /// </summary>
-    public async Task<(bool Success, string Message)> SendDeviceInfoAsync(string serialNumber, string model, string fiscalPrinterSeries, string tenantCode)
+    public async Task SendDeviceInfoAsync(string serialNumber, string model, string fiscalPrinterSeries)
     {
         if (string.IsNullOrWhiteSpace(model) && string.IsNullOrWhiteSpace(fiscalPrinterSeries))
-            return (false, "No data to send");
+            return;
 
         try
         {
             var request = new
             {
                 serialNumber,
-                tenantCode = tenantCode ?? string.Empty,
-                fiscalPrinterSeries = fiscalPrinterSeries ?? "N/A",
-                model = model ?? "N/A"
+                model = model ?? "N/A",
+                fiscalPrinterSeries = fiscalPrinterSeries ?? "N/A"
             };
 
             var json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            
-            var url = $"{API_BASE_URL}/register";
-            System.Diagnostics.Debug.WriteLine($"[BACKEND] Sending to {url}: {json}");
 
-            var response = await _httpClient.PostAsync(url, content);
-            var responseBody = await response.Content.ReadAsStringAsync();
-            
-            System.Diagnostics.Debug.WriteLine($"[BACKEND] Response: {(int)response.StatusCode} - {responseBody}");
+            var response = await _httpClient.PostAsync($"{API_BASE_URL}{API_PATH}/checkin", content);
 
             if (response.IsSuccessStatusCode)
             {
-                return (true, $"Server updated: {responseBody}");
-            }
-            else
-            {
-                return (false, $"Server error {(int)response.StatusCode}: {responseBody}");
+                // Server updated successfully
             }
         }
-        catch (Exception ex)
+        catch
         {
-            System.Diagnostics.Debug.WriteLine($"[BACKEND] Error: {ex.Message}");
-            return (false, $"Error: {ex.Message}");
+            // Silent fail - check-in is not critical for core functionality
         }
     }
 }
 
 /// <summary>
-/// API response model for activation check endpoint.
+/// API response model for activation check endpoint (v13.0.0).
 /// </summary>
 public class ActivationResponse
 {
-    public bool Enabled { get; set; }
+    public bool IsActivated { get; set; }
     public string Status { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
     public string SerialNumber { get; set; } = string.Empty;
@@ -279,13 +216,12 @@ public class ActivationResponse
 public class RegistrationResponse
 {
     public string Message { get; set; } = string.Empty;
-    public bool Enabled { get; set; }
-    public string Status { get; set; } = string.Empty;
+    public bool IsActivated { get; set; }
     public string SerialNumber { get; set; } = string.Empty;
 }
 
 /// <summary>
-/// Result model for device activation operations.
+/// Result model for device activation operations (v13.0.0).
 /// </summary>
 public class ActivationResult
 {
@@ -299,5 +235,4 @@ public class ActivationResult
     public DateTime? FirstAuthenticationDate { get; set; }
     public DateTime? LastCheckIn { get; set; }
     public bool CanRetry { get; set; }
-    public bool NeedsRegistration { get; set; }
 }

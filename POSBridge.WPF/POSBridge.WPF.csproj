@@ -5,7 +5,6 @@
     <ProjectReference Include="..\POSBridge.Core\POSBridge.Core.csproj" />
     <ProjectReference Include="..\POSBridge.Devices.Datecs\POSBridge.Devices.Datecs.csproj" />
     <ProjectReference Include="..\POSBridge.Devices.Incotex\POSBridge.Devices.Incotex.csproj" />
-    <ProjectReference Include="..\POSBridge.Devices.SmartPay\POSBridge.Devices.SmartPay.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +30,8 @@
 
   <!-- Copiază implementarea Windows a System.IO.Ports peste stub (fix eroare pe calculator țintă) -->
   <Target Name="CopyWinPortsAfterPublish" AfterTargets="Publish">
-    <Copy SourceFiles="$(PublishDir)runtimes\win\lib\net8.0\System.IO.Ports.dll" DestinationFiles="$(PublishDir)System.IO.Ports.dll" Condition="Exists('$(PublishDir)runtimes\win\lib\net8.0\System.IO.Ports.dll')" />
+    <Copy SourceFiles="$(PublishDir)runtimes\win\lib\net8.0\System.IO.Ports.dll"
+          DestinationFiles="$(PublishDir)System.IO.Ports.dll"
+          Condition="Exists('$(PublishDir)runtimes\win\lib\net8.0\System.IO.Ports.dll')" />
   </Target>
 </Project>

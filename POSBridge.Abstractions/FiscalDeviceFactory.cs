@@ -20,7 +20,6 @@ public static class FiscalDeviceFactory
         {
             DeviceType.Datecs => CreateDatecsDevice(),
             DeviceType.Incotex => CreateIncotexDevice(),
-            DeviceType.SmartPay => CreateSmartPayDevice(),
             DeviceType.Tremol => throw new NotSupportedException(
                 "Tremol support coming soon! Implementation planned for Phase 2.\n" +
                 "Will support WiFi/GPRS connectivity and advanced features."),
@@ -99,45 +98,11 @@ public static class FiscalDeviceFactory
     }
 
     /// <summary>
-    /// Creates a SmartPay fiscal device instance.
-    /// Uses reflection to avoid direct dependency on POSBridge.Devices.SmartPay.
-    /// </summary>
-    private static IFiscalDevice CreateSmartPayDevice()
-    {
-        try
-        {
-            // Use reflection to create SmartPayDevice without direct assembly reference
-            var smartPayAssembly = AppDomain.CurrentDomain.GetAssemblies()
-                .FirstOrDefault(a => a.GetName().Name == "POSBridge.Devices.SmartPay");
-
-            if (smartPayAssembly == null)
-                throw new InvalidOperationException(
-                    "POSBridge.Devices.SmartPay assembly not found. " +
-                    "Ensure the assembly is loaded and referenced.");
-
-            var smartPayDeviceType = smartPayAssembly.GetType("POSBridge.Devices.SmartPay.SmartPayDevice");
-            if (smartPayDeviceType == null)
-                throw new InvalidOperationException("SmartPayDevice class not found in assembly.");
-
-            var instance = Activator.CreateInstance(smartPayDeviceType) as IFiscalDevice;
-            if (instance == null)
-                throw new InvalidOperationException("Failed to create SmartPayDevice instance.");
-
-            return instance;
-        }
-        catch (Exception ex)
-        {
-            throw new InvalidOperationException(
-                $"Failed to create SmartPay device: {ex.Message}", ex);
-        }
-    }
-
-    /// <summary>
     /// Gets all supported device types.
     /// </summary>
     public static DeviceType[] GetSupportedDeviceTypes()
     {
-        return new[] { DeviceType.Datecs, DeviceType.Incotex, DeviceType.SmartPay };
+        return new[] { DeviceType.Datecs, DeviceType.Incotex };
     }
 
     /// <summary>
@@ -145,7 +110,7 @@ public static class FiscalDeviceFactory
     /// </summary>
     public static bool IsDeviceTypeSupported(DeviceType deviceType)
     {
-        return deviceType == DeviceType.Datecs || deviceType == DeviceType.Incotex || deviceType == DeviceType.SmartPay;
+        return deviceType == DeviceType.Datecs || deviceType == DeviceType.Incotex;
     }
 
     /// <summary>
@@ -157,7 +122,6 @@ public static class FiscalDeviceFactory
         {
             DeviceType.Datecs => "Datecs (RS232/TCP)",
             DeviceType.Incotex => "Incotex (Serial/USB)",
-            DeviceType.SmartPay => "SmartPay/Ingenico (Serial)",
             DeviceType.Tremol => "Tremol (WiFi/GPRS) - Coming Soon",
             DeviceType.Elcom => "Elcom - Coming Soon",
             _ => "Unknown"

@@ -197,14 +197,9 @@ public class DudeComWrapper : IDisposable
             throw new InvalidOperationException("Call Initialize() first");
 
         if (_connected)
-        {
-            ConnectionLogger.Write($"  Already connected, skipping.");
             return;
-        }
 
         ConnectionLogger.WriteSection($"CONEXIUNE TCP/IP - {ipAddress}:{port}");
-        System.Diagnostics.Debug.WriteLine($"[DUDE] ConnectTCP called: {ipAddress}:{port}");
-        
         try
         {
             // Close any existing connection first
@@ -216,11 +211,8 @@ public class DudeComWrapper : IDisposable
             catch (Exception cx) { ConnectionLogger.Write($"  close_Connection() - {cx.Message}"); }
 
             // Set transport type to TCP/IP (1)
-            System.Diagnostics.Debug.WriteLine($"[DUDE] Calling set_TransportType(1)...");
             int errorCode = _device.set_TransportType(1); // 0 = RS232, 1 = TCP/IP
             ConnectionLogger.Write($"  set_TransportType(1=TCP/IP) -> {errorCode} ({_device.lastError_Message})");
-            System.Diagnostics.Debug.WriteLine($"[DUDE] set_TransportType returned: {errorCode}, msg: {_device.lastError_Message}");
-            
             if (errorCode != 0)
             {
                 var msg = _device.lastError_Message?.ToString() ?? string.Empty;
@@ -232,24 +224,17 @@ public class DudeComWrapper : IDisposable
             }
 
             // Set TCP/IP parameters
-            System.Diagnostics.Debug.WriteLine($"[DUDE] Calling set_TCPIP({ipAddress}, {port})...");
             errorCode = _device.set_TCPIP(ipAddress, port);
             ConnectionLogger.Write($"  set_TCPIP({ipAddress}, {port}) -> {errorCode}");
-            System.Diagnostics.Debug.WriteLine($"[DUDE] set_TCPIP returned: {errorCode}");
-            
             if (errorCode != 0)
                 throw new InvalidOperationException($"set_TCPIP failed: {errorCode} - {_device.lastError_Message}");
 
             Thread.Sleep(200);
-            System.Diagnostics.Debug.WriteLine($"[DUDE] Calling open_Connection()...");
             errorCode = _device.open_Connection();
             ConnectionLogger.Write($"  open_Connection() -> {errorCode} ({_device.lastError_Message})");
-            System.Diagnostics.Debug.WriteLine($"[DUDE] open_Connection returned: {errorCode}, msg: {_device.lastError_Message}");
-            
             if (errorCode != 0)
                 throw new InvalidOperationException($"open_Connection failed: {errorCode} - {_device.lastError_Message}");
 
-            System.Diagnostics.Debug.WriteLine($"[DUDE] Checking connected_ToDevice...");
             if (_device.connected_ToDevice != true)
             {
                 ConnectionLogger.Write($"  ✗ connected_ToDevice=false (dispozitivul nu răspunde)");
@@ -258,12 +243,10 @@ public class DudeComWrapper : IDisposable
 
             _connected = true;
             ConnectionLogger.Write($"  ✓ Conectat la {ipAddress}:{port}");
-            System.Diagnostics.Debug.WriteLine($"[DUDE] Connection SUCCESS");
         }
         catch (Exception ex)
         {
             ConnectionLogger.Write($"  ✗ EROARE TCP: {ex.Message}");
-            System.Diagnostics.Debug.WriteLine($"[DUDE] Connection FAILED: {ex.Message}");
             throw new InvalidOperationException(
                 $"Failed to connect to device via TCP/IP at {ipAddress}:{port}. " +
                 $"Error: {ex.Message}", ex);

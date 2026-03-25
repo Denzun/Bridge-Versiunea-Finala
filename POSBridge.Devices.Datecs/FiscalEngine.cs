@@ -197,37 +197,6 @@ public sealed class FiscalEngine
     }
 
     /// <summary>
-    /// Forces a full disconnect and reset of the FiscalEngine.
-    /// Use this when connection fails and you want to retry.
-    /// </summary>
-    public void ForceReset()
-    {
-        try
-        {
-            Invoke(() =>
-            {
-                try
-                {
-                    _dude?.Disconnect();
-                    _dude?.Dispose();
-                }
-                catch { }
-                finally
-                {
-                    _dude = new DudeComWrapper();
-                    _initialized = false;
-                    _isConnectedCached = false;
-                }
-            });
-        }
-        catch
-        {
-            // Ignore errors during reset
-            _initialized = false;
-        }
-    }
-
-    /// <summary>
     /// Tests if the device is connected and responsive.
     /// </summary>
     public bool TestConnection()
@@ -662,10 +631,15 @@ public sealed class FiscalEngine
                          commandFile.Commands[0].Type == ReceiptCommandType.CashOut))
                     {
                         var cmd = commandFile.Commands[0];
-                        decimal amountInLei = cmd.Value ?? 0m;
+                        var amountInBani = cmd.Value ?? 0m;
                         
-                        if (amountInLei <= 0)
+                        if (amountInBani <= 0)
                             throw new InvalidOperationException($"{cmd.Type} amount must be greater than 0");
+
+                        // User enters amount in BANI (smallest currency unit)
+                        // Example: User writes I^500^ -> 500 bani -> convert to 5.00 lei
+                        // Example: User writes I^1000^ -> 1000 bani -> convert to 10.00 lei
+                        decimal amountInLei = amountInBani / 100m;
 
                         var parameters = new Dictionary<string, object>
                         {
@@ -929,7 +903,8 @@ public sealed class FiscalEngine
                             case ReceiptCommandType.CashIn:
                             case ReceiptCommandType.CashOut:
                             {
-                                decimal amountInLei = cmd.Value ?? 0m;
+                                // Convert from BANI to LEI (divide by 100)
+                                decimal amountInLei = (cmd.Value ?? 0m) / 100m;
                                 
                                 var parameters = new Dictionary<string, object>
                                 {

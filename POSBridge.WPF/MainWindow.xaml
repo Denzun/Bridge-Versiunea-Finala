@@ -885,8 +885,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock x:Name="ActivationStatusIcon"
-                                                   Grid.Column="0" 
+                                        <TextBlock Grid.Column="0" 
                                                    Text="✅" 
                                                    FontSize="32" 
                                                    Margin="0,0,15,0"
